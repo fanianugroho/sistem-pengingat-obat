@@ -19,7 +19,7 @@ class Obat extends Model
         'id_kontraindikasi_obat',
         'id_interaksi_obat',
         'efek_samping',
-        'petunjuk penyimpanan',
+        'petunjuk_penyimpanan',
         'pola_makan',
         'informasi',
         'harga_pokok',
@@ -30,15 +30,15 @@ class Obat extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User', 'id_users');
+        return $this->belongsTo('App\User', 'id_users');
     }
     public function bentuk_obat(){
-        return $this->belongsTo('App\Models\BentukObat', 'id_bentuk_obat');
+        return $this->belongsTo('App\BentukObat', 'id_bentuk_obat');
     }
     public function kontraindikasi_obat(){
-        return $this->belongsTo('App\Models\KontraindikasiObat', 'id_kontraindikasi_obat');
+        return $this->belongsTo('App\KontraindikasiObat', 'id_kontraindikasi_obat');
     }
     public function interaksi_obat(){
-        return $this->belongsTo('App\Models\InteraksiObat', 'id_interaksi_obat');
+        return $this->belongsTo('App\InteraksiObat', 'id_interaksi_obat');
     }
 }

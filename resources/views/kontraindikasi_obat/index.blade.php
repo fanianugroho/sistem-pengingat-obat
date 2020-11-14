@@ -60,7 +60,7 @@ Kontraindikasi Obat
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="Nama"> Kontraindikasi </label>
+                        <label class="col-lg-2" for="nama_kontraindikasi"> Kontraindikasi </label>
                         <div class="form-group col-md-8">
                             <input v-model="form.nama_kontraindikasi" id="nama_kontraindikasi" type="text" min=0 placeholder="Masukkan Kontraindikasi Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_kontraindikasi') }">

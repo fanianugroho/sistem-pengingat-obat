@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\KontraindikasiObat;
 use Illuminate\Http\Request;
 
 class KontraindikasiObatController extends Controller
@@ -13,7 +13,8 @@ class KontraindikasiObatController extends Controller
      */
     public function all()
     {
-        
+        $data = KontraindikasiObat::all();
+        return $data; 
     }
 
     public function index()
@@ -39,7 +40,11 @@ class KontraindikasiObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_kontraindikasi' => 'required',
+        ]);
+
+        KontraindikasiObat::create($request->all());
     }
 
     /**
@@ -48,32 +53,14 @@ class KontraindikasiObatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_kontraindikasi' => 'required',
+        ]);
+
+        return KontraindikasiObat::find($id)->update($request->all());
     }
 
     /**
@@ -84,6 +71,6 @@ class KontraindikasiObatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return KontraindikasiObat::find($id)->delete();
     }
 }

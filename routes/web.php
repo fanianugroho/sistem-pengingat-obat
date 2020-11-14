@@ -28,4 +28,6 @@ Route::get('/interaksiobat.all', 'InteraksiObatController@all')->name('interaksi
 Route::resource('interaksiobat', 'InteraksiObatController');
 Route::get('/kontraindikasiobat.all', 'KontraindikasiObatController@all')->name('kontraindikasiobat.all');
 Route::resource('kontraindikasiobat', 'KontraindikasiObatController');
+Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');
+Route::resource('pasien', 'PasienController');
 

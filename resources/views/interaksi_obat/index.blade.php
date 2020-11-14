@@ -60,7 +60,7 @@ Interaksi Obat
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="Nama"> Interaksi Obat </label>
+                        <label class="col-lg-2" for="nama_interaksi"> Interaksi Obat </label>
                         <div class="form-group col-md-8">
                             <input v-model="form.nama_interaksi" id="nama_interaksi" type="text" min=0 placeholder="Masukkan Interaksi Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_interaksi') }">

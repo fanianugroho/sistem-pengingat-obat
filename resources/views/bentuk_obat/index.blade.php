@@ -52,7 +52,7 @@ Bentuk Obat
     <div class="modal-dialog modal-lg" id="modal">
         <div class="modal-content">
             <div class="modal-header ">
-                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Data</h4>
+                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Bentuk</h4>
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
@@ -60,11 +60,11 @@ Bentuk Obat
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="Nama"> Bentuk Obat </label>
+                        <label class="col-lg-2" for="nama_bentuk"> Bentuk Obat </label>
                         <div class="form-group col-md-8">
                             <input v-model="form.nama_bentuk" id="nama_bentuk" type="text" min=0 placeholder="Masukkan Bentuk Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_bentuk') }">
-                            <has-error :form="form" field="nama"></has-error>
+                            <has-error :form="form" field="nama_bentuk"></has-error>
                         </div>
                     </div>
                 <div class="modal-footer">
