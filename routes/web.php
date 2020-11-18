@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
 Route::get('/bentukobat.all', 'BentukObatController@all')->name('bentukobat.all');
@@ -30,4 +30,5 @@ Route::get('/kontraindikasiobat.all', 'KontraindikasiObatController@all')->name(
 Route::resource('kontraindikasiobat', 'KontraindikasiObatController');
 Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');
 Route::resource('pasien', 'PasienController');
+Route::get('/beranda', 'DashboardController@index')->name('beranda');
 

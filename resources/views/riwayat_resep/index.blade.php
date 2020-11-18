@@ -12,20 +12,19 @@ Pasien
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"> Pasien
-                        <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
-                            @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Pasien</button>
+                    <h4 class="card-title"> Riwayat Resep
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No RM</th>
+                                    <th>No </th>
+                                    <th>Tanggal Resep</th>
+                                    <th>No Resep</th>
                                     <th>Nama Pasien</th>
-                                    <th>Jenis Kelamin</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Alamat</th>
-                                    <th>No Telp</th>
+                                    <th>Jumlah Obat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

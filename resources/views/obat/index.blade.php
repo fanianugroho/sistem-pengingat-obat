@@ -34,7 +34,7 @@ Obat
                                     <td>@{{ "OB00255"+index+1 }}</td>
                                     <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}</td>
                                     <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}</td>
-                                    <td>@{{ item.interaksi_obat.nana_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}</td>
+                                    <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}</td>
                                     <td>
                                         <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
