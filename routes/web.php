@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('app.dashboard');
+    return redirect()->route('beranda');
 });
 
 Auth::routes();
-
+/* Route::group(['middleware' => ['auth','verified','web','CheckRole:apoteker']],function(){ */
 
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
@@ -36,3 +36,5 @@ Route::resource('riwayatresep', 'RiwayatResepController');
 Route::get('/resep.all', 'ResepController@all')->name('resep.all');
 Route::resource('resep', 'ResepController');
 
+
+/* }); */

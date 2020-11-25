@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BentukObatSeeder::class);
         $this->call(InteraksiObatSeeder::class);
         $this->call(KontraindikasiObatSeeder::class);
+        $this->call(ObatSeeder::class);
     }
 }

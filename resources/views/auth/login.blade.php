@@ -11,6 +11,7 @@ Sign in
         <div class="text-center">
             <img src="{{asset('template/assets/images/login/apotech.png')}}" alt="wrapkit">
         </div>
+        <h2 class="mt-3 text-center">Sign in</h2>
         <form class="mt-4" action="{{ route('login') }}" method="POST">
             @csrf
             <div class="row">
@@ -46,19 +47,19 @@ Sign in
                             <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                 {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">
-                                {{ __('Ingatkan saya') }}
+                                {{ __('Remember me') }}
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12 text-center">
-                    <button type="submit" class="btn btn-block btn-primary">{{ __('Masuk') }}</button>
+                    <button type="submit" class="btn btn-block btn-primary">{{ __('Login') }}</button>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Lupa Password?') }}
+                            {{ __('Forgot Password?') }}
                         </a>
                         @endif
                     </div>
