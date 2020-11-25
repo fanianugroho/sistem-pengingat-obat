@@ -12,8 +12,26 @@ class BentukObatSeeder extends Seeder
     public function run()
     {
         $data=[
+            [
+                'nama_bentuk' => 'Cair'
+            ],
+            [
+                'nama_bentuk' => 'Kaplet'
+            ],
+            [
+                'nama_bentuk' => 'Serbuk'
+            ],
+            [
+                'nama_bentuk' => 'Tetes'
+            ],
+            [
+                'nama_bentuk' => 'Tablet'
+            ],
+            [
+                'nama_bentuk' => 'Sirup'
+            ],
 
-            'nama_bentuk' => 'Kapsul',
+            
         ];
           BentukObat::insert($data);
     }

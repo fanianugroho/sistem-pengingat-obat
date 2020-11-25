@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InteraksiObatSeeder::class);
         $this->call(KontraindikasiObatSeeder::class);
         $this->call(ObatSeeder::class);
+        $this->call(PasienSeeder::class);
     }
 }

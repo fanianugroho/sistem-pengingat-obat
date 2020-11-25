@@ -12,8 +12,27 @@ class InteraksiObatSeeder extends Seeder
     public function run()
     {
         $data=[
+            [
+                'nama_interaksi' => 'Statin'
+            ],
+            [
+                'nama_interaksi' => 'Diltiazem'
+            ],
+            [
+                'nama_interaksi' => 'Amiodarone'
+            ],
+            [
+                'nama_interaksi' => 'Nevirapine'
+            ],
+            [
+                'nama_interaksi' => 'Levofloxacin'
+            ],
+            [
+                'nama_interaksi' => '	Trimethoprim/sulfamethoxazole'
+            ],
+            
 
-            'nama_interaksi' => 'Statin',
+            
         ];
           InteraksiObat::insert($data);
     }
