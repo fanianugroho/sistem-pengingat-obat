@@ -49,7 +49,7 @@
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-white mb-1 font-weight-medium">0</h1>
+                                <h1 class="text-white mb-1 font-weight-medium">{{$jumlahpasien}}</h1>
                             </div>
                             <h6 class="mb-0 text-white">Jumlah Pasien
                             </h6>
@@ -69,7 +69,7 @@
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-white mb-1 font-weight-medium">0</h1>
+                                <h1 class="text-white mb-1 font-weight-medium">{{$jumlahobat}}</h1>
                             </div>
                             <h6 class="mb-0 text-white">Jumlah Obat
                             </h6>
