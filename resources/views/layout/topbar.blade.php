@@ -9,22 +9,12 @@
             <!-- ============================================================== -->
             <div class="navbar-brand">
                 <!-- Logo icon -->
-                <a href="#">
-                    <b class="logo-icon">
-                        <!-- Dark Logo icon -->
-                        <img src="{{url('/')}}/template/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo icon -->
-                        <img src="{{url('/')}}/template/assets/images/logo-icon.png" alt="homepage"
-                            class="light-logo" />
-                    </b>
-                    <!--End Logo icon -->
+                <a href="/beranda">
+                    
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- dark Logo text -->
-                        <img src="{{url('/')}}/template/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo text -->
-                        <img src="{{url('/')}}/template/assets/images/logo-light-text.png" class="light-logo"
-                            alt="homepage" />
+                        <p> APOTECH.ID </p>
                     </span>
                 </a>
             </div>

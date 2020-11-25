@@ -12,14 +12,10 @@ class RiwayatResep extends Model
     protected $table ='riwayat_resep';
 
     protected $fillable=[
-        'id_pasien',
-        'id_obat',
+        'id_resep',
     ];
 
-    public function obat(){
-        return $this->belongsTo('App\Obat', 'id_obat');
-    }
-    public function pasien(){
-        return $this->belongsTo('App\Pasien', 'id_pasien');
+    public function resep(){
+        return $this->belongsTo('App\Resep', 'id_resep');
     }
 }

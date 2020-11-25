@@ -31,4 +31,8 @@ Route::resource('kontraindikasiobat', 'KontraindikasiObatController');
 Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');
 Route::resource('pasien', 'PasienController');
 Route::get('/beranda', 'DashboardController@index')->name('beranda');
+Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatresep.all');
+Route::resource('riwayatresep', 'RiwayatResepController');
+Route::get('/resep.all', 'ResepController@all')->name('resep.all');
+Route::resource('resep', 'ResepController');
 

@@ -15,13 +15,11 @@ class CreateRiwayatResepTable extends Migration
     {
         Schema::create('riwayat_resep', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pasien');
-            $table->unsignedBigInteger('id_obat');
+            $table->unsignedBigInteger('id_resep');
             $table->timestamps();
             $table->softDeletes();
             
-            $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');
-            $table->foreign('id_pasien')->references('id')->on('pasien')->onDelete('cascade');
+            $table->foreign('id_resep')->references('id')->on('resep')->onDelete('cascade');
         });
     }
 

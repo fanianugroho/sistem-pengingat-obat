@@ -27,10 +27,10 @@
 
                 <li class="sidebar-item"> <a class="sidebar-link" href="{{route('pasien.index')}}" aria-expanded="false"><i
                             class="fas fa-user-plus"></i><span class="hide-menu">Pasien</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html"
+                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('resep.index')}}"
                         aria-expanded="false"><i class="fas fa-pen-square"></i><span
                             class="hide-menu">Buat Resep</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('riwayatresep.index')}}"
                         aria-expanded="false"><i class="fas fa-notes-medical"></i><span
                             class="hide-menu">Riwayat Resep</span></a></li>
 
