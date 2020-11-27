@@ -15,7 +15,21 @@ class ObatController extends Controller
     public function index()
     {
         $data = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->get();
-        return response()->json($data);
+        if($data){
+            return response()->json([
+            "status" => "success",
+            "message" => "data berhasil di tampilkan",
+            "data" => $data,
+            
+        ]);
+    
+        } else {
+            return response()->json([
+                "status" => 'failed' ,
+                "message" => 'data gagal di tampilkan',
+                "data" => null,
+            ]);
+        }
     }
 
 
