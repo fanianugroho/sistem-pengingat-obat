@@ -14,9 +14,9 @@ class ObatSeeder extends Seeder
         $data=[
 
             [
-                'nama_obat' => 'Paracetamol Tablet 10 mg',
+                'nama_obat' => 'Paracetamol Tablet ',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => '10 mg',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 1,
                 'id_interaksi_obat' => 1,
@@ -31,9 +31,9 @@ class ObatSeeder extends Seeder
 
             ],
             [
-                'nama_obat' => 'Komik Sirup 10 ml',
+                'nama_obat' => 'Komik Sirup ',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => '10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 2,
                 'id_interaksi_obat' => 2,
@@ -48,9 +48,9 @@ class ObatSeeder extends Seeder
 
             ],
             [
-                'nama_obat' => 'Paramex Tablet 20 mg',
+                'nama_obat' => 'Paramex Tablet ',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => '20 mg',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 3,
                 'id_interaksi_obat' => 3,
@@ -65,9 +65,9 @@ class ObatSeeder extends Seeder
 
             ],
             [
-                'nama_obat' => 'Panadol Tablet 10 ml',
+                'nama_obat' => 'Panadol Tablet',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => ' 10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 4,
                 'id_interaksi_obat' => 4,
@@ -82,9 +82,9 @@ class ObatSeeder extends Seeder
 
             ],
             [
-                'nama_obat' => 'Contrexyn Tablet 20 ml	',
+                'nama_obat' => 'Contrexyn Tablet',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => '20 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 5,
                 'id_interaksi_obat' => 5,
@@ -99,9 +99,9 @@ class ObatSeeder extends Seeder
 
             ],
             [
-                'nama_obat' => 'Antimo Tablet 10 ml',
+                'nama_obat' => 'Antimo Tablet ',
                 'id_bentuk_obat' => 1,
-                'kesediaan' => 3,
+                'kesediaan' => '10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 6,
                 'id_interaksi_obat' => 6,
