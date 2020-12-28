@@ -34,6 +34,8 @@ Route::get('/beranda', 'DashboardController@index')->name('beranda');
 Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatresep.all');
 Route::resource('riwayatresep', 'RiwayatResepController');
 Route::get('/resep.all', 'ResepController@all')->name('resep.all');
+Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('tambahresep');
+Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
 
 

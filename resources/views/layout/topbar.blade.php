@@ -87,7 +87,7 @@
                         class="rounded-circle"
                         width="40"> --}}
                         <span class="ml-2 d-none d-lg-inline-block">
-                            <span>Hello, Guest</span>
+                            <span>Hello, Apoteker</span>
                             <i data-feather="chevron-down"
                                         class="svg-icon"></i>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">

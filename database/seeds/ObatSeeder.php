@@ -24,10 +24,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
             [
@@ -41,10 +37,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
             [
@@ -58,10 +50,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
             [
@@ -75,10 +63,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
             [
@@ -92,10 +76,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
             [
@@ -109,10 +89,6 @@ class ObatSeeder extends Seeder
                 'petunjuk_penyimpanan' => 'Simpan dibawah suhu 30 derajat celcius',
                 'pola_makan' => '3x sehari',
                 'informasi' => '-',
-                'harga_pokok' => 30000,
-                'harga_jual' => 35000,
-                'stok' => 10,
-                'min_stok' => 5,
 
             ],
 

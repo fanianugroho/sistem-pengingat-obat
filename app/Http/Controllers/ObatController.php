@@ -48,10 +48,6 @@ class ObatController extends Controller
             'petunjuk_penyimpanan' => 'required',
             'pola_makan' => 'required',
             'informasi' => 'required',
-            'harga_pokok' => 'required',
-            'harga_jual' => 'required',
-            'stok' => 'required',
-            'min_stok' => 'required',
         ]);
        
        
@@ -73,10 +69,6 @@ class ObatController extends Controller
             'petunjuk_penyimpanan' => 'required',
             'pola_makan' => 'required',
             'informasi' => 'required',
-            'harga_pokok' => 'required',
-            'harga_jual' => 'required',
-            'stok' => 'required',
-            'min_stok' => 'required',
         ]);
        
        

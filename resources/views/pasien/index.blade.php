@@ -91,7 +91,7 @@ Pasien
                                     :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
                                 <has-error :form="form" field="tanggal_lahir"></has-error>
                             </div>
-                        </div>
+                    </div>
                     <div class="form-row">
                             <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
                             <div class="form-group col-md-8">

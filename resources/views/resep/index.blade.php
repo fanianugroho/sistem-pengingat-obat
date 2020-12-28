@@ -38,7 +38,7 @@ Pasien
                                     <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
                                     <td>@{{ item.no_telp == 'null' ? '' : item.no_telp}}</td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)" @click="detailCard(item.id)" class="text-success"
+                                        <a  v-bind:href="getUrl(item.id,item.nama_pasien)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Pilih"><i
                                                 class="icon-check"></i></a>
                                         
@@ -52,17 +52,16 @@ Pasien
         </div>
     </div>
 </div>
-
-<!-- MODAL -->
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" id="modal">
         <div class="modal-content">
             <div class="modal-header ">
                 <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Pasien</h4>
+                <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Pasien</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
 
-            <form @submit.prevent="storeData()" @keydown="form.onKeydown($event)" id="form">
+            <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
                         <label class="col-lg-2" for="no_rm"> No RM </label>
@@ -119,7 +118,9 @@ Pasien
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                        <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
 
             </form>
@@ -136,11 +137,9 @@ Pasien
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-
     function selectTrigger() {
         app.inputSelect()
     }
-
     var app = new Vue({
         el: '#app',
         data: {
@@ -167,11 +166,11 @@ Pasien
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });
-           
         },
         methods: {
-            getUrl(id) {
-                url = "resep/" + id + "/edit"
+            getUrl(id,nama) {
+                sessionStorage.setItem("id_pasien", id);
+                url = "/detailPasien/" + id
                 return url
             },
             createModal() {
@@ -180,10 +179,11 @@ Pasien
                 this.form.clear();
                 $('#modal').modal('show');
             },
-            detailCard(data) {
+            editModal(data) {
                 this.editMode = true;
                 this.form.fill(data)
                 this.form.clear();
+                $('#modal').modal('show');
             },
             storeData() {
                 this.form.post("{{ route('pasien.store') }}")
@@ -248,11 +248,10 @@ Pasien
                         })
                     })
                     .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
             }
         },
     })
-
 </script>
 @endpush

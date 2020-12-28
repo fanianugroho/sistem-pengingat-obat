@@ -32,7 +32,8 @@ Obat
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ "OB00255"+index+1 }}</td>
-                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}</td>
+                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}  </td>
+                                    
                                     <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}</td>
                                     <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}</td>
                                     <td>
@@ -162,38 +163,6 @@ Obat
                             <has-error :form="form" field="informasi"></has-error>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="harga_pokok"> Harga Pokok </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.harga_pokok" id="harga_pokok" type="text" min=0 
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('harga_pokok') }">
-                            <has-error :form="form" field="harga_pokok"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="harga_jual"> Harga Jual </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.harga_jual" id="harga_jual" type="text" min=0 
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('harga_jual') }">
-                            <has-error :form="form" field="harga_jual"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="stok"> Stok </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.stok" id="stok" type="text" min=0 
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('stok') }">
-                            <has-error :form="form" field="stok"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="min_stok"> Minimal Stok </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.min_stok" id="min_stok" type="text" min=0 
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('min_stok') }">
-                            <has-error :form="form" field="min_stok"></has-error>
-                        </div>
-                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
@@ -233,10 +202,6 @@ Obat
                 petunjuk_penyimpanan:'',
                 pola_makan:'',
                 informasi:'',
-                harga_pokok:'',
-                harga_jual:'',
-                stok:'',
-                min_stok:'',
                 id_bentuk_obat:'',
                 id_interaksi_obat:'',
                 id_kontraindikasi_obat:'',
@@ -262,10 +227,6 @@ Obat
             $('#id_kontraindikasi_obat').select2({
                 placeholder: "Pilih Kontraindikasi Obat"
             });
-            $('#satuan').select2({
-                placeholder: "Pilih Satuan"
-            });
-           
         },
         methods: {
             createModal() {

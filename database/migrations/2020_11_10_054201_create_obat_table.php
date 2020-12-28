@@ -25,10 +25,6 @@ class CreateObatTable extends Migration
             $table->string('petunjuk_penyimpanan');
             $table->string('pola_makan');
             $table->string('informasi');
-            $table->integer('harga_pokok');
-            $table->integer('harga_jual');
-            $table->integer('stok');
-            $table->integer('min_stok');
             $table->unsignedBigInteger('id_users')->nullable(); 
             $table->timestamps();
             $table->softDeletes();

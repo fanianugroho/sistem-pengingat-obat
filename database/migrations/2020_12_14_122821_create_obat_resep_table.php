@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRiwayatResepTable extends Migration
+class CreateObatResepTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreateRiwayatResepTable extends Migration
      */
     public function up()
     {
-        Schema::create('riwayat_resep', function (Blueprint $table) {
+        Schema::create('obat_resep', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_obat');
             $table->unsignedBigInteger('id_resep');
-            $table->timestamps();
-            $table->softDeletes();
             
+            $table->timestamps();
+
+            $table->softDeletes(); 
+
+
+            $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');
             $table->foreign('id_resep')->references('id')->on('resep')->onDelete('cascade');
         });
     }
@@ -30,6 +35,6 @@ class CreateRiwayatResepTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('riwayat_resep');
+        Schema::dropIfExists('obat_resep');
     }
 }

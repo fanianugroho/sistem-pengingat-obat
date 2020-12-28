@@ -29,20 +29,7 @@ Pasien
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item, index in mainData" :key="index">
-                                    <td>@{{ index+1 }}</td>
-                                    <td>@{{ item.tanggal_resep == 'null' ? '' : item.tanggal_resep}}</td>
-                                    <td>@{{ item.no_resep == 'null' ? '' : item.no_resep}}</td>
-                                    <td>@{{ item.id_pasien.nama_pasien == 'null' ? '' : item.id_pasien.nama_pasien}}</td>
-                                    <td>@{{ item.id_pasien.nama_pasien.tanggal_lahir == 'null' ? '' : item.id_pasien.nama_pasien.tanggal_lahir}}</td>
-                                    <td>@{{ item.id_pasien.nama_pasien.alamat == 'null' ? '' : @{{ item.id_pasien.nama_pasien.alamat}}</td>
-                                    <td>@{{ item.jml_obat == 'null' ? '' : item.no_telp}}</td>
-                                    <td>
-                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                                class="far fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                     </div>

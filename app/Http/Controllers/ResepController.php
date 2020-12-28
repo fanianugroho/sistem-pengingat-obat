@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Resep;
 use App\Pasien;
+use App\Obat;
 use Illuminate\Http\Request;
 
 class ResepController extends Controller
@@ -12,8 +13,26 @@ class ResepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function all()
+    {
+        $data =Resep::with('obat')->get();
+//          return response()->json($data);
+	    return $data;
+    }
+
+    public function tambahresep (){
+        $nama_obat = Obat::all();
+        return view('resep.tambahResep',compact('nama_obat'));
+    } 
+
+    public function detailpasien ($id){
+        $detailPasien = Pasien::where('id', $id)->first();   
+        return view('resep.detailPasien',compact('detailPasien'));
+    }
+
     public function index()
     {
+        
         return view('resep.index');
     }
 
@@ -35,43 +54,44 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'no_resep' => 'required',
+            'tanggal_resep' => 'required',
+            'id_pasien' => 'required',
+            'id_obat' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'takaran_minum' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+            'jml_kali_minum' => 'required',
+        ]);
+       
+       
+        Resep::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $pasien = Pasien::find($id);
-        return view('resep.detailPasien', compact('pasien'));
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+            'no_resep' => 'required',
+            'tanggal_resep' => 'required',
+            'id_pasien' => 'required',
+            'id_obat' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'takaran_minum' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+            'jml_kali_minum' => 'required',
+        ]);
+       
+       
+        return Resep::find($id)->update($request->all());
     }
 
     /**
@@ -82,6 +102,6 @@ class ResepController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Resep::find($id)->delete();
     }
 }

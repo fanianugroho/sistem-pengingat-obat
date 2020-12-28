@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\RiwayatResep;
+use App\ObatResep;
 use App\Resep;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class RiwayatResepController extends Controller
      */
     public function all()
     {
-        $data =RiwayatResep::with('resep')->get();
+        $data =ObatResep::with('resep')->get();
 //          return response()->json($data);
 	    return $data;
     }

@@ -23,6 +23,7 @@ class Resep extends Model
         'keterangan',
         'jml_obat',
         'jml_kali_minum',
+        'id_users',
 
     ];
 
@@ -31,6 +32,9 @@ class Resep extends Model
     }
     public function pasien(){
         return $this->belongsTo('App\Pasien', 'id_pasien');
+    }
+    public function users(){
+        return $this->belongsTo('App\User', 'id_users');
     }
 
 }

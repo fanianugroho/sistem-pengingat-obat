@@ -77,7 +77,7 @@
                     <div class="row">
                         <div class="col-7 align-self-center">
                             @guest
-                            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning Guest!
+                            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Selamat Pagi , Apoteker!
                             </h3>
                             @endguest
                             @auth
