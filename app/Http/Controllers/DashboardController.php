@@ -22,7 +22,13 @@ class DashboardController extends Controller
         $jumlahpasien=Pasien::count();
         return view('app.dashboard',compact('jumlahobat','jumlahpasien'));
     }
-
+    
+    public function tampilanawal ()
+    {
+        
+        return view('app.welcome');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -110,7 +110,7 @@ Buat Resep
                                 placeholder="Aturan Pakai" class="form-control"
                                 :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
                             <has-error :form="form" field="aturan_pakai"></has-error>
-                        </div>
+                        </div>  
                         <p> <b> kali sehari </b> </p>
                     </div>
                     <div class="form-row">

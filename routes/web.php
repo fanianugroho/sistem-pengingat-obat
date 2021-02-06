@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('beranda');
+    return redirect()->route('welcome');
 });
 
 Auth::routes();
@@ -37,6 +37,7 @@ Route::get('/resep.all', 'ResepController@all')->name('resep.all');
 Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('tambahresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
+Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
 
 
 /* }); */
