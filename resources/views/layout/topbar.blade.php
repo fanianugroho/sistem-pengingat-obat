@@ -14,7 +14,7 @@
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- dark Logo text -->
-                        <p> APOTECH.ID </p>
+                        <img src="{{url('/')}}/template/assets/images/login/apotech2.png"/>
                     </span>
                 </a>
             </div>

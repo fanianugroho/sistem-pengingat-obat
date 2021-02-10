@@ -131,7 +131,7 @@
 
 
 
-        <script src="{{asset('js/app.js')}}"></script>
+        <script src="{{asset('template/js/app.js')}}"></script>
         <!-- apps -->
         <script src="{{asset('template/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('template/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>

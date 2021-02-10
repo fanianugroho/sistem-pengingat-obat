@@ -6,69 +6,45 @@ Sign in
 
 @section('main')
 
-<div class="col-lg-12 col-md-7 bg-white">
-    <div class="p-3">
-        <div class="text-center">
-            <img src="{{asset('template/assets/images/login/apotech.png')}}" alt="wrapkit">
+<div class="wrap-login100">
+    <form class="login100-form validate-form" action="{{ route('login') }}" method="POST">
+        <img class="login-apotech" src="{{url('/')}}/template/assets/images/login/apotech2.png" />
+        @csrf
+        <span class="login100-form-title p-b-43">
+            <h2 class="apotech-masuk"> <b>Masuk sebagai <br /> Apoteker</b> </h2>
+        </span>
+
+
+        <div class="wrap-input100 validate-input">
+            <input class="input100 @error('email') is-invalid @enderror" type="text" value="{{ old('email') }}" required
+                autocomplete="email" id="email" name="email" placeholder="Email">
+            @error('email')
+            <span class="focus-input100">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
-        <h2 class="mt-3 text-center">Sign in</h2>
-        <form class="mt-4" action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label class="text-dark" for="email">Email</label>
-                        <input class="form-control @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus id="email" type="text"
-                            placeholder="Masukkan Email">
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label class="text-dark" for="password">Password</label>
-                        <input class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="current-password" id="password" type="password"
-                            placeholder="Masukkan Password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember me') }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 text-center">
-                    <button type="submit" class="btn btn-block btn-primary">{{ __('Login') }}</button>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        @if (Route::has('password.request'))
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Password?') }}
-                        </a>
-                        @endif
-                    </div>
-                </div>
-                <!-- <div class="col-lg-12 text-center mt-5">
-                    Don't have an account? <a href="{{ route('register') }}" class="text-danger">Sign Up</a>
-                </div> -->
-            </div>
-        </form>
+
+
+        <div class="wrap-input100 validate-input">
+            <input class="input100 @error('password') is-invalid @enderror" name="password" required
+                autocomplete="current-password" id="password" type="password" placeholder="Password">
+            @error('password')
+            <span class="focus-input100">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="container-login100-form-btn">
+            <button type="submit" class="login100-form-btn">
+                {{ __('Login') }}
+            </button>
+        </div>
+    </form>
+
+    <div class="login100-more" style="background-image: url('template_login/images/login.png');">
     </div>
+
 </div>
 @endsection

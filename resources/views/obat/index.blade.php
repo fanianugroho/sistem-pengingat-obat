@@ -15,6 +15,10 @@ Obat
                     <h4 class="card-title"> Obat
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat</button>
+                            <a href="{{route('beranda')}}">
+                            <button type="button" class="btn btn-danger btn-rounded float-right mb-3">
+                                <i class="fas fa-arrow-left"></i> Kembali</button>
+                        </a>
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">

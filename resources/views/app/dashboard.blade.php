@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('title')
+Beranda
+@endsection
 @section('content')
 
 <div class="row">
