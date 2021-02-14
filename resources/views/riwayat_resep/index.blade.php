@@ -18,18 +18,25 @@ Pasien
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No </th>
+                                    <th>No</th>
                                     <th>Tanggal Resep</th>
                                     <th>No Resep</th>
                                     <th>Nama Pasien</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Alamat</th>
                                     <th>Jumlah Obat</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               
+                                <tr v-for="item, index in mainData" :key="index">
+                                    <td>@{{ index+1 }}</td>
+                                    <td>@{{ item.tgl_resep == 'null' ? '' : item.tgl_resep}}</td>
+                                    <td>@{{ item.no_resep == 'null' ? '' : item.no_resep}}</td>
+                                    <td>@{{ item.nama_pasien == 'null' ? '' : item.nama_pasien}}</td>
+                                    <td>@{{ item.tanggal_lahir == 'null' ? '' : item.tanggal_lahir}}</td>
+                                    <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
+                                    <td>@{{ item.jml_obat == 'null' ? '' : item.jml_obat}}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -63,8 +70,6 @@ Pasien
                 id_pasien: '',
                 id_obat:'',
             }),
-
-            resepObat: @json($resep),
         },
         mounted() {
             $('#table').DataTable()
@@ -115,15 +120,25 @@ Pasien
             refreshData() {
                 axios.get("{{ route('riwayatresep.all') }}")
                     .then(response => {
-                        $('#table').DataTable().destroy()
-                        this.mainData = response.data
+                        $('#table').DataTable().destroy();
+                        let dataPasien = response.data;
+                        console.log('dataPasien',dataPasien)
+                        const datas = dataPasien.map( data => ({
+                            tgl_resep: moment(data.resep.created_at).locale('id').format('DD MMMM YYYY'),
+                            tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
+                            nama_pasien: data.resep.pasien.nama_pasien,
+                            no_resep:data.resep.no_resep,
+                            jml_obat:data.resep.jml_obat,
+                            alamat:data.resep.pasien.alamat,
+                        }));
+                        this.mainData = datas
                         this.$nextTick(function () {
                             $('#table').DataTable();
                         })
                     })
                     .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
             }
         },
     })

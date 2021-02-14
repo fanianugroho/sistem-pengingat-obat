@@ -60,7 +60,6 @@ Pasien
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Pasien</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
@@ -80,26 +79,26 @@ Pasien
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
-                            <div class="form-group col-md-8">
-                                <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
-                                    placeholder="Input tanggal lahir" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
-                                <has-error :form="form" field="tanggal_lahir"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
+                                placeholder="Input tanggal lahir" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
+                            <has-error :form="form" field="tanggal_lahir"></has-error>
                         </div>
+                    </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.jenis_kelamin" id="jenis_kelamin"  onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select"
-                                    :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
-                                    <option disabled item="">- Pilih Jenis Kelamin -</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                                <has-error :form="form" field="jenis_kelamin"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.jenis_kelamin" id="jenis_kelamin"  onchange="selectTrigger()"
+                            style="width: 100%" class="form-control custom-select"
+                                :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
+                                <option disabled item="">- Pilih Jenis Kelamin -</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            <has-error :form="form" field="jenis_kelamin"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="no_telp"> No Telp </label>
@@ -122,9 +121,7 @@ Pasien
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
-
             </form>
-
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -169,7 +166,8 @@ Pasien
         },
         methods: {
             getUrl(id,nama) {
-                sessionStorage.setItem("id_pasien", id);
+                console.log('id',id)
+                localStorage.setItem("id_pasien", id);
                 url = "/detailPasien/" + id
                 return url
             },
@@ -240,16 +238,17 @@ Pasien
 
             refreshData() {
                 axios.get("{{ route('pasien.all') }}")
-                    .then(response => {
-                        $('#table').DataTable().destroy()
-                        this.mainData = response.data
-                        this.$nextTick(function () {
-                            $('#table').DataTable();
-                        })
+                .then(response => {
+                    console.log('res',response)
+                    $('#table').DataTable().destroy()
+                    this.mainData = response.data
+                    this.$nextTick(function () {
+                        $('#table').DataTable();
                     })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
+                })
+                .catch(e => {
+                    e.response.status != 422 ? console.log(e) : '';
+                })
             }
         },
     })

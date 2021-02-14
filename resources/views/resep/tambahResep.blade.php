@@ -12,7 +12,6 @@ Buat Resep
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <h4 class="card-title">
                         <button type="button" class="btn btn-primary btn-rounded float-left mb-"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
@@ -31,10 +30,9 @@ Buat Resep
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ item.nama_obat.nama_obat == 'null' ? '' : item.nama_obat.nama_obat}}</td>
-                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai}}</td>
+                                    <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat}}</td>
+                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " sehari"}}</td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
-
                                     <td>
                                         <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
@@ -42,7 +40,6 @@ Buat Resep
                                         <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
                                                 class="far fa-trash-alt"></i></a>
-
                                     </td>
                                 </tr>
                             </tbody>
@@ -166,7 +163,6 @@ Buat Resep
                             <has-error :form="form" field="jml_kali_minum"></has-error>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
@@ -192,7 +188,7 @@ Buat Resep
         app.inputSelect()
     }
 
-    let idPasien = sessionStorage.getItem("id_pasien");
+    let idPasien = localStorage.getItem("id_pasien");
 
     console.log('idPasien', idPasien)
 
@@ -204,14 +200,14 @@ Buat Resep
             form: new Form({
                 id: '',
                 id_obat: '',
-                id_pasien: '',
+                id_pasien: idPasien,
                 dosis: '',
                 aturan_pakai: '',
                 takaran_minum: '',
                 waktu_minum: '',
                 keterangan: '',
                 jml_obat: '',
-                jml_kali_obat: '',
+                jml_kali_minum: '',
             }),
 
             namaObat: @json($nama_obat),
@@ -230,7 +226,6 @@ Buat Resep
 
         },
         methods: {
-
             createModal() {
                 this.editMode = false;
                 this.form.reset();
@@ -245,6 +240,7 @@ Buat Resep
             storeData() {
                 this.form.post("{{ route('resep.store') }}")
                     .then(response => {
+                        console.log('response',response)
                         $('#modal').modal('hide');
                         this.refreshData()
                     })
@@ -299,6 +295,7 @@ Buat Resep
                 axios.get("{{ route('resep.all') }}")
                     .then(response => {
                         $('#table').DataTable().destroy()
+                        console.log('response',response)
                         this.mainData = response.data
                         this.$nextTick(function () {
                             $('#table').DataTable();

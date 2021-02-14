@@ -22,9 +22,4 @@ class Pasien extends Model
         'no_telp',
         'alamat',
     ];
-
-    public function getTanggalLahirAttribute()
-    {
-        return \Carbon\Carbon::parse($this->attributes['tanggal_lahir'])->locale('id_ID')->isoFormat('LL');
-    }
 }
