@@ -158,11 +158,6 @@ Pasien
         mounted() {
             $('#table').DataTable()
             this.refreshData()
-            $('[data-fancybox]').fancybox({
-                iframe: {
-                    preload: false
-                }
-            })
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });

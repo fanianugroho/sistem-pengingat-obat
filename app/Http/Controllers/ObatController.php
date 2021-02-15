@@ -20,6 +20,11 @@ class ObatController extends Controller
 //          return response()->json($data);
 	    return $data;
     }
+    public function detailobat ($id){
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->where('id',$id)->first();
+        // dd($detailObat->kontraindikasi_obat->nama_kontraindikasi);
+        return view('obat.detailObat',compact('detailObat'));
+    }
     public function index()
     {
         $bentuk_obat = BentukObat::all();

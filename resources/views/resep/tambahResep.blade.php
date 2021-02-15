@@ -75,13 +75,12 @@ Buat Resep
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="tanggal_resep">Tanggal Resep</label>
-                            <div class="form-group col-md-8">
-                                <input v-model="form.tanggal_resep" id="tanggal_resep" type="date"
-                                    placeholder="" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('tanggal_resep') }">
-                                <has-error :form="form" field="tanggal_resep"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="tanggal_resep">Tanggal Resep</label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.tanggal_resep" id="tanggal_resep" type="date" placeholder=""
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('tanggal_resep') }">
+                            <has-error :form="form" field="tanggal_resep"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2">Nama Obat</label>
@@ -110,7 +109,7 @@ Buat Resep
                                 placeholder="Aturan Pakai" class="form-control"
                                 :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
                             <has-error :form="form" field="aturan_pakai"></has-error>
-                        </div>  
+                        </div>
                         <p> <b> kali sehari </b> </p>
                     </div>
                     <div class="form-row">
@@ -168,11 +167,11 @@ Buat Resep
                     </div>
 
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
-                    <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                        <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
 
-                </div>
+                    </div>
             </form>
 
         </div><!-- /.modal-content -->
@@ -310,5 +309,6 @@ Buat Resep
             }
         },
     })
+
 </script>
 @endpush

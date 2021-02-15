@@ -140,7 +140,10 @@ Pasien
     integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
+    let cTime = moment().format();
+    console.log(cTime);
 
     function selectTrigger() {
         app.inputSelect()
@@ -250,8 +253,8 @@ Pasien
                         })
                     })
                     .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
             }
         },
     })

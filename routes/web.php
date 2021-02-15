@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
+Route::get('/detailObat/{id}', 'ObatController@detailobat')->name('detailobat');
 Route::get('/bentukobat.all', 'BentukObatController@all')->name('bentukobat.all');
 Route::resource('bentukobat', 'BentukObatController');
 Route::get('/interaksiobat.all', 'InteraksiObatController@all')->name('interaksiobat.all');
