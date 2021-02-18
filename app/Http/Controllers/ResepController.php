@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Resep;
 use App\Pasien;
 use App\Obat;
+use App\ObatResep;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Http\Request;
 
 class ResepController extends Controller
@@ -54,10 +58,8 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
 
-            'no_resep' => 'required',
-            'tanggal_resep' => 'required',
             'id_pasien' => 'required',
             'id_obat' => 'required',
             'dosis' => 'required',
@@ -70,15 +72,47 @@ class ResepController extends Controller
         ]);
        
        
-        Resep::create($request->all());
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => $validator->messages()
+            ],422);
+        }
+        
+        DB::beginTransaction();
+        try {
+            $resep = New Resep;
+            $resep->id_pasien = $request->id_pasien;
+            $resep->id_obat = $request->id_obat;
+            $resep->dosis = $request->dosis;
+            $resep->aturan_pakai = $request->aturan_pakai;
+            $resep->takaran_minum = $request->takaran_minum;
+            $resep->waktu_minum = $request->waktu_minum;
+            $resep->keterangan = $request->keterangan;
+            $resep->jml_obat = $request->jml_obat;
+            $resep->jml_kali_minum = $request->jml_kali_minum;
+            $resep->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+            $obatResep = New ObatResep;
+            $obatResep->id_resep = $resep->id;
+            $obatResep->id_obat = $request->id_obat;
+            $obatResep->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        DB::commit();
+        return $request;
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
 
-            'no_resep' => 'required',
-            'tanggal_resep' => 'required',
             'id_pasien' => 'required',
             'id_obat' => 'required',
             'dosis' => 'required',

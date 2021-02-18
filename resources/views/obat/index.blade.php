@@ -32,7 +32,7 @@ Obat
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ "OB00255"+index+1 }}</td>
+                                    <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
                                     <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} </td>
 
                                     <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}
@@ -206,6 +206,7 @@ Obat
             form: new Form({
                 id: '',
                 nama_obat: '',
+                kode_obat: '',
                 kesediaan: '',
                 satuan: '',
                 efek_samping: '',

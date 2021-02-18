@@ -7853,7 +7853,7 @@ pre code {
 .table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #7c8798
+    color: #01265D;
 }
 
 .table td,
@@ -11041,9 +11041,13 @@ fieldset:disabled a.btn {
 }
 
 .card-title {
-    margin-bottom: .75rem
+    margin-bottom: .75rem;
 }
 
+.card-title-detailobat {
+    text-align: center;
+    color: #000;
+}
 .card-header,
 .card-subtitle,
 .card-text:last-child {
@@ -17163,7 +17167,7 @@ a.text-light:hover {
 }
 
 .text-dark {
-    color: #1c2d41 !important
+    color: #01265D; !important
 }
 
 a.text-dark:focus,

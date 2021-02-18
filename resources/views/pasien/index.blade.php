@@ -78,38 +78,40 @@ Pasien
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_pasien"> Nama Pasien </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_pasien" id="nama_pasien" type="text" min=0 placeholder="Masukkan Nama Pasien"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('nama_pasien') }">
+                            <input v-model="form.nama_pasien" id="nama_pasien" type="text" min=0
+                                placeholder="Masukkan Nama Pasien" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('nama_pasien') }">
                             <has-error :form="form" field="nama_pasien"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
-                            <div class="form-group col-md-8">
-                                <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
-                                    placeholder="Input tanggal lahir" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
-                                <has-error :form="form" field="tanggal_lahir"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
+                                placeholder="Input tanggal lahir" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
+                            <has-error :form="form" field="tanggal_lahir"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.jenis_kelamin" id="jenis_kelamin"  onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select"
-                                    :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
-                                    <option disabled item="">- Pilih Jenis Kelamin -</option>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                                <has-error :form="form" field="jenis_kelamin"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.jenis_kelamin" onchange="selectTrigger()" name="jenis_kelamin"
+                                style="width: 100%" class="form-control custom-select" placeholder="Pilih Jenis Kelamin"
+                                :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
+                                <option disabled value="">- Pilih Jenis Kelamin -</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            <has-error :form="form" field="jenis_kelamin"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="no_telp"> No Telp </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.no_telp" id="no_telp" type="text" min=0 placeholder="Masukkan No Telpon"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('no_telp') }">
+                            <input v-model="form.no_telp" id="no_telp" type="text" min=0
+                                placeholder="Masukkan No Telpon" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('no_telp') }">
                             <has-error :form="form" field="no_telp"></has-error>
                         </div>
                     </div>
@@ -157,11 +159,11 @@ Pasien
             form: new Form({
                 id: '',
                 no_rm: '',
-                nama_pasien:'',
-                tanggal_lahir:'',
-                jenis_kelamin:'',
-                no_telp:'',
-                alamat:'',
+                nama_pasien: '',
+                tanggal_lahir: '',
+                jenis_kelamin: '',
+                no_telp: '',
+                alamat: '',
             }),
         },
         mounted() {
@@ -175,7 +177,7 @@ Pasien
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });
-           
+
         },
         methods: {
             createModal() {
@@ -184,15 +186,25 @@ Pasien
                 this.form.clear();
                 $('#modal').modal('show');
             },
-            editModal(data) {
+            editModal(dataPasien) {
+                const dataEdit = {
+                    id: dataPasien.id,
+                    no_rm: dataPasien.no_rm,
+                    nama_pasien:dataPasien.nama_pasien,
+                    tanggal_lahir:dataPasien.tanggal_lahir_edit,
+                    jenis_kelamin:dataPasien.jenis_kelamin,
+                    no_telp:dataPasien.no_telp,
+                    alamat:dataPasien.alamat,
+                }
                 this.editMode = true;
-                this.form.fill(data)
+                this.form.fill(dataEdit)
                 this.form.clear();
                 $('#modal').modal('show');
             },
             storeData() {
                 this.form.post("{{ route('pasien.store') }}")
                     .then(response => {
+                        this.form.jenis_kelamin = $("#jenis_kelamin").val()
                         $('#modal').modal('hide');
                         this.refreshData()
                     })
@@ -246,10 +258,21 @@ Pasien
             refreshData() {
                 axios.get("{{ route('pasien.all') }}")
                     .then(response => {
-                        $('#table').DataTable().destroy()
-                        this.mainData = response.data
-                        this.$nextTick(function () {
-                            $('#table').DataTable();
+                    $('#table').DataTable().destroy()
+                    let dataPasien = response.data;
+                    const datas = dataPasien.map( data => ({
+                        tanggal_lahir: moment(data.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
+                        tanggal_lahir_edit: data.tanggal_lahir,
+                        id: data.id,
+                        no_rm: data.no_rm,
+                        nama_pasien:data.nama_pasien,
+                        jenis_kelamin:data.jenis_kelamin,
+                        no_telp:data.no_telp,
+                        alamat:data.alamat,
+                    }));
+                    this.mainData = datas
+                    this.$nextTick(function () {
+                        $('#table').DataTable();
                         })
                     })
                     .catch(e => {

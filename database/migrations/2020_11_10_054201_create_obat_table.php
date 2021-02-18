@@ -16,6 +16,7 @@ class CreateObatTable extends Migration
         Schema::create('obat', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_obat');
+            $table->string('kode_obat');
             $table->unsignedBigInteger('id_bentuk_obat');
             $table->string('kesediaan');
             $table->enum('satuan', ['ml', 'mg']);

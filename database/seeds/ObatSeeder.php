@@ -16,6 +16,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Paracetamol Tablet ',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025501',
                 'kesediaan' => '10 mg',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 1,
@@ -29,6 +30,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Komik Sirup ',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025511',
                 'kesediaan' => '10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 2,
@@ -42,6 +44,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Paramex Tablet ',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025521',
                 'kesediaan' => '20 mg',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 3,
@@ -55,6 +58,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Panadol Tablet',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025531',
                 'kesediaan' => ' 10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 4,
@@ -68,6 +72,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Contrexyn Tablet',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025541',
                 'kesediaan' => '20 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 5,
@@ -81,6 +86,7 @@ class ObatSeeder extends Seeder
             [
                 'nama_obat' => 'Antimo Tablet ',
                 'id_bentuk_obat' => 1,
+                'kode_obat' => 'OB0025551',
                 'kesediaan' => '10 ml',
                 'satuan' => 'ml',
                 'id_kontraindikasi_obat' => 6,

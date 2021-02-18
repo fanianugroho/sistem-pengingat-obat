@@ -111,8 +111,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
+               Apotech.id ⓒ 2021 
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -143,7 +142,7 @@
     <script src="{{asset('template/dist/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('template/dist/js/custom.min.js')}}"></script>
-
+    <script src="{{asset('template/dist/js/moment.js')}}"></script>
     <script src="{{asset('template/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('template/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
     <script src="{{asset('tinymce/tinymce.min.js')}}"></script>

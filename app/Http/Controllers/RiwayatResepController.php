@@ -14,14 +14,13 @@ class RiwayatResepController extends Controller
      */
     public function all()
     {
-        $data =ObatResep::with('resep')->get();
+        $data =ObatResep::with('resep.obat','resep.pasien')->get();
 //          return response()->json($data);
 	    return $data;
     }
     public function index()
     {
-        $resep = Resep::with('pasien')->get();
-        return view('riwayat_resep.index',compact('resep'));
+        return view('riwayat_resep.index');
     }
 
     /**

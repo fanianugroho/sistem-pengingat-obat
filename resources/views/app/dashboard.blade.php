@@ -6,21 +6,21 @@ Beranda
 
 <div class="row">
     <div class="col-3">
-        <div class="card text-white bg-danger">
+        <div class="card border-right">
             <div class="card-body">
                 <a href="">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-white mb-1 font-weight-medium">0</h1>
+                                <h1 class="text-dark mb-1 font-weight-medium">0</h1>
 
                             </div>
-                            <h6 class="mb-0 text-white">
+                            <h6 class="mb-0 text-dark">
                                 <Table>Resep Baru</Table>
                             </h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
-                            <span class="mb-0 text-white"><i data-feather="check-circle"></i></span>
+                            <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
                         </div>
                     </div>
                 </a>
@@ -28,17 +28,17 @@ Beranda
         </div>
     </div>
     <div class="col-3">
-        <div class="card text-white bg-primary">
+        <div class="card border-right">
             <div class="card-body">
                 <a href="">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
-                            <h1 class="text-white mb-1 w-100 text-truncate font-weight-medium">0</h1>
-                            <h6 class="mb-0 text-white">Pasien Baru
+                            <h1 class="text-dark mb-1 w-100 text-truncate font-weight-medium">0</h1>
+                            <h6 class="mb-0 text-dark">Pasien Baru
                             </h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
-                            <span class="mb-0 text-white"><i data-feather="check-circle"></i></span>
+                            <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
                         </div>
                     </div>
                 </a>
@@ -46,19 +46,19 @@ Beranda
         </div>
     </div>
     <div class="col-3">
-        <div class="card text-white bg-success">
+        <div class="card border-right">
             <div class="card-body">
                 <a href="">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-white mb-1 font-weight-medium">{{$jumlahpasien}}</h1>
+                                <h1 class="text-dark mb-1 font-weight-medium">{{$jumlahpasien}}</h1>
                             </div>
-                            <h6 class="mb-0 text-white">Jumlah Pasien
+                            <h6 class="mb-0 text-dark">Jumlah Pasien
                             </h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-2">
-                            <span class="mb-0 text-white"><i data-feather="bar-chart-2"></i></span>
+                            <span class="mb-0 text-dark"><i data-feather="bar-chart-2"></i></span>
                         </div>
                     </div>
                 </a>
@@ -66,19 +66,19 @@ Beranda
         </div>
     </div>
     <div class="col-3">
-        <div class="card text-white bg-warning">
+        <div class="card border-right">
             <div class="card-body">
                 <a href="">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-white mb-1 font-weight-medium">{{$jumlahobat}}</h1>
+                                <h1 class="text-dark mb-1 font-weight-medium">{{$jumlahobat}}</h1>
                             </div>
-                            <h6 class="mb-0 text-white">Jumlah Obat
+                            <h6 class="mb-0 text-dark">Jumlah Obat
                             </h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
-                            <span class="mb-0 text-white"><i data-feather="bar-chart-2"></i></span>
+                            <span class="mb-0 text-dark"><i data-feather="bar-chart-2"></i></span>
                         </div>
                     </div>
                 </a>

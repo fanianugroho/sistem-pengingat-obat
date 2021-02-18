@@ -12,9 +12,51 @@ Buat Resep
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
+                    
+                    <div class="row">
+                        <div class="col-8 mt-4">
+                            <div class="card-body">
+                                <table id="table" class="table table-striped table-bordered no-wrap">
+                                    <tr>
+                                        <th width="400">No RM</th>
+                                        <td width="20px">:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Kelamin</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Lahir</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>No Telepon</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Alamat</th>
+                                        <td>:</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                
+                            </div>
+                            
+                        </div>
+                        <button type="button" class="btn btn-primary btn-rounded"
+                            @click="createModal()"> <i class="icon-printer"></i></button>
+                    </div>
                     <h4 class="card-title">
-                        <button type="button" class="btn btn-primary btn-rounded float-left mb-"
+                        <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
                     </h4>
                     <div class="table-responsive">
@@ -31,8 +73,8 @@ Buat Resep
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ item.nama_obat.nama_obat == 'null' ? '' : item.nama_obat.nama_obat}}</td>
-                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai}}</td>
+                                    <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat}}</td>
+                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + "x sehari"}}</td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
 
                                     <td>
@@ -67,25 +109,9 @@ Buat Resep
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="no_resep"> No Resep </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.no_resep" id="no_resep" type="text" min=0 placeholder=""
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('no_resep') }">
-                            <has-error :form="form" field="no_resep"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="tanggal_resep">Tanggal Resep</label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.tanggal_resep" id="tanggal_resep" type="date" placeholder=""
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('tanggal_resep') }">
-                            <has-error :form="form" field="tanggal_resep"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
                         <label class="col-lg-2">Nama Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()" style="width: 100%"
+                            <select v-model="form.id_obat" name="id_obat" onchange="selectTrigger()" style="width: 100%"
                                 class="form-control custom-select">
                                 <option disabled item="">- Pilih Nama Obat -</option>
                                 <option v-for="item in namaObat" :value="item.id">
@@ -191,9 +217,9 @@ Buat Resep
         app.inputSelect()
     }
 
-    let idPasien = sessionStorage.getItem("id_pasien");
-
-    console.log('idPasien', idPasien)
+    let idPasien = localStorage.getItem("id_pasien");
+    /* 
+        console.log('idPasien', idPasien) */
 
     var app = new Vue({
         el: '#app',
@@ -203,14 +229,14 @@ Buat Resep
             form: new Form({
                 id: '',
                 id_obat: '',
-                id_pasien: '',
+                id_pasien: idPasien,
                 dosis: '',
                 aturan_pakai: '',
                 takaran_minum: '',
                 waktu_minum: '',
                 keterangan: '',
                 jml_obat: '',
-                jml_kali_obat: '',
+                jml_kali_minum: '',
             }),
 
             namaObat: @json($nama_obat),
@@ -233,6 +259,12 @@ Buat Resep
             createModal() {
                 this.editMode = false;
                 this.form.reset();
+                this.form.clear();
+                $('#modal').modal('show');
+            },
+            editModal(data) {
+                this.editMode = true;
+                this.form.fill(data)
                 this.form.clear();
                 $('#modal').modal('show');
             },

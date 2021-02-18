@@ -23,8 +23,4 @@ class Pasien extends Model
         'alamat',
     ];
 
-    // public function getTanggalLahirAttribute()
-    // {
-    //     return \Carbon\Carbon::parse($this->attributes['tanggal_lahir'])->locale('id_ID')->isoFormat('LL');
-    // }
 }

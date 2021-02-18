@@ -45,6 +45,7 @@ class ObatController extends Controller
 
             'nama_obat' => 'required',
             'id_bentuk_obat' => 'required',
+            'kode_obat' => 'sometimes|max:50',
             'kesediaan' => 'required',
             'satuan' => 'required',
             'id_kontraindikasi_obat' => 'required',
@@ -54,9 +55,16 @@ class ObatController extends Controller
             'pola_makan' => 'required',
             'informasi' => 'required',
         ]);
-       
-       
-        Obat::create($request->all());
+
+        if($request->kode_obat){
+        $kode = "'OB00255'+1";
+        }
+        
+        $data = $request->all();
+        
+        $data['kode_obat'] = $kode;
+        
+        Obat::create($data);
     }
 
    

@@ -15,8 +15,6 @@ class CreateResepTable extends Migration
     {
         Schema::create('resep', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('no_resep');
-            $table->datetime('tanggal_resep');
             $table->unsignedBigInteger('id_pasien')->nullable();
             $table->unsignedBigInteger('id_obat');
             $table->string('dosis');
