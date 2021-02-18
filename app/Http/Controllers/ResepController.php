@@ -8,7 +8,7 @@ use App\ObatResep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use PDF;
 
 class ResepController extends Controller
 {
@@ -140,5 +140,17 @@ class ResepController extends Controller
     public function destroy($id)
     {
         return Resep::find($id)->delete();
+    }
+
+    public function cetakPdf()
+    {
+    	$resep = Resep::with('obat')->get();
+        // "b8" => [0, 0, 175.75, 249.45],
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep])->setPaper('b7', 'landscape');
+    	return $pdf->stream();
+    }
+
+    public function cekPdf(){
+        return view('resep.resep_pdf');
     }
 }

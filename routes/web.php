@@ -38,6 +38,8 @@ Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('ta
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
 Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
+Route::get('/cetak-resep','ResepController@cetakPdf');
+Route::get('/cek-resep','ResepController@cekPdf');
 
 
 /* }); */

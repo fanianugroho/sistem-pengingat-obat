@@ -15,6 +15,7 @@ Buat Resep
                     <h4 class="card-title">
                         <button type="button" class="btn btn-primary btn-rounded float-left mb-"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
+                            <a href="/cetak-resep" class="btn btn-primary" target="_blank">CETAK PDF</a>
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">

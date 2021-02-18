@@ -122,10 +122,10 @@ Pasien
                     .then(response => {
                         $('#table').DataTable().destroy();
                         let dataPasien = response.data;
-                        console.log('dataPasien',dataPasien)
                         const datas = dataPasien.map( data => ({
                             tgl_resep: moment(data.resep.created_at).locale('id').format('DD MMMM YYYY'),
                             tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
+                            tanggal_lahir_edit : data.resep.pasien.tanggal_lahir,
                             nama_pasien: data.resep.pasien.nama_pasien,
                             no_resep:data.resep.no_resep,
                             jml_obat:data.resep.jml_obat,
