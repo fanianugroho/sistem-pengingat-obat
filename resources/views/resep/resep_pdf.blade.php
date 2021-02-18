@@ -57,6 +57,9 @@
         float : right;
         width : 50%;
     }
+    .body__content .right img {
+       margin-left : 70px;
+    }
     .body__content .left{
         width : 50%;
         min-height: 30px;
@@ -93,7 +96,7 @@
             </div>
             <div class="body__content">
                 <div class="right">
-                    <img src="" alt="" /> 
+                    <img src="data:image/png;base64, {!! base64_encode($qr) !!} ">
                 </div>
                 <div class="left">
                     <span class="span-text">Nama : Murdi</span> <br />

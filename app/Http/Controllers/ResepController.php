@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PDF;
+use QrCode;
 
 class ResepController extends Controller
 {
@@ -145,12 +146,12 @@ class ResepController extends Controller
     public function cetakPdf()
     {
     	$resep = Resep::with('obat')->get();
-        // "b8" => [0, 0, 175.75, 249.45],
-    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep])->setPaper('b7', 'landscape');
+        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('A basic example of QR code! Nicesnippets.com');
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
     }
 
     public function cekPdf(){
-        return view('resep.resep_pdf');
+        return QrCode::size(300)->generate('A basic example of QR code! Nicesnippets.com');
     }
 }
