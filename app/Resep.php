@@ -12,8 +12,6 @@ class Resep extends Model
     protected $table ='resep';
 
     protected $fillable=[
-        'no_resep',
-        'tanggal_resep',
         'id_pasien',
         'id_obat',
         'dosis',

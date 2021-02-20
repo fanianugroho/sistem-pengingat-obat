@@ -20,10 +20,12 @@ class RiwayatResepController extends Controller
     }
     public function index()
     {
-        // $resep = Resep::with('pasien')->get();
         return view('riwayat_resep.index');
     }
-
+    public function detailresep ($id){
+        $detailResep = Resep::where('id', $id)->first();   
+        return view('resep.detailResep',compact('detailResep'));
+    }
     /**
      * Show the form for creating a new resource.
      *

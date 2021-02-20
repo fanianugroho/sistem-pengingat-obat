@@ -78,25 +78,30 @@ Pasien
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_pasien"> Nama Pasien </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_pasien" id="nama_pasien" type="text" min=0 placeholder="Masukkan Nama Pasien"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('nama_pasien') }">
+                            <input v-model="form.nama_pasien" id="nama_pasien" type="text" min=0
+                                placeholder="Masukkan Nama Pasien" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('nama_pasien') }">
                             <has-error :form="form" field="nama_pasien"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
-                            <div class="form-group col-md-8">
-                                <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
-                                    placeholder="Input tanggal lahir" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
-                                <has-error :form="form" field="tanggal_lahir"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="tanggal_lahir">Tanggal Lahir</label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.tanggal_lahir" id="tanggal_lahir" type="date"
+                                placeholder="Input tanggal lahir" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
+                            <has-error :form="form" field="tanggal_lahir"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
                         <div class="form-group col-md-8">
                             <select v-model="form.jenis_kelamin" onchange="selectTrigger()" name="jenis_kelamin"
+<<<<<<< HEAD
                             style="width: 100%" class="form-control custom-select" placeholder= "Pilih Jenis Kelamin"
+=======
+                                style="width: 100%" class="form-control custom-select" placeholder="Pilih Jenis Kelamin"
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                                 :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
                                 <option disabled value="">- Pilih Jenis Kelamin -</option>
                                 <option value="Laki-laki">Laki-laki</option>
@@ -108,8 +113,9 @@ Pasien
                     <div class="form-row">
                         <label class="col-lg-2" for="no_telp"> No Telp </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.no_telp" id="no_telp" type="text" min=0 placeholder="Masukkan No Telpon"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('no_telp') }">
+                            <input v-model="form.no_telp" id="no_telp" type="text" min=0
+                                placeholder="Masukkan No Telpon" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('no_telp') }">
                             <has-error :form="form" field="no_telp"></has-error>
                         </div>
                     </div>
@@ -140,7 +146,10 @@ Pasien
     integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
+    let cTime = moment().format();
+    console.log(cTime);
 
     function selectTrigger() {
         app.inputSelect()
@@ -154,11 +163,11 @@ Pasien
             form: new Form({
                 id: '',
                 no_rm: '',
-                nama_pasien:'',
-                tanggal_lahir:'',
-                jenis_kelamin:'',
-                no_telp:'',
-                alamat:'',
+                nama_pasien: '',
+                tanggal_lahir: '',
+                jenis_kelamin: '',
+                no_telp: '',
+                alamat: '',
             }),
         },
         mounted() {
@@ -172,6 +181,10 @@ Pasien
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
         },
         methods: {
             createModal() {
@@ -252,7 +265,11 @@ Pasien
 
             refreshData() {
                 axios.get("{{ route('pasien.all') }}")
+<<<<<<< HEAD
                 .then(response => {
+=======
+                    .then(response => {
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                     $('#table').DataTable().destroy()
                     let dataPasien = response.data;
                     const datas = dataPasien.map( data => ({
@@ -268,11 +285,19 @@ Pasien
                     this.mainData = datas
                     this.$nextTick(function () {
                         $('#table').DataTable();
+<<<<<<< HEAD
                     })
                 })
                 .catch(e => {
                     e.response.status != 422 ? console.log(e) : '';
                 })
+=======
+                        })
+                    })
+                    .catch(e => {
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
             }
         },
     })

@@ -36,6 +36,14 @@ Pasien
                                     <td>@{{ item.tanggal_lahir == 'null' ? '' : item.tanggal_lahir}}</td>
                                     <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
                                     <td>@{{ item.jml_obat == 'null' ? '' : item.jml_obat}}</td>
+<<<<<<< HEAD
+=======
+                                    <td>
+                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Pilih"><i
+                                                class="icon-magnifier-add"></i></a>
+                                    </td>
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                                 </tr>
                             </tbody>
                         </table>
@@ -55,7 +63,6 @@ Pasien
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-
     function selectTrigger() {
         app.inputSelect()
     }
@@ -68,8 +75,12 @@ Pasien
             form: new Form({
                 id: '',
                 id_pasien: '',
-                id_obat:'',
+                id_obat: '',
             }),
+<<<<<<< HEAD
+=======
+
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
         },
         mounted() {
             $('#table').DataTable()
@@ -79,49 +90,20 @@ Pasien
                     preload: false
                 }
             })
-           
+
         },
         methods: {
-            createModal() {
-                this.editMode = false;
-                this.form.reset();
-                this.form.clear();
-                $('#modal').modal('show');
+            getUrl(id) {
+                sessionStorage.setItem("id_obat_resep", id);
+                url = "/detailResep/" + id
+                return url
             },
-            
-            deleteData(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.value) {
-                        url = "{{ route('pasien.destroy', ':id') }}".replace(':id', id)
-                        this.form.delete(url)
-                            .then(response => {
-                                Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                )
-                                this.refreshData()
-                            })
-                            .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
-                    }
-                })
-            },
-
             refreshData() {
                 axios.get("{{ route('riwayatresep.all') }}")
                     .then(response => {
                         $('#table').DataTable().destroy();
                         let dataPasien = response.data;
+<<<<<<< HEAD
                         const datas = dataPasien.map( data => ({
                             tgl_resep: moment(data.resep.created_at).locale('id').format('DD MMMM YYYY'),
                             tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
@@ -130,6 +112,18 @@ Pasien
                             no_resep:data.resep.no_resep,
                             jml_obat:data.resep.jml_obat,
                             alamat:data.resep.pasien.alamat,
+=======
+                        console.log('dataPasien', dataPasien)
+                        const datas = dataPasien.map(data => ({
+                            tgl_resep: moment(data.resep.created_at).locale('id').format(
+                                'DD MMMM YYYY'),
+                            tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id')
+                                .format('DD MMMM YYYY'),
+                            nama_pasien: data.resep.pasien.nama_pasien,
+                            no_resep: data.resep.no_resep,
+                            jml_obat: data.resep.jml_obat,
+                            alamat: data.resep.pasien.alamat,
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                         }));
                         this.mainData = datas
                         this.$nextTick(function () {

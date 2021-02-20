@@ -115,8 +115,6 @@ class ResepController extends Controller
     {
         $request->validate([
 
-            'no_resep' => 'required',
-            'tanggal_resep' => 'required',
             'id_pasien' => 'required',
             'id_obat' => 'required',
             'dosis' => 'required',

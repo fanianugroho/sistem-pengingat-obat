@@ -15,10 +15,7 @@ Obat
                     <h4 class="card-title"> Obat
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat</button>
-                            <a href="{{route('beranda')}}">
-                            <button type="button" class="btn btn-danger btn-rounded float-right mb-3">
-                                <i class="fas fa-arrow-left"></i> Kembali</button>
-                        </a>
+                        
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
@@ -35,12 +32,17 @@ Obat
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ "OB00255"+index+1 }}</td>
-                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}  </td>
-                                    
-                                    <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}</td>
-                                    <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}</td>
+                                    <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
+                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} </td>
+
+                                    <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}
+                                    </td>
+                                    <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}
+                                    </td>
                                     <td>
+                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Detail"><i
+                                                class="icon-magnifier-add"></i></a>
                                         <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
                                                 class="far fa-edit"></i></a>
@@ -73,105 +75,110 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_obat"> Nama Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_obat" id="nama_obat" type="text" min=0 placeholder="Masukkan Nama Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('nama_obat') }">
+                            <input v-model="form.nama_obat" id="nama_obat" type="text" min=0
+                                placeholder="Masukkan Nama Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('nama_obat') }">
                             <has-error :form="form" field="nama_obat"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2">Bentuk Obat</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.id_bentuk_obat" id="id_bentuk_obat" onchange="selectTrigger()"
-                                    style="width: 100%" class="form-control custom-select">
-                                    <option disabled item="">- Pilih Bentuk Obat -</option>
-                                    <option v-for="item in bentukObat" :value="item.id">
-                                        @{{  item.nama_bentuk }}</option>
-                                </select>
-                                <has-error :form="form" field="id_bentuk_obat"></has-error>
-                            </div>
+                        <label class="col-lg-2">Bentuk Obat</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.id_bentuk_obat" id="id_bentuk_obat" onchange="selectTrigger()"
+                                style="width: 100%" class="form-control custom-select">
+                                <option disabled item="">- Pilih Bentuk Obat -</option>
+                                <option v-for="item in bentukObat" :value="item.id">
+                                    @{{  item.nama_bentuk }}</option>
+                            </select>
+                            <has-error :form="form" field="id_bentuk_obat"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="kesediaan"> Kesediaan Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.kesediaan" id="kesediaan" type="text" min=0 placeholder="Masukkan Kesediaan Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('kesediaan') }">
+                            <input v-model="form.kesediaan" id="kesediaan" type="text" min=0
+                                placeholder="Masukkan Kesediaan Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('kesediaan') }">
                             <has-error :form="form" field="kesediaan"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2" for="satuan">Satuan</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.satuan" id="satuan"  onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select"
-                                    :class="{ 'is-invalid': form.errors.has('satuan') }">
-                                    <option disabled item="">- Pilih Satuan -</option>
-                                    <option value="ml">ml</option>
-                                    <option value="mg">mg</option>
-                                </select>
-                                <has-error :form="form" field="satuan"></has-error>
-                            </div>
+                        <label class="col-lg-2" for="satuan">Satuan</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.satuan" id="satuan" onchange="selectTrigger()" style="width: 100%"
+                                class="form-control custom-select" :class="{ 'is-invalid': form.errors.has('satuan') }">
+                                <option disabled item="">- Pilih Satuan -</option>
+                                <option value="ml">ml</option>
+                                <option value="mg">mg</option>
+                            </select>
+                            <has-error :form="form" field="satuan"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2">Kontraindikasi Obat</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.id_kontraindikasi_obat" id="id_kontraindikasi_obat" onchange="selectTrigger()"
-                                    style="width: 100%" class="form-control custom-select">
-                                    <option disabled item="">- Pilih Kontraindikasi Obat -</option>
-                                    <option v-for="item in kontraindikasiObat" :value="item.id">
-                                        @{{  item.nama_kontraindikasi }}</option>
-                                </select>
-                                <has-error :form="form" field="id_kontraindikasi_obat"></has-error>
-                            </div>
+                        <label class="col-lg-2">Kontraindikasi Obat</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.id_kontraindikasi_obat" id="id_kontraindikasi_obat"
+                                onchange="selectTrigger()" style="width: 100%" class="form-control custom-select">
+                                <option disabled item="">- Pilih Kontraindikasi Obat -</option>
+                                <option v-for="item in kontraindikasiObat" :value="item.id">
+                                    @{{  item.nama_kontraindikasi }}</option>
+                            </select>
+                            <has-error :form="form" field="id_kontraindikasi_obat"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
-                            <label class="col-lg-2">Interaksi Obat</label>
-                            <div class="form-group col-md-8">
-                                <select v-model="form.id_interaksi_obat" id="id_interaksi_obat" onchange="selectTrigger()"
-                                    style="width: 100%" class="form-control custom-select">
-                                    <option disabled item="">- Pilih Interaksi Obat -</option>
-                                    <option v-for="item in interaksiObat" :value="item.id">
-                                        @{{  item.nama_interaksi }}</option>
-                                </select>
-                                <has-error :form="form" field="id_interaksi_obat"></has-error>
-                            </div>
+                        <label class="col-lg-2">Interaksi Obat</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.id_interaksi_obat" id="id_interaksi_obat" onchange="selectTrigger()"
+                                style="width: 100%" class="form-control custom-select">
+                                <option disabled item="">- Pilih Interaksi Obat -</option>
+                                <option v-for="item in interaksiObat" :value="item.id">
+                                    @{{  item.nama_interaksi }}</option>
+                            </select>
+                            <has-error :form="form" field="id_interaksi_obat"></has-error>
+                        </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="efek_samping"> Efek Samping </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.efek_samping" id="efek_samping" type="text" min=0 placeholder="Masukkan Efek Samping Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('efek_samping') }">
+                            <input v-model="form.efek_samping" id="efek_samping" type="text" min=0
+                                placeholder="Masukkan Efek Samping Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('efek_samping') }">
                             <has-error :form="form" field="efek_samping"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan" type="text" min=0 placeholder="Masukkan Petunjuk Penyimpanan"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
+                            <input v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan" type="text" min=0
+                                placeholder="Masukkan Petunjuk Penyimpanan" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
                             <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="pola_makan"> Pola Makan </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.pola_makan" id="pola_makan" type="text" min=0 placeholder="Masukkan Pola Makan"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('pola_makan') }">
+                            <input v-model="form.pola_makan" id="pola_makan" type="text" min=0
+                                placeholder="Masukkan Pola Makan" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('pola_makan') }">
                             <has-error :form="form" field="pola_makan"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="informasi"> Informasi </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.informasi" id="informasi" type="text" min=0 placeholder="Masukkan Informasi"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('informasi') }">
+                            <input v-model="form.informasi" id="informasi" type="text" min=0
+                                placeholder="Masukkan Informasi" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('informasi') }">
                             <has-error :form="form" field="informasi"></has-error>
                         </div>
                     </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
-                    <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                        <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
+                    </div>
 
             </form>
 
@@ -187,7 +194,6 @@ Obat
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-
     function selectTrigger() {
         app.inputSelect()
     }
@@ -200,15 +206,16 @@ Obat
             form: new Form({
                 id: '',
                 nama_obat: '',
-                kesediaan:'',
-                satuan:'',
-                efek_samping:'',
-                petunjuk_penyimpanan:'',
-                pola_makan:'',
-                informasi:'',
-                id_bentuk_obat:'',
-                id_interaksi_obat:'',
-                id_kontraindikasi_obat:'',
+                kode_obat: '',
+                kesediaan: '',
+                satuan: '',
+                efek_samping: '',
+                petunjuk_penyimpanan: '',
+                pola_makan: '',
+                informasi: '',
+                id_bentuk_obat: '',
+                id_interaksi_obat: '',
+                id_kontraindikasi_obat: '',
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -233,6 +240,11 @@ Obat
             });
         },
         methods: {
+            getUrl(id) {
+                sessionStorage.setItem("id_obat", id);
+                url = "/detailObat/" + id
+                return url
+            },
             createModal() {
                 this.editMode = false;
                 this.form.reset();
@@ -311,8 +323,8 @@ Obat
                         })
                     })
                     .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
             }
         },
     })

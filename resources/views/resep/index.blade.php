@@ -85,6 +85,10 @@ Pasien
                                 placeholder="Input tanggal lahir" class="form-control"
                                 :class="{ 'is-invalid': form.errors.has('tanggal_lahir') }">
                             <has-error :form="form" field="tanggal_lahir"></has-error>
+<<<<<<< HEAD
+=======
+                        </div>
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                         </div>
                     </div>
                     <div class="form-row">
@@ -155,11 +159,6 @@ Pasien
         mounted() {
             $('#table').DataTable()
             this.refreshData()
-            $('[data-fancybox]').fancybox({
-                iframe: {
-                    preload: false
-                }
-            })
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });
@@ -239,11 +238,33 @@ Pasien
             refreshData() {
                 axios.get("{{ route('pasien.all') }}")
                 .then(response => {
+<<<<<<< HEAD
                     console.log('res',response)
                     $('#table').DataTable().destroy()
                     this.mainData = response.data
                     this.$nextTick(function () {
                         $('#table').DataTable();
+=======
+                    $('#table').DataTable().destroy()
+                    let dataPasien = response.data;
+                    const datas = dataPasien.map( data => ({
+                        tanggal_lahir: moment(data.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
+                        tanggal_lahir_edit: data.tanggal_lahir,
+                        id: data.id,
+                        no_rm: data.no_rm,
+                        nama_pasien:data.nama_pasien,
+                        jenis_kelamin:data.jenis_kelamin,
+                        no_telp:data.no_telp,
+                        alamat:data.alamat,
+                    }));
+                    this.mainData = datas
+                    this.$nextTick(function () {
+                        $('#table').DataTable();
+                        })
+                    })
+                    .catch(e => {
+                        e.response.status != 422 ? console.log(e) : '';
+>>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                     })
                 })
                 .catch(e => {

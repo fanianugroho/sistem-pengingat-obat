@@ -22,10 +22,6 @@ class Obat extends Model
         'petunjuk_penyimpanan',
         'pola_makan',
         'informasi',
-        'harga_pokok',
-        'harga_jual',
-        'stok',
-        'min_stok',
         'id_users',
     ];
 

@@ -20,6 +20,11 @@ class ObatController extends Controller
 //          return response()->json($data);
 	    return $data;
     }
+    public function detailobat ($id){
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->where('id',$id)->first();
+        // dd($detailObat->kontraindikasi_obat->nama_kontraindikasi);
+        return view('obat.detailObat',compact('detailObat'));
+    }
     public function index()
     {
         $bentuk_obat = BentukObat::all();
@@ -40,6 +45,7 @@ class ObatController extends Controller
 
             'nama_obat' => 'required',
             'id_bentuk_obat' => 'required',
+            'kode_obat' => 'sometimes|max:50',
             'kesediaan' => 'required',
             'satuan' => 'required',
             'id_kontraindikasi_obat' => 'required',
@@ -49,9 +55,16 @@ class ObatController extends Controller
             'pola_makan' => 'required',
             'informasi' => 'required',
         ]);
-       
-       
-        Obat::create($request->all());
+
+        if($request->kode_obat){
+        $kode = "'OB00255'+1";
+        }
+        
+        $data = $request->all();
+        
+        $data['kode_obat'] = $kode;
+        
+        Obat::create($data);
     }
 
    

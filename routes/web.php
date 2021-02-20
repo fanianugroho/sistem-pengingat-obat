@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
+Route::get('/detailObat/{id}', 'ObatController@detailobat')->name('detailobat');
 Route::get('/bentukobat.all', 'BentukObatController@all')->name('bentukobat.all');
 Route::resource('bentukobat', 'BentukObatController');
 Route::get('/interaksiobat.all', 'InteraksiObatController@all')->name('interaksiobat.all');
@@ -33,6 +34,7 @@ Route::resource('pasien', 'PasienController');
 Route::get('/beranda', 'DashboardController@index')->name('beranda');
 Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatresep.all');
 Route::resource('riwayatresep', 'RiwayatResepController');
+Route::get('/detailResep/{id}', 'RiwayatResepController@detailresep')->name('detailresep');
 Route::get('/resep.all', 'ResepController@all')->name('resep.all');
 Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('tambahresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
