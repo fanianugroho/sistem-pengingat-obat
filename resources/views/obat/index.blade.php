@@ -40,9 +40,9 @@ Obat
                                     <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}
                                     </td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)" class="text-success" data-toggle="tooltip"
-                                            data-placement="top" data-original-title="Pilih"><i
-                                                class="icon-check"></i></a>
+                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Detail"><i
+                                                class="icon-magnifier-add"></i></a>
                                         <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
                                                 class="far fa-edit"></i></a>

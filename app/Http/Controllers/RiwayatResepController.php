@@ -22,7 +22,10 @@ class RiwayatResepController extends Controller
     {
         return view('riwayat_resep.index');
     }
-
+    public function detailresep ($id){
+        $detailResep = Resep::where('id', $id)->first();   
+        return view('resep.detailResep',compact('detailResep'));
+    }
     /**
      * Show the form for creating a new resource.
      *

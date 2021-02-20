@@ -25,7 +25,7 @@ Pasien
                                     <th>Tanggal Lahir</th>
                                     <th>Alamat</th>
                                     <th>Jumlah Obat</th>
-                                   <!--  <th>Aksi</th> -->
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,6 +37,11 @@ Pasien
                                     <td>@{{ item.tanggal_lahir == 'null' ? '' : item.tanggal_lahir}}</td>
                                     <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
                                     <td>@{{ item.jml_obat == 'null' ? '' : item.jml_obat}}</td>
+                                    <td>
+                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Pilih"><i
+                                                class="icon-magnifier-add"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -56,7 +61,6 @@ Pasien
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-
     function selectTrigger() {
         app.inputSelect()
     }
@@ -69,7 +73,7 @@ Pasien
             form: new Form({
                 id: '',
                 id_pasien: '',
-                id_obat:'',
+                id_obat: '',
             }),
 
         },
@@ -81,22 +85,29 @@ Pasien
                     preload: false
                 }
             })
-           
+
         },
         methods: {
+            getUrl(id) {
+                sessionStorage.setItem("id_obat_resep", id);
+                url = "/detailResep/" + id
+                return url
+            },
             refreshData() {
                 axios.get("{{ route('riwayatresep.all') }}")
                     .then(response => {
                         $('#table').DataTable().destroy();
                         let dataPasien = response.data;
-                        console.log('dataPasien',dataPasien)
-                        const datas = dataPasien.map( data => ({
-                            tgl_resep: moment(data.resep.created_at).locale('id').format('DD MMMM YYYY'),
-                            tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id').format('DD MMMM YYYY'),
+                        console.log('dataPasien', dataPasien)
+                        const datas = dataPasien.map(data => ({
+                            tgl_resep: moment(data.resep.created_at).locale('id').format(
+                                'DD MMMM YYYY'),
+                            tanggal_lahir: moment(data.resep.pasien.tanggal_lahir).locale('id')
+                                .format('DD MMMM YYYY'),
                             nama_pasien: data.resep.pasien.nama_pasien,
-                            no_resep:data.resep.no_resep,
-                            jml_obat:data.resep.jml_obat,
-                            alamat:data.resep.pasien.alamat,
+                            no_resep: data.resep.no_resep,
+                            jml_obat: data.resep.jml_obat,
+                            alamat: data.resep.pasien.alamat,
                         }));
                         this.mainData = datas
                         this.$nextTick(function () {
@@ -104,8 +115,8 @@ Pasien
                         })
                     })
                     .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
             }
         },
     })

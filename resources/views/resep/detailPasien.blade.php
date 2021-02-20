@@ -16,47 +16,44 @@ Pasien
                             Data Pasien untuk Resep Obat
                         </div>
                         <!-- Card -->
-                        <div class="card">
-                            <div class="card-body">
-                                <table id="table" class="table table-striped table-bordered no-wrap">
-                                    <tr >
-                                        <th width="400">No RM</th>
-                                        <td width="20px">:</td>
-                                        <td>{{$detailPasien->no_rm}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <td>:</td>
-                                        <td>{{$detailPasien->nama_pasien}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Jenis Kelamin</th>
-                                        <td>:</td>
-                                        <td>{{$detailPasien->jenis_kelamin}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tanggal Lahir</th>
-                                        <td>:</td>
-                                        <td>{{$detailPasien->tanggal_lahir}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>No Telepon</th>
-                                        <td>:</td>
-                                        <td>{{$detailPasien->no_telp}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Alamat</th>
-                                        <td>:</td>
-                                        <td>{{$detailPasien->alamat}}</td>
-                                    </tr>
+                        <div class="card-body">
+                            <table id="table" class="table table-striped table-bordered no-wrap">
+                                <tr>
+                                    <th width="400">No RM</th>
+                                    <td width="20px">:</td>
+                                    <td>{{$detailPasien->no_rm}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama</th>
+                                    <td>:</td>
+                                    <td>{{$detailPasien->nama_pasien}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Jenis Kelamin</th>
+                                    <td>:</td>
+                                    <td>{{$detailPasien->jenis_kelamin}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir</th>
+                                    <td>:</td>
+                                    <td>{{Carbon\Carbon::parse($detailPasien->tanggal_lahir)->locale('id_ID')->isoFormat('LL')}}</td>
+                                </tr>
+                                <tr>
+                                    <th>No Telepon</th>
+                                    <td>:</td>
+                                    <td>{{$detailPasien->no_telp}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
+                                    <td>:</td>
+                                    <td>{{$detailPasien->alamat}}</td>
+                                </tr>
 
-                                </table>
-                                <div class="modal-footer">
-                                    <a href="{{route('resep.index')}}"><button type="button" class="btn btn-light"
-                                            data-dismiss="modal">Batal</button></a>
-                                    <a href="{{route('tambahresep')}}" class="btn btn-primary">Lanjutkan</a>
-                                </div>
-
+                            </table>
+                            <div class="modal-footer">
+                                <a href="{{route('resep.index')}}"><button type="button" class="btn btn-light"
+                                        data-dismiss="modal">Batal</button></a>
+                                <a href="{{route('tambahresep')}}" class="btn btn-primary">Lanjutkan</a>
                             </div>
                         </div>
                         <!-- Card -->
@@ -67,4 +64,3 @@ Pasien
     </div>
 </div>
 @endsection
-
