@@ -261,6 +261,11 @@ Obat
                 this.form.post("{{ route('obat.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Obat berhasil ditambahkan',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -272,6 +277,11 @@ Obat
                 this.form.put(url)
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Obat berhasil diubah',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -287,21 +297,22 @@ Obat
 
             deleteData(id) {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Apakah anda yakin?',
+                    text: "Anda tidak dapat mengembalikan ini",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.value) {
                         url = "{{ route('obat.destroy', ':id') }}".replace(':id', id)
                         this.form.delete(url)
                             .then(response => {
                                 Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
+                                    'Terhapus',
+                                    'Obat telah dihapus',
                                     'success'
                                 )
                                 this.refreshData()

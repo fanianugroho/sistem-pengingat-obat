@@ -287,6 +287,11 @@ Buat Resep
                     this.form.post("{{ route('resep.store') }}")
                         .then(response => {
                             $('#modal').modal('hide');
+                            Swal.fire(
+                            'Berhasil',
+                            'Resep berhasil ditambahkan',
+                            'success'
+                        )
                             this.refreshData()
                         })
                         .catch(e => {
@@ -298,6 +303,11 @@ Buat Resep
                     this.form.put(url)
                         .then(response => {
                             $('#modal').modal('hide');
+                            Swal.fire(
+                            'Berhasil',
+                            'Data Resep berhasil diubah',
+                            'success'
+                        )
                             this.refreshData()
                         })
                         .catch(e => {
@@ -310,21 +320,22 @@ Buat Resep
 
                 deleteData(id) {
                     Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
+                        title: 'Apakah anda yakin?',
+                        text: "Anda tidak dapat mengembalikan ini",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
                         cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: 'Ya, Hapus',
+                        cancelButtonText: 'Batal'
                     }).then((result) => {
                         if (result.value) {
                             url = "{{ route('resep.destroy', ':id') }}".replace(':id', id)
                             this.form.delete(url)
                                 .then(response => {
                                     Swal.fire(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
+                                        'Terhapus',
+                                        'Resep telah dihapus',
                                         'success'
                                     )
                                     this.refreshData()

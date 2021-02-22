@@ -206,6 +206,11 @@ Pasien
                     .then(response => {
                         this.form.jenis_kelamin = $("#jenis_kelamin").val()
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Pasien berhasil ditambahkan',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -217,6 +222,11 @@ Pasien
                 this.form.put(url)
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Data Pasien berhasil diubah',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -229,21 +239,22 @@ Pasien
 
             deleteData(id) {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Apakah anda yakin?',
+                    text: "Anda tidak dapat mengembalikan ini",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.value) {
                         url = "{{ route('pasien.destroy', ':id') }}".replace(':id', id)
                         this.form.delete(url)
                             .then(response => {
                                 Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
+                                    'Terhapus',
+                                    'Pasien telah dihapus',
                                     'success'
                                 )
                                 this.refreshData()
