@@ -39,6 +39,7 @@ Route::get('/resep.all', 'ResepController@all')->name('resep.all');
 Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('tambahresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
+Route::get('/cetak-resep','ResepController@cetakPdf');
 Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
 
 

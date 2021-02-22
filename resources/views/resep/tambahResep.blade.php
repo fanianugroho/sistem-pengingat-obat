@@ -14,7 +14,7 @@ Buat Resep
                 <div class="card-body">
                     <h3 class="card-title-detailobat"> Buat Resep
                     </h3>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="card-body">
                             <table id="table" class="table table-striped table-bordered no-wrap">
                                 <tr>
@@ -54,10 +54,10 @@ Buat Resep
                                 </tr>
                             </table>
                         </div>
-                    </div>
+                    </div> -->
                     <h4 class="card-title">
-                        <button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
-                                class="icon-printer"></i> Cetak Resep</button>
+                        <a href="/cetak-resep"><button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
+                                class="icon-printer"></i> Cetak Resep</button></a>
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
                     </h4>

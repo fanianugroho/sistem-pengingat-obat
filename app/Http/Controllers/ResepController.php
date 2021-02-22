@@ -7,6 +7,8 @@ use App\Obat;
 use App\ObatResep;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PDF;
+use QrCode;
 
 use Illuminate\Http\Request;
 
@@ -137,5 +139,13 @@ class ResepController extends Controller
     public function destroy($id)
     {
         return Resep::find($id)->delete();
+    }
+
+    public function cetakPdf()
+    {
+    	$resep = Resep::with('obat')->get();
+        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('A basic example of QR code! Nicesnippets.com');
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
+    	return $pdf->stream();
     }
 }
