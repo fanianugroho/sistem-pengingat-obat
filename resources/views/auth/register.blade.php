@@ -121,23 +121,6 @@ Sign up
                     </div>
                 </div>
 
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label class="text-dark" for="tipe_user">{{ __('Tipe User') }}</label>
-                        <select type="text" id="tipe_user" class="form-control @error('tipe_user') is-invalid @enderror"
-                            name="tipe_user" value="{{ old('tipe_user') }}" required autocomplete="tipe_user" autofocus>
-                            <option value="admin">Admin</option>
-                            <option value="apoteker">Apoteker</option>
-                        </select>
-                        <!-- <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus> -->
-
-                        @error('tipe_user')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
 
                 <div class="col-lg-12">
                     <div class="form-group">

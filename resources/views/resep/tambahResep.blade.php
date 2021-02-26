@@ -117,7 +117,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2">Nama Obat</label>
                                 <div class="form-group col-md-8">
-                                    <select v-model="form.id_obat" name="id_obat" onchange="selectTrigger()"
+                                    <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()"
                                         style="width: 100%" class="form-control custom-select">
                                         <option disabled item="">- Pilih Nama Obat -</option>
                                         <option v-for="item in namaObat" :value="item.id">
