@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\BentukObat;
 use App\InteraksiObat;
 use App\KontraindikasiObat;
+use App\EfekSampingObat;
+use App\PetunjukPenyimpananObat;
+use App\FungsiObat;
 use App\Obat;
 use Illuminate\Http\Request;
 
@@ -16,12 +19,14 @@ class ObatController extends Controller
      */
     public function all()
     {
-        $data =Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->get();
+        $data =Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat'
+        , 'petunjuk_penyimpanan_obat')->get();
 //          return response()->json($data);
 	    return $data;
     }
     public function detailobat ($id){
-        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->where('id',$id)->first();
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat'
+        , 'petunjuk_penyimpanan_obat')->where('id',$id)->first();
         // dd($detailObat->kontraindikasi_obat->nama_kontraindikasi);
         return view('obat.detailObat',compact('detailObat'));
     }
@@ -30,7 +35,11 @@ class ObatController extends Controller
         $bentuk_obat = BentukObat::all();
         $interaksi_obat = InteraksiObat::all();
         $kontraindikasi_obat = KontraindikasiObat::all();
-        return view('obat.index',compact('bentuk_obat','interaksi_obat','kontraindikasi_obat'));
+        $fungsi_obat = FungsiObat::all();
+        $efek_samping_obat = EfekSampingObat::all();
+        $petunjuk_penyimpanan_obat = PetunjukPenyimpananObat::all();
+        return view('obat.index',compact('bentuk_obat','interaksi_obat','kontraindikasi_obat','fungsi_obat'
+            , 'efek_samping_obat', 'petunjuk_penyimpanan_obat'));
     }
 
     /**
@@ -50,8 +59,9 @@ class ObatController extends Controller
             'satuan' => 'required',
             'id_kontraindikasi_obat' => 'required',
             'id_interaksi_obat' => 'required',
-            'efek_samping' => 'required',
-            'petunjuk_penyimpanan' => 'required',
+            'id_efek_samping_obat' => 'required',
+            'id_petunjuk_penyimpanan_obat' => 'required',
+            'id_fungsi_obat' => 'required',
             'pola_makan' => 'required',
             'informasi' => 'required',
         ]);
@@ -78,8 +88,9 @@ class ObatController extends Controller
             'satuan' => 'required',
             'id_kontraindikasi_obat' => 'required',
             'id_interaksi_obat' => 'required',
-            'efek_samping' => 'required',
-            'petunjuk_penyimpanan' => 'required',
+            'id_efek_samping_obat' => 'required',
+            'id_petunjuk_penyimpanan_obat' => 'required',
+            'id_fungsi_obat' => 'required',
             'pola_makan' => 'required',
             'informasi' => 'required',
         ]);

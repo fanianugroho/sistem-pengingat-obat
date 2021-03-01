@@ -22,8 +22,9 @@ class CreateObatTable extends Migration
             $table->enum('satuan', ['ml', 'mg']);
             $table->unsignedBigInteger('id_kontraindikasi_obat');
             $table->unsignedBigInteger('id_interaksi_obat');
-            $table->string('efek_samping');
-            $table->string('petunjuk_penyimpanan');
+            $table->unsignedBigInteger('id_efek_samping_obat');
+            $table->unsignedBigInteger('id_fungsi_obat');
+            $table->unsignedBigInteger('id_petunjuk_penyimpanan_obat');
             $table->string('pola_makan');
             $table->string('informasi');
             $table->unsignedBigInteger('id_users')->nullable(); 
@@ -33,6 +34,9 @@ class CreateObatTable extends Migration
             $table->foreign('id_bentuk_obat')->references('id')->on('bentuk_obat')->onDelete('cascade');
             $table->foreign('id_kontraindikasi_obat')->references('id')->on('kontraindikasi_obat')->onDelete('cascade');
             $table->foreign('id_interaksi_obat')->references('id')->on('interaksi_obat')->onDelete('cascade');
+            $table->foreign('id_efek_samping_obat')->references('id')->on('efek_samping_obat')->onDelete('cascade');
+            $table->foreign('id_fungsi_obat')->references('id')->on('fungsi_obat')->onDelete('cascade');
+            $table->foreign('id_petunjuk_penyimpanan_obat')->references('id')->on('petunjuk_penyimpanan_obat')->onDelete('cascade');
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
         });
     }

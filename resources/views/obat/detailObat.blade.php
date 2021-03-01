@@ -32,7 +32,12 @@ Detail Obat
                                     <td>{{$detailObat->nama_obat}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Kesediaan Obat</th>
+                                    <th>Sediaan</th>
+                                    <td>:</td>
+                                    <td>{{$detailObat->bentuk_obat->nama_bentuk}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Stok</th>
                                     <td>:</td>
                                     <td>{{$detailObat->kesediaan}}</td>
                                 </tr>
@@ -40,6 +45,11 @@ Detail Obat
                                     <th>Satuan</th>
                                     <td>:</td>
                                     <td>{{$detailObat->satuan}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Fungsi</th>
+                                    <td>:</td>
+                                    <td>{{$detailObat->fungsi_obat->nama_fungsi}}</td>
                                 </tr>
                                 <tr>
                                     <th>Kontraindikasi Obat</th>
@@ -54,12 +64,12 @@ Detail Obat
                                 <tr>
                                     <th>Efek Samping</th>
                                     <td>:</td>
-                                    <td>{{$detailObat->efek_samping}}</td>
+                                    <td>{{$detailObat->efek_samping_obat->nama_efek_samping}}</td>
                                 </tr>
                                 <tr>
                                     <th>Petunjuk Penyimpanan</th>
                                     <td>:</td>
-                                    <td>{{$detailObat->petunjuk_penyimpanan}}</td>
+                                    <td>{{$detailObat->petunjuk_penyimpanan_obat->nama_petunjuk_penyimpanan}}</td>
                                 </tr>
                                 <tr>
                                     <th>Pola Makan</th>

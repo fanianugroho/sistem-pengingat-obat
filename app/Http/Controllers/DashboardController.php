@@ -6,6 +6,7 @@ use App\Obat;
 use App\BentukObat;
 use App\InteraksiObat;
 use App\KontraindikasiObat;
+use App\ObatResep;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -23,7 +24,17 @@ class DashboardController extends Controller
         $pasienbaru=DB::table('pasien')->whereDate('created_at',DB::raw('CURDATE()'))->count();
         $jumlahobat=Obat::count();
         $jumlahpasien=Pasien::count();
-        return view('app.dashboard',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien'));
+
+        $obatResep =  DB::table('obat_resep')
+                    ->select('id_obat','obat.nama_obat', DB::raw('count(*) as total_obat'))
+                    ->join('obat', 'obat.id', '=', 'obat_resep.id_obat')
+                    ->groupBy('obat_resep.id_obat','obat.nama_obat')
+                    ->orderBy('total_obat', 'desc')
+                    ->get();
+
+        /* dd($obatResep); */
+
+        return view('app.dashboard',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien','obatResep'));
     }
     
     public function tampilanawal ()

@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 /* Route::group(['middleware' => ['auth','verified','web','CheckRole:apoteker']],function(){ */
-
+Route::resource('user', 'UserController');
+Route::get('/user.all', 'UserController@all')->name('user.all');
+Route::get('/user.ubahPassword', 'UserController@indexPassword')->name('user.indexPassword');
+Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.ubahPassword');
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
 Route::get('/detailObat/{id}', 'ObatController@detailobat')->name('detailobat');
@@ -27,6 +30,12 @@ Route::get('/bentukobat.all', 'BentukObatController@all')->name('bentukobat.all'
 Route::resource('bentukobat', 'BentukObatController');
 Route::get('/interaksiobat.all', 'InteraksiObatController@all')->name('interaksiobat.all');
 Route::resource('interaksiobat', 'InteraksiObatController');
+Route::get('/fungsiobat.all', 'FungsiObatController@all')->name('fungsiobat.all');
+Route::resource('fungsiobat', 'FungsiObatController');
+Route::get('/efeksampingobat.all', 'EfekSampingObatController@all')->name('efeksampingobat.all');
+Route::resource('efeksampingobat', 'EfekSampingObatController');
+Route::get('/petunjukpenyimpananobat.all', 'PetunjukPenyimpananObatController@all')->name('petunjukpenyimpananobat.all');
+Route::resource('petunjukpenyimpananobat', 'PetunjukPenyimpananObatController');
 Route::get('/kontraindikasiobat.all', 'KontraindikasiObatController@all')->name('kontraindikasiobat.all');
 Route::resource('kontraindikasiobat', 'KontraindikasiObatController');
 Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');

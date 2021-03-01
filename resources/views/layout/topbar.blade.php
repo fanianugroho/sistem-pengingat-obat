@@ -113,6 +113,10 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                        <a class="dropdown-item" href="{{ route('user.indexPassword') }}">
+                            <i class="fas fa-key"></i>
+                            Ubah Password
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i data-feather="log-out" class="svg-icon mr-2 ml-1"></i>

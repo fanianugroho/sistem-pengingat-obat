@@ -40,9 +40,9 @@ Sign in
             <button type="submit" class="login100-form-btn">
                 {{ __('Login') }}
             </button>
-            <div class="col-lg-12 text-center mt-5">
+            <!-- <div class="col-lg-12 text-center mt-5">
                 Belum punya akun ? <a href="{{ route('register') }}" class="text-danger">Register</a>
-            </div>
+            </div> -->
         </div>
     </form>
 
