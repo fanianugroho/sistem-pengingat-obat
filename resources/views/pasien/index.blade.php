@@ -97,11 +97,7 @@ Pasien
                         <label class="col-lg-2" for="jenis_kelamin">Jenis Kelamin</label>
                         <div class="form-group col-md-8">
                             <select v-model="form.jenis_kelamin" onchange="selectTrigger()" name="jenis_kelamin"
-<<<<<<< HEAD
                             style="width: 100%" class="form-control custom-select" placeholder= "Pilih Jenis Kelamin"
-=======
-                                style="width: 100%" class="form-control custom-select" placeholder="Pilih Jenis Kelamin"
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                                 :class="{ 'is-invalid': form.errors.has('jenis_kelamin') }">
                                 <option disabled value="">- Pilih Jenis Kelamin -</option>
                                 <option value="Laki-laki">Laki-laki</option>
@@ -181,10 +177,6 @@ Pasien
             $('#jenis_kelamin').select2({
                 placeholder: "Pilih Jenis Kelamin"
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
         },
         methods: {
             createModal() {
@@ -265,11 +257,7 @@ Pasien
 
             refreshData() {
                 axios.get("{{ route('pasien.all') }}")
-<<<<<<< HEAD
                 .then(response => {
-=======
-                    .then(response => {
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                     $('#table').DataTable().destroy()
                     let dataPasien = response.data;
                     const datas = dataPasien.map( data => ({
@@ -285,19 +273,11 @@ Pasien
                     this.mainData = datas
                     this.$nextTick(function () {
                         $('#table').DataTable();
-<<<<<<< HEAD
                     })
                 })
                 .catch(e => {
                     e.response.status != 422 ? console.log(e) : '';
                 })
-=======
-                        })
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
             }
         },
     })

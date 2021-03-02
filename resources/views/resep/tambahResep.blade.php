@@ -12,52 +12,6 @@ Buat Resep
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
-<<<<<<< HEAD
-=======
-                    <h3 class="card-title-detailobat"> Buat Resep
-                    </h3>
-                    <div class="col-12">
-                        <div class="card-body">
-                            <table id="table" class="table table-striped table-bordered no-wrap">
-                                <tr>
-                                    <th width="400">No Resep</th>
-                                    <td width="20px">:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th width="400">Tanggal Resep</th>
-                                    <td width="20px">:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Nama</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Jenis Kelamin</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Lahir</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>No Telepon</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Alamat</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                     <h4 class="card-title">
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
                                 class="icon-printer"></i> Cetak Resep</button>
@@ -81,11 +35,7 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat}}</td>
-<<<<<<< HEAD
                                     <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " sehari"}}</td>
-=======
-                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + "x sehari"}}</td>
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
                                         <a class="text-primary" data-toggle="tooltip" data-placement="top"
@@ -206,7 +156,6 @@ Buat Resep
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
                                 </div>
                             </div>
-<<<<<<< HEAD
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2">Nama Obat</label>
@@ -295,13 +244,6 @@ Buat Resep
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
-=======
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                                <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
-                                <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
 
                             </div>
                     </form>
@@ -324,13 +266,7 @@ Buat Resep
             app.inputSelect()
         }
 
-<<<<<<< HEAD
     let idPasien = localStorage.getItem("id_pasien");
-=======
-        let idPasien = localStorage.getItem("id_pasien");
-        /* 
-            console.log('idPasien', idPasien) */
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
 
         var app = new Vue({
             el: '#app',
@@ -350,7 +286,6 @@ Buat Resep
                     jml_kali_minum: '',
                 }),
 
-<<<<<<< HEAD
     var app = new Vue({
         el: '#app',
         data: {
@@ -368,26 +303,10 @@ Buat Resep
                 jml_obat: '',
                 jml_kali_minum: '',
             }),
-=======
-                namaObat: @json($nama_obat),
-            },
-            mounted() {
-                $('#table').DataTable()
-                this.refreshData()
-                $('[data-fancybox]').fancybox({
-                    iframe: {
-                        preload: false
-                    }
-                })
-                $('#id_obat').select2({
-                    placeholder: "Pilih Nama Obat"
-                });
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
 
             },
             methods: {
 
-<<<<<<< HEAD
         },
         methods: {
             createModal() {
@@ -410,75 +329,6 @@ Buat Resep
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
-=======
-                createModal() {
-                    this.editMode = false;
-                    this.form.reset();
-                    this.form.clear();
-                    $('#modal').modal('show');
-                },
-                editModal(data) {
-                    this.editMode = true;
-                    this.form.fill(data)
-                    this.form.clear();
-                    $('#modal').modal('show');
-                },
-                detailCard(data) {
-                    this.editMode = true;
-                    this.form.fill(data)
-                    this.form.clear();
-                },
-                storeData() {
-                    this.form.post("{{ route('resep.store') }}")
-                        .then(response => {
-                            $('#modal').modal('hide');
-                            this.refreshData()
-                        })
-                        .catch(e => {
-                            e.response.status != 422 ? console.log(e) : '';
-                        })
-                },
-                updateData() {
-                    url = "{{ route('resep.update', ':id') }}".replace(':id', this.form.id)
-                    this.form.put(url)
-                        .then(response => {
-                            $('#modal').modal('hide');
-                            this.refreshData()
-                        })
-                        .catch(e => {
-                            e.response.status != 422 ? console.log(e) : '';
-                        })
-                },
-                inputSelect() {
-                    this.form.id_obat = $("#id_obat").val()
-                },
-
-                deleteData(id) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.value) {
-                            url = "{{ route('resep.destroy', ':id') }}".replace(':id', id)
-                            this.form.delete(url)
-                                .then(response => {
-                                    Swal.fire(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
-                                        'success'
-                                    )
-                                    this.refreshData()
-                                })
-                                .catch(e => {
-                                    e.response.status != 422 ? console.log(e) : '';
-                                })
-                        }
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
                     })
                 },
 
@@ -498,7 +348,6 @@ Buat Resep
             },
         })
 
-<<<<<<< HEAD
             refreshData() {
                 axios.get("{{ route('resep.all') }}")
                     .then(response => {
@@ -517,7 +366,3 @@ Buat Resep
     })
 </script>
 @endpush
-=======
-    </script>
-    @endpush
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39

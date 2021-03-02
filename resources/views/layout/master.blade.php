@@ -131,7 +131,6 @@
 
 
 
-<<<<<<< HEAD
         <script src="{{asset('template/js/app.js')}}"></script>
         <!-- apps -->
         <script src="{{asset('template/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
@@ -155,33 +154,6 @@
                     "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
                     "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
-=======
-    <script src="{{asset('template/js/app.js')}}"></script>
-    <!-- apps -->
-    <script src="{{asset('template/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
-    <script src="{{asset('template/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('template/dist/js/app-style-switcher.js')}}"></script>
-    <script src="{{asset('template/dist/js/feather.min.js')}}"></script>
-    <script src="{{asset('template/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
-    <script src="{{asset('template/assets/extra-libs/sparkline/sparkline.js')}}"></script>
-    <script src="{{asset('template/dist/js/sidebarmenu.js')}}"></script>
-    <!--Custom JavaScript -->
-    <script src="{{asset('template/dist/js/custom.min.js')}}"></script>
-    <script src="{{asset('template/dist/js/moment.js')}}"></script>
-    <script src="{{asset('template/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('template/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
-    <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
-    <script>
-        tinymce.init({
-            selector: "textarea",
-            theme: "silver",
-            width: 680,
-            height: 300,
-            plugins: [
-                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-                "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-                "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
             ],
 
             toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",

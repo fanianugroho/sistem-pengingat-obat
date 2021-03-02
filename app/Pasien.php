@@ -22,8 +22,4 @@ class Pasien extends Model
         'no_telp',
         'alamat',
     ];
-<<<<<<< HEAD
-=======
-
->>>>>>> 865e75b9880c049445bc2286c97ecf3f80022e39
 }
