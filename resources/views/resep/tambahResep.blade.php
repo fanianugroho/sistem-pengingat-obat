@@ -12,9 +12,52 @@ Buat Resep
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
+                    <h3 class="card-title-detailobat"> Buat Resep
+                    </h3>
+                    <!-- <div class="col-12">
+                        <div class="card-body">
+                            <table id="table" class="table table-striped table-bordered no-wrap">
+                                <tr>
+                                    <th width="400">No Resep</th>
+                                    <td width="20px">:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th width="400">Tanggal Resep</th>
+                                    <td width="20px">:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Nama</th>
+                                    <td>:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Jenis Kelamin</th>
+                                    <td>:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir</th>
+                                    <td>:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>No Telepon</th>
+                                    <td>:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
+                                    <td>:</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> -->
                     <h4 class="card-title">
-                        <button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
-                                class="icon-printer"></i> Cetak Resep</button>
+                        <a href="/cetak-resep"><button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
+                                class="icon-printer"></i> Cetak Resep</button></a>
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
                             <a href="/cetak-resep" class="btn btn-primary" target="_blank">CETAK PDF</a>
@@ -73,7 +116,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2">Nama Obat</label>
                                 <div class="form-group col-md-8">
-                                    <select v-model="form.id_obat" name="id_obat" onchange="selectTrigger()"
+                                    <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()"
                                         style="width: 100%" class="form-control custom-select">
                                         <option disabled item="">- Pilih Nama Obat -</option>
                                         <option v-for="item in namaObat" :value="item.id">
@@ -306,29 +349,84 @@ Buat Resep
 
             },
             methods: {
+                createModal() {
+                    this.editMode = false;
+                    this.form.reset();
+                    this.form.clear();
+                    $('#modal').modal('show');
+                },
+                editModal(data) {
+                    this.editMode = true;
+                    this.form.fill(data)
+                    this.form.clear();
+                    $('#modal').modal('show');
+                },
+                detailCard(data) {
+                    this.editMode = true;
+                    this.form.fill(data)
+                    this.form.clear();
+                },
+                storeData() {
+                    this.form.post("{{ route('resep.store') }}")
+                        .then(response => {
+                            $('#modal').modal('hide');
+                            Swal.fire(
+                            'Berhasil',
+                            'Resep berhasil ditambahkan',
+                            'success'
+                        )
+                            this.refreshData()
+                        })
+                        .catch(e => {
+                            e.response.status != 422 ? console.log(e) : '';
+                        })
+                },
+                updateData() {
+                    url = "{{ route('resep.update', ':id') }}".replace(':id', this.form.id)
+                    this.form.put(url)
+                        .then(response => {
+                            $('#modal').modal('hide');
+                            Swal.fire(
+                            'Berhasil',
+                            'Data Resep berhasil diubah',
+                            'success'
+                        )
+                            this.refreshData()
+                        })
+                        .catch(e => {
+                            e.response.status != 422 ? console.log(e) : '';
+                        })
+                },
+                inputSelect() {
+                    this.form.id_obat = $("#id_obat").val()
+                },
 
-        },
-        methods: {
-            createModal() {
-                this.editMode = false;
-                this.form.reset();
-                this.form.clear();
-                $('#modal').modal('show');
-            },
-            detailCard(data) {
-                this.editMode = true;
-                this.form.fill(data)
-                this.form.clear();
-            },
-            storeData() {
-                this.form.post("{{ route('resep.store') }}")
-                    .then(response => {
-                        console.log('response',response)
-                        $('#modal').modal('hide');
-                        this.refreshData()
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
+                deleteData(id) {
+                    Swal.fire({
+                        title: 'Apakah anda yakin?',
+                        text: "Anda tidak dapat mengembalikan ini",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, Hapus',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.value) {
+                            url = "{{ route('resep.destroy', ':id') }}".replace(':id', id)
+                            this.form.delete(url)
+                                .then(response => {
+                                    Swal.fire(
+                                        'Terhapus',
+                                        'Resep telah dihapus',
+                                        'success'
+                                    )
+                                    this.refreshData()
+                                })
+                                .catch(e => {
+                                    e.response.status != 422 ? console.log(e) : '';
+                                })
+                        }
                     })
                 },
 

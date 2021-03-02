@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 use App\BentukObat;
 use App\InteraksiObat;
 use App\KontraindikasiObat;
+use App\EfekSampingObat;
+use App\PetunjukPenyimpananObat;
+use App\FungsiObat;
 use App\Obat;
+use App\Fungsi;
+use App\EfekSamping;
 use Illuminate\Http\Request;
+use DB;
 
 class ObatController extends Controller
 {
@@ -16,12 +22,12 @@ class ObatController extends Controller
      */
     public function all()
     {
-        $data =Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->get();
+        $data =Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat')->get();
 //          return response()->json($data);
 	    return $data;
     }
     public function detailobat ($id){
-        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->where('id',$id)->first();
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat')->where('id',$id)->first();
         // dd($detailObat->kontraindikasi_obat->nama_kontraindikasi);
         return view('obat.detailObat',compact('detailObat'));
     }
@@ -30,7 +36,9 @@ class ObatController extends Controller
         $bentuk_obat = BentukObat::all();
         $interaksi_obat = InteraksiObat::all();
         $kontraindikasi_obat = KontraindikasiObat::all();
-        return view('obat.index',compact('bentuk_obat','interaksi_obat','kontraindikasi_obat'));
+        $fungsi_obat = Fungsi::all();
+        $efek_samping_obat = EfekSamping::all();
+        return view('obat.index',compact('bentuk_obat','interaksi_obat','kontraindikasi_obat','fungsi_obat', 'efek_samping_obat'));
     }
 
     /**
@@ -41,30 +49,48 @@ class ObatController extends Controller
     
     public function store(Request $request)
     {
-        $request->validate([
-
-            'nama_obat' => 'required',
-            'id_bentuk_obat' => 'required',
-            'kode_obat' => 'sometimes|max:50',
-            'kesediaan' => 'required',
-            'satuan' => 'required',
-            'id_kontraindikasi_obat' => 'required',
-            'id_interaksi_obat' => 'required',
-            'efek_samping' => 'required',
-            'petunjuk_penyimpanan' => 'required',
-            'pola_makan' => 'required',
-            'informasi' => 'required',
-        ]);
-
-        if($request->kode_obat){
-        $kode = "'OB00255'+1";
+        DB::beginTransaction();
+        try {
+            $obat = New Obat;
+            $obat->nama_obat = $request->nama_obat;
+            $obat->id_bentuk_obat = $request->id_bentuk_obat;
+            $obat->kode_obat = $request->kode_obat;
+            $obat->stok = $request->stok;
+            $obat->id_kontraindikasi_obat = $request->id_kontraindikasi_obat;
+            $obat->id_interaksi_obat = $request->id_interaksi_obat;
+            $obat->satuan = $request->satuan;
+            $obat->pola_makan = $request->pola_makan;
+            $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
+            $obat->informasi = $request->informasi;  
+            $obat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
-        
-        $data = $request->all();
-        
-        $data['kode_obat'] = $kode;
-        
-        Obat::create($data);
+        try {
+            $efekSampingObat = New EfekSampingObat;
+            $efekSampingObat->id_obat = $obat->id;
+            $efekSampingObat->id_efek_samping = $request->id_efek_samping_obat;
+            $efekSampingObat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+            $fungsiObat = New FungsiObat;
+            $fungsiObat->id_obat = $obat->id;
+            $fungsiObat->id_fungsi = $request->id_fungsi_obat;
+            $fungsiObat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        DB::commit();
+      
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil menambah obat'
+        ]); 
     }
 
    
@@ -74,12 +100,13 @@ class ObatController extends Controller
 
             'nama_obat' => 'required',
             'id_bentuk_obat' => 'required',
-            'kesediaan' => 'required',
+            'stok' => 'required',
             'satuan' => 'required',
             'id_kontraindikasi_obat' => 'required',
             'id_interaksi_obat' => 'required',
-            'efek_samping' => 'required',
+            'id_efek_samping_obat' => 'required',
             'petunjuk_penyimpanan' => 'required',
+            'id_fungsi_obat' => 'required',
             'pola_makan' => 'required',
             'informasi' => 'required',
         ]);

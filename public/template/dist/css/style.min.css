@@ -7894,7 +7894,6 @@ pre code {
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f4f8fb
 }
 
 .table-hover tbody tr:hover {
@@ -9826,7 +9825,7 @@ fieldset:disabled a.btn {
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #5f76e8
+    background-color: #01265D;
 }
 
 .dropdown-item.disabled,
@@ -17736,8 +17735,7 @@ a.text-purple:hover {
 }
 
 .topbar .dropdown-menu {
-    padding-top: 0;
-    border: 0;
+    border-radius: 10px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, .1);
     -moz-box-shadow: 1px 1px 15px rgba(0, 0, 0, .1)

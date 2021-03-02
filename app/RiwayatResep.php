@@ -10,7 +10,7 @@ class RiwayatResep extends Model
     use SoftDeletes;
 
     protected $table ='riwayat_resep';
-
+    protected $primaryKey = 'id';
     protected $fillable=[
         'id_resep',
     ];

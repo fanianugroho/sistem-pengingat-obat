@@ -10,11 +10,10 @@
             <div class="navbar-brand">
                 <!-- Logo icon -->
                 <a href="/beranda">
-                    
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- dark Logo text -->
-                        <img src="{{url('/')}}/template/assets/images/APOTECH.png"/>
+                        <img src="{{url('/')}}/template/assets/images/APOTECH.png" />
                     </span>
                 </a>
             </div>
@@ -85,8 +84,7 @@
                         @guest
                         <span class="ml-2 d-none d-lg-inline-block">
                             <span>Hello, Apoteker</span>
-                            <i data-feather="chevron-down"
-                                        class="svg-icon"></i>
+                            <i data-feather="chevron-down" class="svg-icon"></i>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <a class="dropdown-item" href="{{ route('login') }}"><span
                                         class="ml-2 d-none d-lg-inline-block"><i data-feather="log-in"
@@ -100,22 +98,25 @@
                                 </a>
                                 @endif
                             </div>
-                            
+
                         </span>
                     </a>
                 </li>
                 @else
-                
+
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="javascript:void(0)" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <span>Halo, <span class="text-dark">{{ Auth::user()->nama }}</span> <span class="caret"></span>
-                            <i data-feather="chevron-down"
-                                class="svg-icon"></i>
-                        </span> 
+                            <i data-feather="chevron-down" class="svg-icon"></i>
+                        </span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                        <a class="dropdown-item" href="{{ route('user.indexPassword') }}">
+                            <i class="fas fa-key"></i>
+                            Ubah Password
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i data-feather="log-out" class="svg-icon mr-2 ml-1"></i>
@@ -123,7 +124,7 @@
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form>     
+                        </form>
                     </div>
                 </li>
                 @endguest

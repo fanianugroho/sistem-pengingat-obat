@@ -10,5 +10,6 @@ class BentukObat extends Model
     use SoftDeletes;
 
     protected $table = 'bentuk_obat';
+    protected $primaryKey = 'id';
     protected $fillable=['nama_bentuk'];
 }

@@ -12,7 +12,7 @@ Beranda
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h1 class="text-dark mb-1 font-weight-medium">0</h1>
+                                <h1 class="text-dark mb-1 font-weight-medium">{{$resepbaru}}</h1>
 
                             </div>
                             <h6 class="mb-0 text-dark">
@@ -33,7 +33,7 @@ Beranda
                 <a href="">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
-                            <h1 class="text-dark mb-1 w-100 text-truncate font-weight-medium">0</h1>
+                            <h1 class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{$pasienbaru}}</h1>
                             <h6 class="mb-0 text-dark">Pasien Baru
                             </h6>
                         </div>

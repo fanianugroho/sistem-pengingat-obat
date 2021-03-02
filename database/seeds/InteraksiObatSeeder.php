@@ -30,9 +30,6 @@ class InteraksiObatSeeder extends Seeder
             [
                 'nama_interaksi' => '	Trimethoprim/sulfamethoxazole'
             ],
-            
-
-            
         ];
           InteraksiObat::insert($data);
     }

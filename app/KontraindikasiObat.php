@@ -10,5 +10,6 @@ class KontraindikasiObat extends Model
     use SoftDeletes;
 
     protected $table = 'kontraindikasi_obat';
+    protected $primaryKey = 'id';
     protected $fillable=['nama_kontraindikasi'];
 }

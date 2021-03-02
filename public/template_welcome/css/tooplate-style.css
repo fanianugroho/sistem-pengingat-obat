@@ -20,9 +20,10 @@ http://www.tooplate.com/view/2098-health
   -----------------------------------------*/
 
   h1,h2,h3,h4,h5,h6 {
-    font-weight: 600;
+    font-weight: 500;
     line-height: inherit;
   }
+
 
   h1,h2,h3,h4 {
     letter-spacing: -1px;
@@ -41,18 +42,32 @@ http://www.tooplate.com/view/2098-health
     color: #272727;
     font-size: 3em;
     padding-bottom: 10px;
+    text-align : center;
   }
-
+  .h2-left{
+    text-align: left;
+  }
+  .h2-left-2{
+    text-align: left;
+    padding-left: 60px;
+    font-size: 36px;
+    font-weight: 300px;
+  }
   h3 {
     font-size: 1.8em;
     line-height: 1.2em;
     margin-bottom: 0;
   }
 
+  .h3-small{
+    font-size: 1.1em;
+  }
+
   h4 {
-    color: #454545;
+    color: #ffff;
     font-size: 1.8em;
     padding-bottom: 2px;
+    letter-spacing: 1px;
   }
 
   h6 {
@@ -61,12 +76,50 @@ http://www.tooplate.com/view/2098-health
   }
 
   p {
-    color: #757575;
-    font-size: 14px;
+    color: #fff;
+    font-size: 17px;
     font-weight: normal;
     line-height: 24px;
   }
+  .layanan-apotech{
+    color: #757575;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 24px;
+    text-align: center;
+  }
+  .info-monitoring{
+    color: #000;
+    font-size: 24px;
+    padding: auto;
+  }
 
+  .step-title{
+    color: #000;
+    font-size: 20px;
+    text-align: left;
+  }
+  .step-title-L1{
+    color: #fff;
+    font-size: 20px;
+    text-align: left;
+  }
+  .desc-info-monitoring{
+    color: #000;
+    font-size: 18px;
+    padding: auto;
+  }
+  .step-desc{
+    color: #000;
+    font-size: 15px;
+    text-align: justify;
+  }
+  .step-desc-L1{
+    color: #fff;
+    font-size: 15px;
+    text-align: justify;
+  }
+  
 
   /*---------------------------------------
      GENERAL               
@@ -146,14 +199,16 @@ http://www.tooplate.com/view/2098-health
 
   .news-thumb {
     background: #ffffff;
-    border-radius: 10px;
+  }
+  .news-thumb-2 {
+    background: #eef1f8;
   }
   .news-thumb img {
-    border-radius: 10px 10px 0 0;
   }
 
   .news-info {
-    padding: 30px;
+    padding-top: 20px;
+    padding-bottom: 40px;
     text-align: left;
   }
   .news-info span {
@@ -189,8 +244,7 @@ http://www.tooplate.com/view/2098-health
   #about, #team, #news,
   #news-detail {
     position: relative;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
   }
 
   #news, #service {
@@ -385,18 +439,16 @@ http://www.tooplate.com/view/2098-health
   -----------------------------------------*/
 
   #home h1 {
-    color: #ffffff;
     padding-bottom: 10px;
     margin-top: 0;
   }
 
-  #home h3 {
-    color: #ffffff;
-    font-size: 14px;
+  h3 {
+    color: #000000;
+    font-size: 20px;
     font-weight: normal;
     line-height: inherit;
     letter-spacing: 3px;
-    text-transform: uppercase;
     margin: 0;
   }
 
@@ -432,8 +484,7 @@ http://www.tooplate.com/view/2098-health
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
-    background-color: rgba(20,20,20,0.2);
+    text-align: left;
     height: 100%;
     color: #fff;
     cursor: e-resize;
@@ -453,6 +504,7 @@ http://www.tooplate.com/view/2098-health
 
   .slider .item-second {
     background-image: url(../images/slider2.jpg);
+    height: 450px;
   }
 
   .slider .item-third {
@@ -599,9 +651,12 @@ http://www.tooplate.com/view/2098-health
   -----------------------------------------*/
 
   #news, #news-detail {
-    background: #f9f9f9;
+    background: #eef1f8;
   }
-
+  #container-white{
+    background:#fff;
+    height: 250px;
+  }
   #news-detail blockquote {
     margin: 30px 0;
   }
@@ -792,6 +847,7 @@ http://www.tooplate.com/view/2098-health
   footer {
     padding-top: 80px;
     padding-bottom: 40px;
+    background-color: #000A31;
   }
 
   footer h4 {
@@ -811,7 +867,6 @@ http://www.tooplate.com/view/2098-health
   }
 
   .contact-info .fa {
-    background: #393939;
     border-radius: 100%;
     color: #ffffff;
     font-size: 15px;
@@ -864,8 +919,8 @@ http://www.tooplate.com/view/2098-health
 
   .copyright-text p,
   .footer-link a {
-    color: #858585;
-    font-size: 12px;
+    color: #ffff;
+    font-size: 14px;
     font-weight: 500;
   }
 

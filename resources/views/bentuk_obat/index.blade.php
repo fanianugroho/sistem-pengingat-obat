@@ -124,6 +124,11 @@ Bentuk Obat
                 this.form.post("{{ route('bentukobat.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Bentuk Obat berhasil ditambahkan',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -135,6 +140,11 @@ Bentuk Obat
                 this.form.put(url)
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Bentuk Obat berhasil diubah',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {
@@ -144,21 +154,22 @@ Bentuk Obat
 
             deleteData(id) {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Apakah anda yakin?',
+                    text: "Anda tidak dapat mengembalikan ini",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.value) {
                         url = "{{ route('bentukobat.destroy', ':id') }}".replace(':id', id)
                         this.form.delete(url)
                             .then(response => {
                                 Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
+                                    'Terhapus',
+                                    'Bentuk Obat telah dihapus',
                                     'success'
                                 )
                                 this.refreshData()

@@ -331,6 +331,14 @@ iframe {
     padding: 110px 55px 55px 55px;
 }
 
+.login100-form-regis {
+    width: 800px;
+    min-height: 100vh;
+    display: block;
+    background-color: #ffffff;
+    padding: 0px 55px 55px 55px;
+}
+
 .login100-form-title {
     width: 100%;
     display: block;
@@ -355,7 +363,7 @@ iframe {
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
-    height: 80px;
+    height: 50px;
     position: relative;
     border: 1px solid #e6e6e6;
     border-radius: 10px;

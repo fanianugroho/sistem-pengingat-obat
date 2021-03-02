@@ -10,7 +10,7 @@ class ObatResep extends Model
     use SoftDeletes;
 
     protected $table ='obat_resep';
-
+    protected $primaryKey = 'id';
     protected $fillable=[
         'id_resep',
         'id_obat',

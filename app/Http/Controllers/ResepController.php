@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use PDF;
 use QrCode;
 
+
 class ResepController extends Controller
 {
     /**
@@ -64,7 +65,6 @@ class ResepController extends Controller
             'no_resep' => 'required',
             'tanggal_resep' => 'required',
             'id_pasien' => 'required',
-            'id_obat' => 'required',
             'dosis' => 'required',
             'aturan_pakai' => 'required',
             'takaran_minum' => 'required',
@@ -85,7 +85,6 @@ class ResepController extends Controller
             $resep->no_resep = $request->no_resep;
             $resep->tanggal_resep = $request->tanggal_resep;
             $resep->id_pasien = $request->id_pasien;
-            $resep->id_obat = $request->id_obat;
             $resep->dosis = $request->dosis;
             $resep->aturan_pakai = $request->aturan_pakai;
             $resep->takaran_minum = $request->takaran_minum;
@@ -108,7 +107,10 @@ class ResepController extends Controller
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
         DB::commit();
-        return $request;
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil membuat obat'
+        ]); 
     }
 
     public function update(Request $request, $id)
@@ -125,9 +127,32 @@ class ResepController extends Controller
             'jml_obat' => 'required',
             'jml_kali_minum' => 'required',
         ]);
+
+        $resep = Resep::findOrFail($id);
+        
+        DB::beginTransaction();
+        try {
+            $resep->no_resep = $request->no_resep;
+            $resep->tanggal_resep = $request->tanggal_resep;
+            $resep->id_pasien = $request->id_pasien;
+            $resep->dosis = $request->dosis;
+            $resep->aturan_pakai = $request->aturan_pakai;
+            $resep->takaran_minum = $request->takaran_minum;
+            $resep->waktu_minum = $request->waktu_minum;
+            $resep->keterangan = $request->keterangan;
+            $resep->jml_obat = $request->jml_obat;
+            $resep->jml_kali_minum = $request->jml_kali_minum;
+            $resep->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil merubah obat'
+        ]); 
        
-       
-        return Resep::find($id)->update($request->all());
+        // return Resep::find($id)->update($request->all());
     }
 
     /**
@@ -147,9 +172,5 @@ class ResepController extends Controller
         $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('A basic example of QR code! Nicesnippets.com');
     	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
-    }
-
-    public function cekPdf(){
-        return QrCode::size(300)->generate('A basic example of QR code! Nicesnippets.com');
     }
 }

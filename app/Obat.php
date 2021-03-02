@@ -14,15 +14,15 @@ class Obat extends Model
     protected $fillable=[
         'nama_obat',
         'id_bentuk_obat',
-        'kesediaan',
+        'stok',
         'satuan',
         'id_kontraindikasi_obat',
         'id_interaksi_obat',
-        'efek_samping',
-        'petunjuk_penyimpanan',
+        'id_petunjuk_penyimpanan_obat',
         'pola_makan',
         'informasi',
         'id_users',
+        
     ];
 
     public function user(){
@@ -36,5 +36,11 @@ class Obat extends Model
     }
     public function interaksi_obat(){
         return $this->belongsTo('App\InteraksiObat', 'id_interaksi_obat');
+    }
+    public function fungsi_obat(){
+        return $this->belongsTo('App\FungsiObat', 'id_fungsi_obat');
+    }
+    public function efek_samping_obat(){
+        return $this->belongsTo('App\EfekSampingObat', 'id_efek_samping_obat');
     }
 }

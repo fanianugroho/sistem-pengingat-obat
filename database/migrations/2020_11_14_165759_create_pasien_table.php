@@ -22,7 +22,6 @@ class CreatePasienTable extends Migration
             $table->string('no_telp');
             $table->string('alamat');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
