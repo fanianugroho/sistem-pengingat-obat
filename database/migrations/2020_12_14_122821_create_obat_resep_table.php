@@ -20,9 +20,6 @@ class CreateObatResepTable extends Migration
             
             $table->timestamps();
 
-            $table->softDeletes(); 
-
-
             $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');
             $table->foreign('id_resep')->references('id')->on('resep')->onDelete('cascade');
         });

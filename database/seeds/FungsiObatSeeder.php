@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\FungsiObat;
 
 class FungsiObatSeeder extends Seeder
 {
@@ -13,16 +12,19 @@ class FungsiObatSeeder extends Seeder
     public function run()
     {
         $data=[
-        [
-            'nama_fungsi' => 'Mual'
-        ],
-        [
-            'nama_fungsi' => 'Sakit Kepala'
-        ],
-        [
-            'nama_fungsi' => 'Meringankan demam'
-        ],
-        ];
-        FungsiObat::insert($data);
+            [
+                'id_fungsi' => 1,
+                'id_obat' => 1,
+            ],
+            [
+                'id_fungsi' => 2,
+                'id_obat' => 1,
+            ],
+            [
+                'id_fungsi' => 3,
+                'id_obat' => 2,
+            ],
+            ];
+            FungsiObat::insert($data);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\EfekSampingObat;
 
 class EfekSampingObatSeeder extends Seeder
 {
@@ -14,15 +13,18 @@ class EfekSampingObatSeeder extends Seeder
     {
         $data=[
             [
-                'nama_efek_samping' => 'Mual'
+                'id_efek_samping' => 1,
+                'id_obat' => 1,
             ],
             [
-                'nama_efek_samping' => 'Sakit Kepala'
+                'id_efek_samping' => 2,
+                'id_obat' => 1,
             ],
             [
-                'nama_efek_samping' => 'Meringankan demam'
+                'id_efek_samping' => 3,
+                'id_obat' => 2,
             ],
             ];
-            EfekSampingObat::insert($data);
+            FungsiObat::insert($data);
     }
 }

@@ -106,12 +106,12 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="kesediaan"> Stok </label>
+                        <label class="col-lg-2" for="stok"> Stok </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.kesediaan" id="kesediaan" type="text" min=0
-                                placeholder="Masukkan Kesediaan Obat" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('kesediaan') }">
-                            <has-error :form="form" field="kesediaan"></has-error>
+                            <input v-model="form.stok" id="stok" type="text" min=0
+                                placeholder="Masukkan Stok Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('stok') }">
+                            <has-error :form="form" field="stok"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
@@ -119,7 +119,7 @@ Obat
                         <div class="form-group col-md-8">
                             <select v-model="form.id_fungsi_obat" id="id_fungsi_obat"
                                 onchange="selectTrigger()" style="width: 100%" class="form-control custom-select">
-                                <option disabled item="">- Pilih Fungsi Obat -</option>
+                                <option disabled item="">- Pilih Penggunaan Obat -</option>
                                 <option v-for="item in fungsiObat" :value="item.id">
                                     @{{  item.nama_fungsi }}</option>
                             </select>
@@ -162,14 +162,12 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="id_petunjuk_penyimpanan_obat"> Petunjuk Penyimpanan </label>
+                        <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_petunjuk_penyimpanan_obat" id="id_petunjuk_penyimpanan_obat" onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select">
-                                <option disabled item="">- Pilih Petunjuk Penyimpanan -</option>
-                                <option v-for="item in petunjukpenyimpananObat" :value="item.id">
-                                    @{{  item.nama_petunjuk_penyimpanan}}</option>
-                            </select>
+                            <input v-model="petunjuk_penyimpanan" id="petunjuk_penyimpanan" type="text" min=0
+                                placeholder="Masukkan Petunjuk Penyimpanan" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
+                            <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
@@ -223,7 +221,7 @@ Obat
                 id: '',
                 nama_obat: '',
                 kode_obat: '',
-                kesediaan: '',
+                stok: '',
                 satuan: '',
                 id_efek_samping_obat: '',
                 id_petunjuk_penyimpanan_obat: '',
@@ -239,7 +237,6 @@ Obat
             kontraindikasiObat: @json($kontraindikasi_obat),
             fungsiObat: @json($fungsi_obat),
             efeksampingObat : @json ($efek_samping_obat),
-            petunjukpenyimpananObat : @json ($petunjuk_penyimpanan_obat)
         },
         mounted() {
             $('#table').DataTable()
@@ -260,9 +257,6 @@ Obat
             });
             $('#id_fungsi_obat').select2({
                 placeholder: "Pilih Fungsi Obat"
-            });
-            $('#id_petunjuk_penyimpanan_obat').select2({
-                placeholder: "Pilih Petunjuk Penyimpanan"
             });
             $('#id_efek_samping_obat').select2({
                 placeholder: "Pilih Efek Samping"
@@ -324,7 +318,6 @@ Obat
                 this.form.satuan = $("#satuan").val()
                 this.form.id_fungsi_obat = $("#id_fungsi_obat").val()
                 this.form.id_efek_samping_obat = $("#id_efek_samping_obat").val()
-                this.form.id_petunjuk_penyimpanan_obat = $("#id_petunjuk_penyimpanan_obat").val()
             },
 
             deleteData(id) {

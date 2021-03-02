@@ -23,7 +23,7 @@
                                 </li>
                                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                         href="{{route('bentukobat.index')}}" aria-expanded="false"><i
-                                        class="fas fa-pills"></i><span class="hide-menu">Bentuk Obat</span></a>
+                                        class="fas fa-pills"></i><span class="hide-menu">Sediaan</span></a>
                                 </li>
                                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                         href="{{route('kontraindikasiobat.index')}}" aria-expanded="false"><i
@@ -36,13 +36,7 @@
                                 </li>
                                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                         href="{{route('fungsiobat.index')}}" aria-expanded="false"><i
-                                        class="fas fa-capsules"></i><span class="hide-menu">Fungsi
-                                        Obat</span></a>
-                                </li>
-                                <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
-                                        href="{{route('petunjukpenyimpananobat.index')}}" aria-expanded="false"><i
-                                        class="fas fa-notes-medical"></i><span class="hide-menu">Petunjuk Penyimpanan
-                                        </span></a>
+                                        class="fas fa-capsules"></i><span class="hide-menu">Penggunaan</span></a>
                                 </li>
                                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                         href="{{route('efeksampingobat.index')}}" aria-expanded="false"><i

@@ -15,9 +15,13 @@ class CreateFungsiObatTable extends Migration
     {
         Schema::create('fungsi_obat', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_fungsi');
+            $table->unsignedBigInteger('id_fungsi');
+            $table->unsignedBigInteger('id_obat');
+            
             $table->timestamps();
-            $table->softDeletes();
+
+            $table->foreign('id_fungsi')->references('id')->on('fungsi')->onDelete('cascade');
+            $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');
         });
     }
 

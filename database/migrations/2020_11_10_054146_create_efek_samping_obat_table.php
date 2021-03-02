@@ -15,9 +15,13 @@ class CreateEfekSampingObatTable extends Migration
     {
         Schema::create('efek_samping_obat', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_efek_samping');
+            $table->unsignedBigInteger('id_efek_samping');
+            $table->unsignedBigInteger('id_obat');
+            
             $table->timestamps();
-            $table->softDeletes();
+
+            $table->foreign('id_efek_samping')->references('id')->on('efek_samping')->onDelete('cascade');
+            $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');
         });
     }
 

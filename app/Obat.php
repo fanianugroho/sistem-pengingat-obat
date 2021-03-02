@@ -14,7 +14,7 @@ class Obat extends Model
     protected $fillable=[
         'nama_obat',
         'id_bentuk_obat',
-        'kesediaan',
+        'stok',
         'satuan',
         'id_kontraindikasi_obat',
         'id_fungsi_obat',
@@ -44,8 +44,5 @@ class Obat extends Model
     }
     public function efek_samping_obat(){
         return $this->belongsTo('App\EfekSampingObat', 'id_efek_samping_obat');
-    }
-    public function petunjuk_penyimpanan_obat(){
-        return $this->belongsTo('App\PetunjukPenyimpananObat', 'id_petunjuk_penyimpanan_obat');
     }
 }

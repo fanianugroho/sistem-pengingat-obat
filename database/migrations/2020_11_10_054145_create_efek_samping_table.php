@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePetunjukPenyimpananObatTable extends Migration
+class CreateEfekSampingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePetunjukPenyimpananObatTable extends Migration
      */
     public function up()
     {
-        Schema::create('petunjuk_penyimpanan_obat', function (Blueprint $table) {
+        Schema::create('efek_samping', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_petunjuk_penyimpanan');
+            $table->string('nama_efek_samping');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +28,6 @@ class CreatePetunjukPenyimpananObatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('petunjuk_penyimpanan_obat');
+        Schema::dropIfExists('efek_samping');
     }
 }

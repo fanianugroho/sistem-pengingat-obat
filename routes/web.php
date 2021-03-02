@@ -34,8 +34,6 @@ Route::get('/fungsiobat.all', 'FungsiObatController@all')->name('fungsiobat.all'
 Route::resource('fungsiobat', 'FungsiObatController');
 Route::get('/efeksampingobat.all', 'EfekSampingObatController@all')->name('efeksampingobat.all');
 Route::resource('efeksampingobat', 'EfekSampingObatController');
-Route::get('/petunjukpenyimpananobat.all', 'PetunjukPenyimpananObatController@all')->name('petunjukpenyimpananobat.all');
-Route::resource('petunjukpenyimpananobat', 'PetunjukPenyimpananObatController');
 Route::get('/kontraindikasiobat.all', 'KontraindikasiObatController@all')->name('kontraindikasiobat.all');
 Route::resource('kontraindikasiobat', 'KontraindikasiObatController');
 Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');
