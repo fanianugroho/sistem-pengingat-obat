@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FungsiObatSeeder::class);
         $this->call(EfekSampingObatSeeder::class);
         $this->call(PasienSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

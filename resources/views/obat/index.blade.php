@@ -15,7 +15,7 @@ Obat
                     <h4 class="card-title"> Obat
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat</button>
-                        
+
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
@@ -108,29 +108,30 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="stok"> Stok </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.stok" id="stok" type="text" min=0
-                                placeholder="Masukkan Stok Obat" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('stok') }">
+                            <input v-model="form.stok" id="stok" type="text" min=0 placeholder="Masukkan Stok Obat"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('stok') }">
                             <has-error :form="form" field="stok"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2">Fungsi</label>
+                        <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_fungsi_obat" id="id_fungsi_obat"
-                                onchange="selectTrigger()" style="width: 100%" class="form-control custom-select">
+                            <select v-model="form.id_fungsi_obat" id="id_fungsi_obat" name="states[]"
+                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
+                                class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Penggunaan Obat -</option>
                                 <option v-for="item in fungsiObat" :value="item.id">
                                     @{{  item.nama_fungsi }}</option>
                             </select>
-                            <has-error :form="form" field="id_kontraindikasi_obat"></has-error>
+                            <has-error :form="form" field="id_fungsi_obat"></has-error>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" for="id_kontraindikasi_obat">
                         <label class="col-lg-2">Kontraindikasi Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_kontraindikasi_obat" id="id_kontraindikasi_obat"
-                                onchange="selectTrigger()" style="width: 100%" class="form-control custom-select">
+                            <select v-model="form.id_kontraindikasi_obat" id="id_kontraindikasi_obat" name="states[]"
+                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
+                                class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Kontraindikasi Obat -</option>
                                 <option v-for="item in kontraindikasiObat" :value="item.id">
                                     @{{  item.nama_kontraindikasi }}</option>
@@ -139,9 +140,10 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2">Interaksi Obat</label>
+                        <label class="col-lg-2" for="id_interaksi_obat">Interaksi Obat</label>
                         <div class="form-group col-md-8">
                             <select v-model="form.id_interaksi_obat" id="id_interaksi_obat" onchange="selectTrigger()"
+                                name="states[]" multiple="multiple" class="js-example-basic-multiple"
                                 style="width: 100%" class="form-control custom-select">
                                 <option disabled item="">- Pilih Interaksi Obat -</option>
                                 <option v-for="item in interaksiObat" :value="item.id">
@@ -153,21 +155,22 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_efek_samping_obat"> Efek Samping </label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_efek_samping_obat" id="id_efek_samping_obat" onchange="selectTrigger()"
+                            <select v-model="form.id_efek_samping_obat" id="id_efek_samping_obat" name="states[]"
+                                multiple="multiple" class="js-example-basic-multiple" onchange="selectTrigger()"
                                 style="width: 100%" class="form-control custom-select">
                                 <option disabled item="">- Pilih Efek Samping Obat -</option>
                                 <option v-for="item in efeksampingObat" :value="item.id">
                                     @{{  item.nama_efek_samping}}</option>
                             </select>
+                            <has-error :form="form" field="id_efek_samping_obat"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan" type="text" min=0
-                                placeholder="Masukkan Petunjuk Penyimpanan" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
-                            <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
+                            <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan" 
+                                placeholder="Masukkan petunjuk penyimpanan" type="text">
+                            </textarea>
                         </div>
                     </div>
                     <div class="form-row">
@@ -225,7 +228,7 @@ Obat
                 satuan: '',
                 id_efek_samping_obat: '',
                 petunjuk_penyimpanan: '',
-                id_fungsi_obat:'',
+                id_fungsi_obat: '',
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
@@ -236,7 +239,7 @@ Obat
             interaksiObat: @json($interaksi_obat),
             kontraindikasiObat: @json($kontraindikasi_obat),
             fungsiObat: @json($fungsi_obat),
-            efeksampingObat : @json ($efek_samping_obat),
+            efeksampingObat: @json($efek_samping_obat),
         },
         mounted() {
             $('#table').DataTable()
@@ -249,17 +252,25 @@ Obat
             $('#id_bentuk_obat').select2({
                 placeholder: "Pilih Sediaan Obat"
             });
-            $('#id_interaksi_obat').select2({
-                placeholder: "Pilih Interaksi Obat"
+            $('#id_interaksi_obat').ready(function () {
+                $('#id_interaksi_obat').select2({
+                    placeholder: "Pilih Interaksi"
+                });
             });
-            $('#id_kontraindikasi_obat').select2({
-                placeholder: "Pilih Kontraindikasi Obat"
+            $('#id_kontraindikasi_obat').ready(function () {
+                $('#id_kontraindikasi_obat').select2({
+                    placeholder: "Pilih Kontraindikasi"
+                });
             });
-            $('#id_fungsi_obat').select2({
-                placeholder: "Pilih Fungsi Obat"
+            $('#id_fungsi_obat').ready(function () {
+                $('#id_fungsi_obat').select2({
+                    placeholder: "Pilih Penggunaan"
+                });
             });
-            $('#id_efek_samping_obat').select2({
-                placeholder: "Pilih Efek Samping"
+            $('#id_efek_samping_obat').ready(function () {
+                $('#id_efek_samping_obat').select2({
+                    placeholder: "Pilih Efek Samping"
+                });
             });
         },
         methods: {
@@ -281,6 +292,7 @@ Obat
                 $('#modal').modal('show');
             },
             storeData() {
+                this.form.petunjuk_penyimpanan = tinymce.get("petunjuk_penyimpanan").getContent({format:'text'})
                 this.form.post("{{ route('obat.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');
