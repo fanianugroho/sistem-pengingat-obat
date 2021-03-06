@@ -37,9 +37,9 @@ class Obat extends Model
         return $this->belongsTo('App\InteraksiObat', 'id_interaksi_obat');
     }
     public function fungsi_obat(){
-        return $this->belongsTo('App\FungsiObat', 'id_fungsi_obat');
+        return $this->hasMany('App\FungsiObat', 'id_obat');
     }
     public function efek_samping_obat(){
-        return $this->belongsTo('App\EfekSampingObat', 'id_efek_samping_obat');
+        return $this->hasMany('App\EfekSampingObat', 'id_obat');
     }
 }

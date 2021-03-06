@@ -308,7 +308,7 @@ Buat Resep
             app.inputSelect()
         }
 
-    let idPasien = localStorage.getItem("id_pasien");
+        let idPasien = localStorage.getItem("id_pasien");
 
         var app = new Vue({
             el: '#app',
@@ -318,6 +318,7 @@ Buat Resep
                 form: new Form({
                     id: '',
                     id_obat: '',
+                    namaObat : '',
                     id_pasien: idPasien,
                     dosis: '',
                     aturan_pakai: '',
@@ -327,25 +328,14 @@ Buat Resep
                     jml_obat: '',
                     jml_kali_minum: '',
                 }),
-
-    var app = new Vue({
-        el: '#app',
-        data: {
-            mainData: [],
-            editMode: false,
-            form: new Form({
-                id: '',
-                id_obat: '',
-                id_pasien: idPasien,
-                dosis: '',
-                aturan_pakai: '',
-                takaran_minum: '',
-                waktu_minum: '',
-                keterangan: '',
-                jml_obat: '',
-                jml_kali_minum: '',
-            }),
-
+                namaObat : @json($nama_obat),
+            },
+            mounted() {
+                $('#table').DataTable()
+                this.refreshData()
+                $('#jenis_kelamin').select2({
+                    placeholder: "Pilih Jenis Kelamin"
+                });
             },
             methods: {
                 createModal() {
@@ -444,22 +434,5 @@ Buat Resep
                 }
             },
         })
-
-            refreshData() {
-                axios.get("{{ route('resep.all') }}")
-                    .then(response => {
-                        $('#table').DataTable().destroy()
-                        console.log('response',response)
-                        this.mainData = response.data
-                        this.$nextTick(function () {
-                            $('#table').DataTable();
-                        })
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
-            }
-        },
-    })
 </script>
 @endpush

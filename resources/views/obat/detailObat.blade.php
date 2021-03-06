@@ -44,7 +44,11 @@ Detail Obat
                                 <tr>
                                     <th>Fungsi</th>
                                     <td>:</td>
-                                    <td>{{$detailObat->fungsi_obat->nama_fungsi}}</td>
+                                    <td>
+                                    @foreach ($detailObat->fungsi_obat as $item)
+                                        {{$item->fungsi->nama_fungsi}},
+                                    @endforeach
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Kontraindikasi Obat</th>
@@ -59,12 +63,16 @@ Detail Obat
                                 <tr>
                                     <th>Efek Samping</th>
                                     <td>:</td>
-                                    <td>{{$detailObat->efek_samping_obat->nama_efek_samping}}</td>
+                                    <td>
+                                    @foreach ($detailObat->efek_samping_obat as $item)
+                                        {{$item->efek_samping->nama_efek_samping}},
+                                    @endforeach
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Petunjuk Penyimpanan</th>
                                     <td>:</td>
-                                    <td>{{$detailObat->petunjuk_penyimpanan_obat->nama_petunjuk_penyimpanan}}</td>
+                                    <td>{{$detailObat->petunjuk_penyimpanan}}</td>
                                 </tr>
                                 <tr>
                                     <th>Pola Makan</th>

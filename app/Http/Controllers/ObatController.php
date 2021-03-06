@@ -28,7 +28,8 @@ class ObatController extends Controller
 	    return $data;
     }
     public function detailobat ($id){
-        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat')->where('id',$id)->first();
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat.fungsi','efek_samping_obat.efek_samping')->where('id',$id)->first();
+        // dd($detailObat->efek_samping_obat[0]->efek_samping);
         // dd($detailObat);
         return view('obat.detailObat',compact('detailObat'));
     }
