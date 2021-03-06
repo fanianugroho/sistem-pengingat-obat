@@ -43,6 +43,7 @@ Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatrese
 Route::resource('riwayatresep', 'RiwayatResepController');
 Route::get('/detailResep/{id}', 'RiwayatResepController@detailresep')->name('detailresep');
 Route::get('/resep.all', 'ResepController@all')->name('resep.all');
+Route::post('/search-pasien','ResepController@searchPasien')->name('searchPasien');
 Route::get('/detailPasien/tambahResep', 'ResepController@tambahresep')->name('tambahresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');

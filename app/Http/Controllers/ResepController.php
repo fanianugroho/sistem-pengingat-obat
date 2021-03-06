@@ -52,6 +52,32 @@ class ResepController extends Controller
         //
     }
 
+    
+    public function searchPasien(Request $request)
+    {
+        $search = Pasien::where([
+            ['nama_pasien','LIKE','%'.$request->nama_pasien .'%']
+        ])
+        ->where([
+            ['no_rm','LIKE','%'.$request->no_rm .'%']
+        ])
+        ->where([
+            ['tanggal_lahir','LIKE','%'.$request->tanggal_lahir .'%']
+        ])
+        ->where([
+            ['jenis_kelamin','LIKE','%'.$request->jenis_kelamin .'%']
+        ])
+        ->where([
+            ['alamat','LIKE','%'.$request->alamat .'%']
+        ])
+        ->where([
+            ['no_telp','LIKE','%'.$request->no_telp .'%']
+        ])
+        ->get();
+
+        return $search;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
