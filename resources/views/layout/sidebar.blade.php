@@ -7,13 +7,14 @@
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/beranda" aria-expanded="false"><i
                             data-feather="home" class="feather-icon"></i><span class="hide-menu">Beranda</span></a></li>
                 @if(Auth::user()->tipe_user=='admin')
+                <li class="nav-small-cap"><span class="hide-menu">Informasi User</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('user.index')}}"
                         aria-expanded="false"><i class="fas fa-user"></i><span class="hide-menu">Tambah
                             Apoteker</span></a>
                 </li>
                 @endif
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Menu informasi obat</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Informasi obat</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow" aria-expanded="false"><i
                             data-feather="circle" class="feather-icon"></i><span class="hide-menu">Menu informasi obat</span></a>
                         <ul aria-expanded="false" class="collapse first-level base-level-line">
@@ -47,11 +48,13 @@
                         </ul>
                 </li>
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Menu pasien dan resep</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Informasi Pasien</span></li>
 
                 <li class="sidebar-item"> <a class="sidebar-link" href="{{route('pasien.index')}}"
                         aria-expanded="false"><i class="fas fa-user-plus"></i><span class="hide-menu">Pasien</span></a>
                 </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Informasi Resep</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('resep.index')}}"
                         aria-expanded="false"><i class="fas fa-pen-square"></i><span class="hide-menu">Buat
                             Resep</span></a></li>

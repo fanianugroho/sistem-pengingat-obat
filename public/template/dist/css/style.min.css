@@ -6333,7 +6333,7 @@ html {
 
 body {
     font-family: Rubik, sans-serif;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 400;
     background-color: #f9fbfd
 }
@@ -7860,7 +7860,7 @@ pre code {
 .table td,
 .table th {
     padding: 1rem;
-    vertical-align: top;
+    vertical-align: text-top;
     border-top: 1px solid #e8eef3
 }
 
@@ -8789,10 +8789,29 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: #fff;
     background-color:#01265D;
-    ;
     border-color: #01265D;
     border-radius: 0em;
-
+}
+.btn-blue {
+    color: #fff;
+    background-color:#1850A5;
+    border-color: #1850A5;
+    border-radius: 0.3em;
+    font-size: smaller;
+}
+.btn-green {
+    color: #fff;
+    background-color:#18A550;
+    border-color: #18A550;
+    border-radius: 0.3em;
+    font-size: smaller;
+}
+.btn-red {
+    color: #fff;
+    background-color:#A52918;
+    border-color: #A52918;
+    border-radius: 0.3em;
+    font-size: smaller;
 }
 
 .btn-primary:hover {
@@ -17863,7 +17882,7 @@ a.text-purple:hover {
 
 .sidebar-nav #sidebarnav .sidebar-item .sidebar-link {
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     padding: 12px 30px;
     display: flex;
     white-space: nowrap;

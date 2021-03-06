@@ -112,8 +112,8 @@ Pasien
                                     <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
                                     <td>@{{ item.no_telp == 'null' ? '' : item.no_telp}}</td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id,item.nama_pasien)" class="text-success"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Pilih"><i
+                                        <a v-bind:href="getUrl(item.id,item.nama_pasien)" class="btn btn-blue"
+                                            data-toggle="tooltip" data-placement="top" data-original-title="Pilih">Pilih<i
                                                 class="icon-check"></i></a>
 
                                     </td>

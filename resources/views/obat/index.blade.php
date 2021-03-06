@@ -26,7 +26,7 @@ Obat
                                     <th>Nama Obat</th>
                                     <th>Kontraindikasi</th>
                                     <th>Interaksi</th>
-                                    <th>Aksi</th>
+                                    <th class="data-fixed-columns">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,15 +40,15 @@ Obat
                                     <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}
                                     </td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
+                                        <a v-bind:href="getUrl(item.id)"class="btn btn-blue" data-toggle="tooltip"
                                             data-placement="top" data-original-title="Detail"><i
-                                                class="icon-magnifier-add"></i></a>
-                                        <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
+                                                class="icon-magnifier-add"></i>Detail</a>
+                                        <a href="javascript:void(0);" @click="editModal(item)" class="btn btn-green"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                                class="far fa-edit"></i></a>
-                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
+                                                class="far fa-edit"></i>Edit</a>
+                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="btn btn-red"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                                class="far fa-trash-alt"></i></a>
+                                                class="far fa-trash-alt"></i>Hapus</a>
                                     </td>
                                 </tr>
                             </tbody>
