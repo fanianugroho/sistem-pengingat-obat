@@ -106,17 +106,9 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="stok"> Stok </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.stok" id="stok" type="text" min=0 placeholder="Masukkan Stok Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('stok') }">
-                            <has-error :form="form" field="stok"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
                         <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_fungsi_obat" id="id_fungsi_obat" name="states[]"
+                            <select  v-model="form.id_fungsi_obat" id="id_fungsi_obat" name="states[]"
                                 multiple="multiple" onchange="selectTrigger()" style="width: 100%"
                                 class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Penggunaan Obat -</option>
@@ -224,16 +216,15 @@ Obat
                 id: '',
                 nama_obat: '',
                 kode_obat: '',
-                stok: '',
                 satuan: '',
-                id_efek_samping_obat: '',
+                id_efek_samping_obat: [],
                 petunjuk_penyimpanan: '',
-                id_fungsi_obat: '',
+                id_fungsi_obat: [],
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                id_interaksi_obat: '',
-                id_kontraindikasi_obat: '',
+                id_interaksi_obat: [],
+                id_kontraindikasi_obat: [],
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),

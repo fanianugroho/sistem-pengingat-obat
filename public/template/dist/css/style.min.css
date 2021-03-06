@@ -18,6 +18,7 @@ button,
 hr,
 input {
     overflow: visible
+    
 }
 
 .dropdown-menu,
@@ -6491,6 +6492,7 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit
+    
 }
 
 .close,
@@ -6806,6 +6808,7 @@ kbd kbd {
 .form-control,
 .input-group-text {
     font-weight: 400
+    
 }
 
 pre {
@@ -8237,7 +8240,7 @@ pre code {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #e9ecef;
-    border-radius: 2px;
+    border-radius: 6px;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 

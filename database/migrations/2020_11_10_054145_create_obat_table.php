@@ -18,7 +18,6 @@ class CreateObatTable extends Migration
             $table->string('nama_obat');
             $table->string('kode_obat')->nullable(); 
             $table->unsignedBigInteger('id_bentuk_obat');
-            $table->string('stok');
             $table->enum('satuan', ['ml', 'mg']);
             $table->unsignedBigInteger('id_kontraindikasi_obat');
             $table->unsignedBigInteger('id_interaksi_obat');

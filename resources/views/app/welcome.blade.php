@@ -82,7 +82,7 @@
                             <p class="layanan-apotech">Website ini digunakan sebagai sistem informasi pengelolaan obat.
                             </p>
                         </div>
-                        <div class="row row-centered"">
+                        <div class="row row-centered">
                                 <div class=" col-md-6 col-sm-4">
                             <img src="{{asset('template_welcome/images/info-obat.png')}}" alt="">
                             <h4 class="info-monitoring">Informasi Obat</h4>

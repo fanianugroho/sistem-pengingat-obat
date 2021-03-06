@@ -60,7 +60,6 @@ Buat Resep
                                 class="icon-printer"></i> Cetak Resep</button></a>
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
-                            <a href="/cetak-resep" class="btn btn-primary" target="_blank">CETAK PDF</a>
                     </h4>
 
                     <div class="table-responsive">

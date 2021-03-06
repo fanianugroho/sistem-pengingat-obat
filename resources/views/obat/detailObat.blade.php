@@ -37,11 +37,6 @@ Detail Obat
                                     <td>{{$detailObat->bentuk_obat->nama_bentuk}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Stok</th>
-                                    <td>:</td>
-                                    <td>{{$detailObat->kesediaan}}</td>
-                                </tr>
-                                <tr>
                                     <th>Satuan</th>
                                     <td>:</td>
                                     <td>{{$detailObat->satuan}}</td>

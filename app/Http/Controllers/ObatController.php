@@ -11,6 +11,7 @@ use App\Obat;
 use App\Fungsi;
 use App\EfekSamping;
 use Illuminate\Http\Request;
+use Auth;
 use DB;
 
 class ObatController extends Controller
@@ -49,48 +50,60 @@ class ObatController extends Controller
     
     public function store(Request $request)
     {
-        DB::beginTransaction();
-        try {
-            $obat = New Obat;
-            $obat->nama_obat = $request->nama_obat;
-            $obat->id_bentuk_obat = $request->id_bentuk_obat;
-            $obat->kode_obat = $request->kode_obat;
-            $obat->stok = $request->stok;
-            $obat->id_kontraindikasi_obat = $request->id_kontraindikasi_obat;
-            $obat->id_interaksi_obat = $request->id_interaksi_obat;
-            $obat->satuan = $request->satuan;
-            $obat->pola_makan = $request->pola_makan;
-            $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
-            $obat->informasi = $request->informasi;  
-            $obat->save();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        }
-        try {
-            $efekSampingObat = New EfekSampingObat;
-            $efekSampingObat->id_obat = $obat->id;
-            $efekSampingObat->id_efek_samping = $request->id_efek_samping_obat;
-            $efekSampingObat->save();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        }
-        try {
-            $fungsiObat = New FungsiObat;
-            $fungsiObat->id_obat = $obat->id;
-            $fungsiObat->id_fungsi = $request->id_fungsi_obat;
-            $fungsiObat->save();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        }
-        DB::commit();
+
+        $user = Auth::user();
+        
+        $kontraindikasi_obat = sizeof($request->id_kontraindikasi_obat);
+        $items = array();
+        for($i=0; i<$kontraindikasi_obat; $i++){
+
+            }
+
+        return $count;
+        // DB::beginTransaction();
+        // try {
+        //     $obat = New Obat;
+        //     $obat->nama_obat = $request->nama_obat;
+        //     $obat->id_bentuk_obat = $request->id_bentuk_obat;
+        //     $obat->kode_obat = $request->kode_obat;
+        //     $obat->stok = $request->stok;
+        //     $obat->id_kontraindikasi_obat = $request->id_kontraindikasi_obat;
+        //     $obat->id_interaksi_obat = $request->id_interaksi_obat;
+        //     $obat->satuan = $request->satuan;
+        //     $obat->pola_makan = $request->pola_makan;
+        //     $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
+        //     $obat->informasi = $request->informasi;  
+        //     $obat->id_user = $user->id;
+        //     $obat->save();
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        // }
+        // try {
+        //     $efekSampingObat = New EfekSampingObat;
+        //     $efekSampingObat->id_obat = $obat->id;
+        //     $efekSampingObat->id_efek_samping = $request->id_efek_samping_obat;
+        //     $efekSampingObat->save();
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        // }
+        // try {
+        //     $fungsiObat = New FungsiObat;
+        //     $fungsiObat->id_obat = $obat->id;
+        //     $fungsiObat->id_fungsi = $request->id_fungsi_obat;
+        //     $fungsiObat->save();
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        // }
+        // DB::commit();
       
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Berhasil menambah obat'
-        ]); 
+        // return response()->json([
+        //     'status' => 'Success',
+        //     'message' => 'Berhasil menambah obat'
+        // ]); 
+
     }
 
    
