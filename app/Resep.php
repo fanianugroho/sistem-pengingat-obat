@@ -29,5 +29,7 @@ class Resep extends Model
     public function users(){
         return $this->belongsTo('App\User', 'id_users');
     }
-
+    public function obatResep(){
+        return $this->hasMany('App\ObatResep', 'id_obat');
+    }
 }

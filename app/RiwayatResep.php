@@ -18,4 +18,5 @@ class RiwayatResep extends Model
     public function resep(){
         return $this->belongsTo('App\Resep', 'id_resep');
     }
+    
 }

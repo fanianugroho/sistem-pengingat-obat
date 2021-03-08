@@ -14,9 +14,9 @@ class RiwayatResepController extends Controller
      */
     public function all()
     {
-        $data =ObatResep::with('resep.obat','resep.pasien')->get();
-//          return response()->json($data);
-	    return $data;
+        $data =ObatResep::with('resep','resep.pasien')->get();
+         return response()->json($data);
+	    // return $data;
     }
     public function index()
     {

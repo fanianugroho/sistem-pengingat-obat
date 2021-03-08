@@ -13,6 +13,22 @@
                             Apoteker</span></a>
                 </li>
                 @endif
+                
+                
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Informasi Resep</span></li>
+                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('resep.index')}}"
+                        aria-expanded="false"><i class="fas fa-pen-square"></i><span class="hide-menu">Buat
+                            Resep</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('riwayatresep.index')}}"
+                        aria-expanded="false"><i class="fas fa-notes-medical"></i><span class="hide-menu">Riwayat
+                            Resep</span></a></li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Informasi Pasien</span></li>
+
+                <li class="sidebar-item"> <a class="sidebar-link" href="{{route('pasien.index')}}"
+                        aria-expanded="false"><i class="fas fa-user-plus"></i><span class="hide-menu">Pasien</span></a>
+                </li>
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Informasi obat</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow" aria-expanded="false"><i
@@ -44,23 +60,8 @@
                                         class="fas fa-exclamation"></i><span class="hide-menu">Efek Samping
                                         </span></a>
                                 </li>
-                                
                         </ul>
                 </li>
-                <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Informasi Pasien</span></li>
-
-                <li class="sidebar-item"> <a class="sidebar-link" href="{{route('pasien.index')}}"
-                        aria-expanded="false"><i class="fas fa-user-plus"></i><span class="hide-menu">Pasien</span></a>
-                </li>
-                <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Informasi Resep</span></li>
-                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('resep.index')}}"
-                        aria-expanded="false"><i class="fas fa-pen-square"></i><span class="hide-menu">Buat
-                            Resep</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('riwayatresep.index')}}"
-                        aria-expanded="false"><i class="fas fa-notes-medical"></i><span class="hide-menu">Riwayat
-                            Resep</span></a></li>
 
 
         </nav>

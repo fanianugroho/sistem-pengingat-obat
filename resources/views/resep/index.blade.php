@@ -77,8 +77,8 @@ Pasien
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal" @click="resetData()">Refresh</button>
-                    <button type="submit" class="btn btn-primary">Cari</button>
+                    <button type="button" class="btn btn-reset" data-dismiss="modal" @click="resetData()">Reset</button>
+                    <button type="submit" class="btn btn-search">Cari</button>
                 </div>
             </form>
         </div>
@@ -114,8 +114,8 @@ Pasien
                                     <td>@{{ item.no_telp == 'null' ? '' : item.no_telp}}</td>
                                     <td>
                                         <a v-bind:href="getUrl(item.id,item.nama_pasien)" class="btn btn-blue"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Pilih">Pilih<i
-                                                class="icon-check"></i></a>
+                                            data-toggle="tooltip" data-placement="top" data-original-title="Pilih"><i
+                                                ></i>Pilih</a>
 
                                     </td>
                                 </tr>

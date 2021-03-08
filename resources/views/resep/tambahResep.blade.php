@@ -9,52 +9,12 @@ Buat Resep
     <!-- ============================================================== -->
     <!-- basic table -->
     <div class="card">
+            
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
                     <h3 class="card-title-detailobat"> Buat Resep
                     </h3>
-                    <!-- <div class="col-12">
-                        <div class="card-body">
-                            <table id="table" class="table table-striped table-bordered no-wrap">
-                                <tr>
-                                    <th width="400">No Resep</th>
-                                    <td width="20px">:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th width="400">Tanggal Resep</th>
-                                    <td width="20px">:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Nama</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Jenis Kelamin</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Lahir</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>No Telepon</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Alamat</th>
-                                    <td>:</td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div> -->
                     <h4 class="card-title">
                         <a href="/cetak-resep"><button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
                                 class="icon-printer"></i> Cetak Resep</button></a>

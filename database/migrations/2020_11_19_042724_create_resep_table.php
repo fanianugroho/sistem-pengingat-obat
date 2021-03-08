@@ -15,7 +15,8 @@ class CreateResepTable extends Migration
     {
         Schema::create('resep', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pasien')->nullable();
+            $table->unsignedBigInteger('id_pasien');
+            $table->unsignedBigInteger('id_users')->nullable();
             $table->string('dosis');
             $table->string('aturan_pakai');
             $table->mediumtext('takaran_minum');
@@ -27,6 +28,7 @@ class CreateResepTable extends Migration
             $table->softDeletes(); 
 
             $table->foreign('id_pasien')->references('id')->on('pasien')->onDelete('cascade');
+            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

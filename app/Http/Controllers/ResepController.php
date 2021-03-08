@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 use QrCode;
+use Auth;
 
 
 class ResepController extends Controller
@@ -21,7 +22,7 @@ class ResepController extends Controller
      */
     public function all()
     {
-        $data = Resep::with('obat')->get();
+        $data = Resep::with('obatResep.obat')->get();
         // dd($data);
 	    return $data;
     }
@@ -32,8 +33,9 @@ class ResepController extends Controller
     } 
 
     public function detailpasien ($id){
+        $nama_obat = Obat::all();
         $detailPasien = Pasien::where('id', $id)->first();   
-        return view('resep.detailPasien',compact('detailPasien'));
+        return view('resep.detailPasien',compact('detailPasien','nama_obat'));
     }
 
     public function index()
@@ -86,10 +88,9 @@ class ResepController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
-            'no_resep' => 'required',
-            'tanggal_resep' => 'required',
             'id_pasien' => 'required',
             'dosis' => 'required',
             'aturan_pakai' => 'required',
@@ -108,9 +109,8 @@ class ResepController extends Controller
         DB::beginTransaction();
         try {
             $resep = New Resep;
-            $resep->no_resep = $request->no_resep;
-            $resep->tanggal_resep = $request->tanggal_resep;
             $resep->id_pasien = $request->id_pasien;
+            $resep->id_users = $user->id;
             $resep->dosis = $request->dosis;
             $resep->aturan_pakai = $request->aturan_pakai;
             $resep->takaran_minum = $request->takaran_minum;
@@ -142,7 +142,6 @@ class ResepController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-
             'id_pasien' => 'required',
             'id_obat' => 'required',
             'dosis' => 'required',
@@ -158,9 +157,8 @@ class ResepController extends Controller
         
         DB::beginTransaction();
         try {
-            $resep->no_resep = $request->no_resep;
-            $resep->tanggal_resep = $request->tanggal_resep;
             $resep->id_pasien = $request->id_pasien;
+            $resep->id_users = $user->id;
             $resep->dosis = $request->dosis;
             $resep->aturan_pakai = $request->aturan_pakai;
             $resep->takaran_minum = $request->takaran_minum;
@@ -194,7 +192,7 @@ class ResepController extends Controller
 
     public function cetakPdf()
     {
-    	$resep = Resep::with('obat')->get();
+    	$resep = Resep::with('obatResep')->get();
         $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('A basic example of QR code! Nicesnippets.com');
     	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
