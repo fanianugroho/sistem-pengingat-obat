@@ -64,9 +64,6 @@ Buat Resep
                         Daftar Resep Pasien
                     </h3>
                     <h4 class="card-title">
-                        <a href="/cetak-resep"><button type="button"
-                                class="btn btn-primary btn-rounded float-right mb-4"> <i class="icon-printer"></i> Cetak
-                                Resep</button></a>
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Resep </button>
                     </h4>
@@ -77,7 +74,6 @@ Buat Resep
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal Pembuatan Resep</th>
-                                    <!--   <th>Jumlah Obat</th>   -->
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -85,16 +81,10 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.created_at == 'null' ? '' : item.created_at }}</td>
-                                    <!-- <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td> -->
+                                   
                                     <td>
-                                        <a class="text-primary" data-toggle="tooltip" data-placement="top"
-                                            data-original-title="Detail"><i class="icon-magnifier-add"></i></a>
-                                        <!-- <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                                class="far fa-edit"></i></a>
-                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                                class="far fa-trash-alt"></i></a> -->
+                                        <a v-bind:href="getUrl(item.id)" class="btn btn-blue"data-toggle="tooltip" data-placement="top"
+                                            data-original-title="Detail">Detail</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -231,8 +221,10 @@ Buat Resep
         function selectTrigger() {
             app.inputSelect()
         }
-
-        let idPasien = localStorage.getItem("id_pasien");
+    
+        let segment_str = window.location.pathname; 
+        let segment_array = segment_str.split( '/' );
+        let id = segment_array.pop();
 
         var app = new Vue({
             el: '#app',
@@ -242,7 +234,7 @@ Buat Resep
                 form: new Form({
                     id: '',
                     namaObat: '',
-                    id_pasien: idPasien,
+                    id_pasien: id,
                     dosis: '',
                     aturan_pakai: '',
                     takaran_minum: '',
@@ -255,14 +247,17 @@ Buat Resep
 
             },
             mounted() {
-                // console.log(ama);
                 $('#tablePasien').DataTable()
                 this.refreshData()
-                $('#jenis_kelamin').select2({
-                    placeholder: "Pilih Jenis Kelamin"
+                $('#id_obat').select2({
+                    placeholder: "Pilih Obat"
                 });
             },
             methods: {
+                getUrl(id) {
+                    url = "/detailPasien/detailObatResep/" + id
+                    return url
+                },
                 createModal() {
                     this.editMode = false;
                     this.form.reset();
@@ -314,7 +309,6 @@ Buat Resep
                 inputSelect() {
                     this.form.id_obat = $("#id_obat").val()
                 },
-
                 deleteData(id) {
                     Swal.fire({
                         title: 'Apakah anda yakin?',
@@ -343,16 +337,22 @@ Buat Resep
                         }
                     })
                 },
-
                 refreshData() {
-                    axios.get("{{ route('resep.all') }}")
+                    let segment_str = window.location.pathname; 
+                    let segment_array = segment_str.split( '/' );
+                    let id = segment_array.pop();
+                    axios.get("{{ route('resep.all', ':id') }}".replace(':id', id))
                         .then(response => {
-                            $('#tablePasien').DataTable().destroy()
+                            // console.log(response.data);
+                            // this.jumlahObat = response.data.length;
+                            $('#tablePasien').DataTable().destroy();
                             let dataPasien = response.data;
+                            console.log('data',response.data);
                             const datas = dataPasien.map(data => ({
-                                created_at: moment(data.created_at).locale('id').format(
+                                id : data.id_resep,
+                                created_at: moment(data.resep.created_at).locale('id').format(
                                     'DD MMMM YYYY'),
-                                    created_at_edit: data.created_at,
+                                    created_at_edit: data.resep.created_at,
                             }));
                             this.mainData = datas
                             this.$nextTick(function () {

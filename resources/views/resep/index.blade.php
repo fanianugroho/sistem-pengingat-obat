@@ -113,7 +113,7 @@ Pasien
                                     <td>@{{ item.alamat == 'null' ? '' : item.alamat}}</td>
                                     <td>@{{ item.no_telp == 'null' ? '' : item.no_telp}}</td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id,item.nama_pasien)" class="btn btn-blue"
+                                        <a v-bind:href="getUrl(item.id)" class="btn btn-blue"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Pilih"><i
                                                 ></i>Pilih</a>
 
@@ -237,9 +237,7 @@ Pasien
             });
         },
         methods: {
-            getUrl(id, nama) {
-                console.log('id', id)
-                localStorage.setItem("id_pasien", id);
+            getUrl(id) {
                 url = "/detailPasien/" + id
                 return url
             },

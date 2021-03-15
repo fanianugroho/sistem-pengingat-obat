@@ -8,12 +8,32 @@ Buat Resep
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <!-- basic table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Detail Obat Resep Pasien
+                    </h4>
+                    <div class="col-12 mt-4">
+                        <!-- Card -->
+                        <table id="table1" class="table table-striped table-bordered no-wrap">
+                            <tr>
+                                <th width="200">Jumlah Obat</th>
+                                <td width="20px">:</td>
+                                <td>@{{jumlahObat}}</td>
+                            </tr>
+                        </table>
+                        <!-- Card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
-            
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
-                    <h3 class="card-title-detailobat"> Buat Resep
+                    <h3 class="card-title-detailobat"> Daftar Obat Resep Pasien
                     </h3>
                     <h4 class="card-title">
                         <a href="/cetak-resep"><button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
@@ -36,9 +56,9 @@ Buat Resep
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat}}</td>
-                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " sehari"}}</td>
-                                    <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
+                                    <td>@{{ item.obat.nama_obat}}</td>
+                                    <td>@{{ item.resep.aturan_pakai == 'null' ? '' : item.resep.aturan_pakai + " x sehari"}}</td>
+                                    <td>@{{ item.resep.waktu_minum == 'null' ? '' : item.resep.waktu_minum}}</td>
                                     <td>
                                         <a class="text-primary" data-toggle="tooltip" data-placement="top"
                                             data-original-title="Detail"><i class="icon-magnifier-add"></i></a>
@@ -159,89 +179,6 @@ Buat Resep
                                 </div>
                             </div>
                     </div>
-                    <div class="form-row">
-                        <label class="col-lg-2">Nama Obat</label>
-                        <div class="form-group col-md-8">
-                            <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()" style="width: 100%"
-                                class="form-control custom-select">
-                                <option disabled item="">- Pilih Nama Obat -</option>
-                                <option v-for="item in namaObat" :value="item.id">
-                                    @{{  item.nama_obat }}</option>
-                            </select>
-                            <has-error :form="form" field="id_obat"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="dosis"> Dosis </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.dosis" id="dosis" type="text" min=0 placeholder="Masukkan Dosis"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('dosis') }">
-                            <has-error :form="form" field="dosis"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="aturan_pakai"> Aturan Pakai </label>
-                        <div class="form-group col-md-6">
-                            <input v-model="form.aturan_pakai" id="aturan_pakai" type="text" min=0
-                                placeholder="Aturan Pakai" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
-                            <has-error :form="form" field="aturan_pakai"></has-error>
-                        </div>  
-                        <p> <b> kali sehari </b> </p>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
-                                placeholder="Takaran Minum" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
-                            <has-error :form="form" field="takaran_minum"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="waktu_minum">Waktu Minum</label>
-                        <div class="form-group col-md-8">
-                            <select v-model="form.waktu_minum" id="waktu_minum" onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select"
-                                :class="{ 'is-invalid': form.errors.has('waktu_minum') }">
-                                <option disabled item="">- Pilih Waktu Minum -</option>
-                                <option value="Sebelum Makan">Sebelum Makan</option>
-                                <option value="Saat Makan">Saat Makan</option>
-                                <option value="Sesudah Makan">Sesudah Makan</option>
-                            </select>
-                            <has-error :form="form" field="waktu_minum"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="keterangan">Keterangan</label>
-                        <div class="form-group col-md-8">
-                            <select v-model="form.keterangan" id="keterangan" onchange="selectTrigger()"
-                                style="width: 100%" class="form-control custom-select"
-                                :class="{ 'is-invalid': form.errors.has('keterangan') }">
-                                <option disabled item="">- Pilih Keterangan -</option>
-                                <option value="Kondisional">Kondisional</option>
-                                <option value="Harus Habis">Harus Habis</option>
-                                <option value="Rutin">Rutin</option>
-                            </select>
-                            <has-error :form="form" field="keterangan"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="jml_obat"> Jumlah Obat </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.jml_obat" id="jml_obat" type="text" min=0 placeholder="Jumlah Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('jml_obat') }">
-                            <has-error :form="form" field="jml_obat"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.jml_kali_minum" id="jml_kali_minum" type="text" min=0
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
-                            <has-error :form="form" field="jml_kali_minum"></has-error>
-                        </div>
-                    </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
@@ -274,10 +211,10 @@ Buat Resep
             el: '#app',
             data: {
                 mainData: [],
+                jumlahObat : 0,
                 editMode: false,
                 form: new Form({
                     id: '',
-                    id_obat: '',
                     namaObat : '',
                     id_pasien: idPasien,
                     dosis: '',
@@ -288,14 +225,15 @@ Buat Resep
                     jml_obat: '',
                     jml_kali_minum: '',
                 }),
-                namaObat : @json($nama_obat),
+                namaObat: @json($nama_obat),
             },
             mounted() {
                 $('#table').DataTable()
                 this.refreshData()
-                $('#jenis_kelamin').select2({
-                    placeholder: "Pilih Jenis Kelamin"
+                $('#id_obat').select2({
+                    placeholder: "Pilih Obat"
                 });
+                
             },
             methods: {
                 createModal() {
@@ -380,8 +318,12 @@ Buat Resep
                 },
 
                 refreshData() {
-                    axios.get("{{ route('resep.all') }}")
+                    let segment_str = window.location.pathname; 
+                    let segment_array = segment_str.split( '/' );
+                    let id = segment_array.pop();
+                    axios.get("{{ route('detailobatresep', ':id') }}".replace(':id', id))
                         .then(response => {
+                            this.jumlahObat = response.data.length;
                             $('#table').DataTable().destroy()
                             this.mainData = response.data
                             this.$nextTick(function () {

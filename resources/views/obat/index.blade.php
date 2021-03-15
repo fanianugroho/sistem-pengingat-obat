@@ -40,15 +40,15 @@ Obat
                                     <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}
                                     </td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)"class="btn btn-blue" data-toggle="tooltip"
+                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
                                             data-placement="top" data-original-title="Detail"><i
-                                                class="icon-magnifier-add"></i>Detail</a>
-                                        <a href="javascript:void(0);" @click="editModal(item)" class="btn btn-green"
+                                                class="icon-magnifier-add"></i></a>
+                                        <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                                class="far fa-edit"></i>Edit</a>
-                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="btn btn-red"
+                                                class="far fa-edit"></i></a>
+                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                                class="far fa-trash-alt"></i>Hapus</a>
+                                                class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -108,7 +108,7 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
                         <div class="form-group col-md-8">
-                            <select  v-model="form.id_fungsi_obat" id="id_fungsi_obat" name="states[]"
+                            <select v-model="form.id_fungsi_obat" id="id_fungsi_obat" name="states[]"
                                 multiple="multiple" onchange="selectTrigger()" style="width: 100%"
                                 class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Penggunaan Obat -</option>
@@ -160,7 +160,7 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan" 
+                            <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
                                 placeholder="Masukkan petunjuk penyimpanan" type="text">
                             </textarea>
                         </div>
@@ -283,7 +283,9 @@ Obat
                 $('#modal').modal('show');
             },
             storeData() {
-                this.form.petunjuk_penyimpanan = tinymce.get("petunjuk_penyimpanan").getContent({format:'text'})
+                this.form.petunjuk_penyimpanan = tinymce.get("petunjuk_penyimpanan").getContent({
+                    format: 'text'
+                })
                 this.form.post("{{ route('obat.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');

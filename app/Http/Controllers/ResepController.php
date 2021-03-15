@@ -20,17 +20,37 @@ class ResepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all()
+    public function all($id)
     {
-        $data = Resep::with('obatResep.obat')->get();
-        // dd($data);
+        $data = ObatResep::with('resep.pasien')->select('id_resep')->groupBy('id_resep')
+                ->whereHas('resep.pasien',function($q) use($id) {
+                    $q->where('id_pasien',$id);
+                })
+                ->get();
+
+        // $data = ObatResep::with('resep.pasien')
+        // ->whereHas('resep.pasien',function($q) use($id) {
+        //     $q->where('id_pasien',$id);
+        // })->get();
+        // $data = DB::table('obat_resep')
+        //         ->select('obat_resep.*','resep.id','pasien.id')     
+        //         ->join('resep', 'obat_resep.id', '=', 'resep.id')
+        //         ->join('pasien', 'resep.id', '=', 'pasien.id')
+        //         ->where('obat_resep.id_pasien',$id)
+        //         ->get();
 	    return $data;
     }
 
-    public function tambahresep (){
+    public function viewdetailobatresep ($id){
         $nama_obat = Obat::all();
-        return view('resep.tambahResep',compact('nama_obat'));
+        return view('resep.detailObatResep',compact('nama_obat'));
     } 
+
+    public function detailobatresep ($id){
+        
+        $data = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
+        return $data;
+    }
 
     public function detailpasien ($id){
         $nama_obat = Obat::all();
@@ -42,16 +62,6 @@ class ResepController extends Controller
     {
         
         return view('resep.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     
@@ -86,6 +96,41 @@ class ResepController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function resep_obat (Request $request){
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'id_pasien' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'takaran_minum' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+            'jml_kali_minum' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => $validator->messages()
+            ],422);
+        }
+        DB::beginTransaction();
+        try {
+            $obatResep = New ObatResep;
+            $obatResep->id_resep = $resep->id;
+            $obatResep->id_obat = $request->id_obat;
+            $obatResep->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        DB::commit();
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil membuat obat'
+        ]); 
+    }
     public function store(Request $request)
     {
         $user = Auth::user();

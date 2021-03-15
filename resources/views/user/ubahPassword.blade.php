@@ -12,7 +12,7 @@ Ubah Password
                 <div class="form-row">
                         <label class="col-lg-2" for="old_password"> Password Lama </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.old_password" id="old_password" type="text" min=0 placeholder="Masukkan Password Lama"
+                            <input v-model="form.old_password" id="old_password" type="password" min=0 placeholder="Masukkan Password Lama"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('old_password') }">
                             <has-error :form="form" field="old_password"></has-error>
                         </div>
@@ -20,7 +20,7 @@ Ubah Password
                     <div class="form-row">
                         <label class="col-lg-2" for="password"> Password Baru</label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.password" id="password" type="text" min=0 placeholder="Masukkan Password Baru"
+                            <input v-model="form.password" id="password" type="password" min=0 placeholder="Masukkan Password Baru"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                             <has-error :form="form" field="password"></has-error>
                         </div>
@@ -28,7 +28,7 @@ Ubah Password
                     <div class="form-row">
                         <label class="col-lg-2" for="password_confirmation"> Konfirmasi Password</label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.password_confirmation" id="password_confirmation" type="text" min=0 placeholder="Konfirmasi Password"
+                            <input v-model="form.password_confirmation" id="password_confirmation" type="password" min=0 placeholder="Konfirmasi Password"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
                             <has-error :form="form" field="password_confirmation"></has-error>
                         </div>
