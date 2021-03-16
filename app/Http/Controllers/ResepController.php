@@ -96,30 +96,22 @@ class ResepController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function resep_obat (Request $request){
-        $user = Auth::user();
+    public function store_obat(Request $request ,$id)
+    {
+        // $resep = ObatResep::findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-            'id_pasien' => 'required',
-            'dosis' => 'required',
-            'aturan_pakai' => 'required',
-            'takaran_minum' => 'required',
-            'waktu_minum' => 'required',
-            'keterangan' => 'required',
-            'jml_obat' => 'required',
-            'jml_kali_minum' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'Failed',
-                'message' => $validator->messages()
-            ],422);
-        }
         DB::beginTransaction();
         try {
             $obatResep = New ObatResep;
-            $obatResep->id_resep = $resep->id;
+            $obatResep->id_resep = $resep->id_resep;
             $obatResep->id_obat = $request->id_obat;
+            $obatResep->dosis = $request->dosis;
+            $obatResep->aturan_pakai = $request->aturan_pakai;
+            $obatResep->takaran_minum = $request->takaran_minum;
+            $obatResep->waktu_minum = $request->waktu_minum;
+            $obatResep->keterangan = $request->keterangan;
+            $obatResep->jml_obat = $request->jml_obat;
+            $obatResep->jml_kali_minum = $request->jml_kali_minum;
             $obatResep->save();
         } catch (\Exception $e) {
             DB::rollback();
@@ -131,38 +123,33 @@ class ResepController extends Controller
             'message' => 'Berhasil membuat obat'
         ]); 
     }
+
     public function store(Request $request)
     {
         $user = Auth::user();
 
-        $validator = Validator::make($request->all(), [
-            'id_pasien' => 'required',
-            'dosis' => 'required',
-            'aturan_pakai' => 'required',
-            'takaran_minum' => 'required',
-            'waktu_minum' => 'required',
-            'keterangan' => 'required',
-            'jml_obat' => 'required',
-            'jml_kali_minum' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'Failed',
-                'message' => $validator->messages()
-            ],422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'id_pasien' => 'required',
+        //     'dosis' => 'required',
+        //     'aturan_pakai' => 'required',
+        //     'takaran_minum' => 'required',
+        //     'waktu_minum' => 'required',
+        //     'keterangan' => 'required',
+        //     'jml_obat' => 'required',
+        //     'jml_kali_minum' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 'Failed',
+        //         'message' => $validator->messages()
+        //     ],422);
+        // }
         DB::beginTransaction();
         try {
             $resep = New Resep;
             $resep->id_pasien = $request->id_pasien;
             $resep->id_users = $user->id;
-            $resep->dosis = $request->dosis;
-            $resep->aturan_pakai = $request->aturan_pakai;
-            $resep->takaran_minum = $request->takaran_minum;
-            $resep->waktu_minum = $request->waktu_minum;
-            $resep->keterangan = $request->keterangan;
-            $resep->jml_obat = $request->jml_obat;
-            $resep->jml_kali_minum = $request->jml_kali_minum;
+            
             $resep->save();
         } catch (\Exception $e) {
             DB::rollback();
@@ -172,6 +159,13 @@ class ResepController extends Controller
             $obatResep = New ObatResep;
             $obatResep->id_resep = $resep->id;
             $obatResep->id_obat = $request->id_obat;
+            $obatResep->dosis = $request->dosis;
+            $obatResep->aturan_pakai = $request->aturan_pakai;
+            $obatResep->takaran_minum = $request->takaran_minum;
+            $obatResep->waktu_minum = $request->waktu_minum;
+            $obatResep->keterangan = $request->keterangan;
+            $obatResep->jml_obat = $request->jml_obat;
+            $obatResep->jml_kali_minum = $request->jml_kali_minum;
             $obatResep->save();
         } catch (\Exception $e) {
             DB::rollback();

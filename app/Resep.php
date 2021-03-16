@@ -13,13 +13,6 @@ class Resep extends Model
     protected $primaryKey = 'id';
     protected $fillable=[
         'id_pasien',
-        'dosis',
-        'aturan_pakai',
-        'takaran_minum',
-        'waktu_minum',
-        'keterangan',
-        'jml_obat',
-        'jml_kali_minum',
         'id_users',
     ];
 

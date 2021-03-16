@@ -12,6 +12,13 @@ class ObatResep extends Model
     protected $fillable=[
         'id_resep',
         'id_obat',
+        'dosis',
+        'aturan_pakai',
+        'takaran_minum',
+        'waktu_minum',
+        'keterangan',
+        'jml_obat',
+        'jml_kali_minum',
     ];
 
     public function resep(){

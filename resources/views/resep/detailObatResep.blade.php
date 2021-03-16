@@ -57,8 +57,8 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.obat.nama_obat}}</td>
-                                    <td>@{{ item.resep.aturan_pakai == 'null' ? '' : item.resep.aturan_pakai + " x sehari"}}</td>
-                                    <td>@{{ item.resep.waktu_minum == 'null' ? '' : item.resep.waktu_minum}}</td>
+                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " x sehari"}}</td>
+                                    <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
                                         <a class="text-primary" data-toggle="tooltip" data-placement="top"
                                             data-original-title="Detail"><i class="icon-magnifier-add"></i></a>
@@ -254,7 +254,7 @@ Buat Resep
                     this.form.clear();
                 },
                 storeData() {
-                    this.form.post("{{ route('resep.store') }}")
+                    this.form.post("{{ route('resep.store_obat') }}")
                         .then(response => {
                             $('#modal').modal('hide');
                             Swal.fire(

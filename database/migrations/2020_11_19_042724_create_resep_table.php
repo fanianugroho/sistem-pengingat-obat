@@ -16,14 +16,8 @@ class CreateResepTable extends Migration
         Schema::create('resep', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_pasien');
-            $table->unsignedBigInteger('id_users')->nullable();
-            $table->string('dosis');
-            $table->string('aturan_pakai');
-            $table->mediumtext('takaran_minum');
-            $table->enum('waktu_minum', ['Sebelum Makan', 'Saat Makan','Sesudah Makan']);
-            $table->enum('keterangan', ['Kondisional', 'Harus Habis', 'Rutin']);
-            $table->string('jml_obat');
-            $table->string('jml_kali_minum');
+            $table->unsignedBigInteger('id_users');
+            
             $table->timestamps();
             $table->softDeletes(); 
 
