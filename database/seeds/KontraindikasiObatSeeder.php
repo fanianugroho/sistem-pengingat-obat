@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\KontraindikasiObat;
+
 class KontraindikasiObatSeeder extends Seeder
 {
     /**
@@ -12,25 +13,19 @@ class KontraindikasiObatSeeder extends Seeder
     public function run()
     {
         $data=[
-                [
-                    'nama_kontraindikasi' => 'Ibu Hamil',
-                ],
-                [
-                    'nama_kontraindikasi' => 'Blok jantung',
-                ],
-                [
-                    'nama_kontraindikasi' => 'Kerusakan miokard',
-                ],
-                [
-                    'nama_kontraindikasi' => 'Penggunaan inhibitor CYP3A4 yang kuat',
-                ],
-                [
-                    'nama_kontraindikasi' => 'Hipersensitivitas',
-                ],
-                [
-                    'nama_kontraindikasi' => 'Penyakit liver aktif',
-                ],
-        ];
-          KontraindikasiObat::insert($data);
+            [
+                'id_kontraindikasi' => 1,
+                'id_obat' => 1,
+            ],
+            [
+                'id_kontraindikasi' => 2,
+                'id_obat' => 3,
+            ],
+            [
+                'id_kontraindikasi' => 3,
+                'id_obat' => 2,
+            ],
+            ];
+            KontraindikasiObat::insert($data);
     }
 }

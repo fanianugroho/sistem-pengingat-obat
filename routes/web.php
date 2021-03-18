@@ -43,9 +43,10 @@ Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatrese
 Route::resource('riwayatresep', 'RiwayatResepController');
 Route::get('/detailResep/{id}', 'RiwayatResepController@detailresep')->name('detailresep');
 Route::get('/resep.all/{id}', 'ResepController@all')->name('resep.all');
-Route::post('/tambahObat', 'ResepController@store_obat')->name('resep.store_obat');
+Route::post('/tambahObat/{id}', 'ResepController@store_obat')->name('resep.store_obat');
 Route::post('/search-pasien','ResepController@searchPasien')->name('searchPasien');
 Route::get('/detailPasien/detailObatResep/{id}', 'ResepController@viewdetailobatresep')->name('viewdetailobatresep');
+// Route::get('/detailPasien/detailObatResep/tambah{id}', 'ResepController@viewdetailobatresep')->name('viewdetailobatreseptambah');
 Route::get('/detailObatResep/{id}', 'ResepController@detailobatresep')->name('detailobatresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');

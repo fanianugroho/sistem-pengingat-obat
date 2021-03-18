@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInteraksiObatTable extends Migration
+class CreateInteraksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInteraksiObatTable extends Migration
      */
     public function up()
     {
-        Schema::create('interaksi_obat', function (Blueprint $table) {
+        Schema::create('interaksi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_interaksi');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateInteraksiObatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interaksi_obat');
+        Schema::dropIfExists('interaksi');
     }
 }

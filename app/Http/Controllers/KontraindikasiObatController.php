@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\KontraindikasiObat;
+use App\Kontraindikasi;
 use Illuminate\Http\Request;
 
 class KontraindikasiObatController extends Controller
@@ -13,7 +13,7 @@ class KontraindikasiObatController extends Controller
      */
     public function all()
     {
-        $data = KontraindikasiObat::all();
+        $data = Kontraindikasi::all();
         return $data; 
     }
 
@@ -22,29 +22,14 @@ class KontraindikasiObatController extends Controller
         return view('kontraindikasi_obat.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
             'nama_kontraindikasi' => 'required',
         ]);
 
-        KontraindikasiObat::create($request->all());
+        Kontraindikasi::create($request->all());
     }
 
     /**
@@ -60,7 +45,7 @@ class KontraindikasiObatController extends Controller
             'nama_kontraindikasi' => 'required',
         ]);
 
-        return KontraindikasiObat::find($id)->update($request->all());
+        return Kontraindikasi::find($id)->update($request->all());
     }
 
     /**
@@ -71,6 +56,6 @@ class KontraindikasiObatController extends Controller
      */
     public function destroy($id)
     {
-        return KontraindikasiObat::find($id)->delete();
+        return Kontraindikasi::find($id)->delete();
     }
 }

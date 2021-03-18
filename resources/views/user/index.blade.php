@@ -137,6 +137,7 @@ Tambah Apoteker
         app.inputSelect()
     }
 
+
     var app = new Vue({
         el: '#app',
         data: {
@@ -154,11 +155,9 @@ Tambah Apoteker
         mounted() {
             $('#table').DataTable()
             this.refreshData()
-            $('[data-fancybox]').fancybox({
-                iframe: {
-                    preload: false
-                }
-            })
+            $('#tipe_user').select2({
+                    placeholder: "Pilih Tipe User"
+                });
         },
         methods: {
             createModal() {
@@ -232,7 +231,9 @@ Tambah Apoteker
                     }
                 })
             },
-
+            inputSelect() {
+                    this.form.tipe_user = $("#tipe_user").val()
+                },
             refreshData() {
                 axios.get("{{ route('user.all') }}")
                     .then(response => {

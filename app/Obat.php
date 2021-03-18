@@ -15,8 +15,6 @@ class Obat extends Model
         'nama_obat',
         'id_bentuk_obat',
         'satuan',
-        'id_kontraindikasi_obat',
-        'id_interaksi_obat',
         'id_petunjuk_penyimpanan_obat',
         'pola_makan',
         'informasi',
@@ -31,10 +29,10 @@ class Obat extends Model
         return $this->belongsTo('App\BentukObat', 'id_bentuk_obat');
     }
     public function kontraindikasi_obat(){
-        return $this->belongsTo('App\KontraindikasiObat', 'id_kontraindikasi_obat');
+        return $this->hasMany('App\KontraindikasiObat', 'id_obat');
     }
     public function interaksi_obat(){
-        return $this->belongsTo('App\InteraksiObat', 'id_interaksi_obat');
+        return $this->hasMany('App\InteraksiObat', 'id_obat');
     }
     public function fungsi_obat(){
         return $this->hasMany('App\FungsiObat', 'id_obat');

@@ -98,12 +98,11 @@ class ResepController extends Controller
      */
     public function store_obat(Request $request ,$id)
     {
-        // $resep = ObatResep::findOrFail($id);
-
+       
         DB::beginTransaction();
         try {
             $obatResep = New ObatResep;
-            $obatResep->id_resep = $resep->id_resep;
+            $obatResep->id_resep = $id;
             $obatResep->id_obat = $request->id_obat;
             $obatResep->dosis = $request->dosis;
             $obatResep->aturan_pakai = $request->aturan_pakai;
@@ -113,6 +112,7 @@ class ResepController extends Controller
             $obatResep->jml_obat = $request->jml_obat;
             $obatResep->jml_kali_minum = $request->jml_kali_minum;
             $obatResep->save();
+            
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);

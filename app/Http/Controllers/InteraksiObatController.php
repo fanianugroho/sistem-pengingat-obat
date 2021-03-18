@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\InteraksiObat;
+use App\Interaksi;
 use Illuminate\Http\Request;
 
 class InteraksiObatController extends Controller
@@ -13,7 +13,7 @@ class InteraksiObatController extends Controller
      */
     public function all()
     {
-        $data = InteraksiObat::all();
+        $data = Interaksi::all();
         return $data; 
     }
 
@@ -22,29 +22,14 @@ class InteraksiObatController extends Controller
         return view('interaksi_obat.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
             'nama_interaksi' => 'required',
         ]);
 
-        InteraksiObat::create($request->all());
+        Interaksi::create($request->all());
     }
 
     public function update(Request $request, $id)
@@ -53,7 +38,7 @@ class InteraksiObatController extends Controller
             'nama_interaksi' => 'required',
         ]);
 
-        return InteraksiObat::find($id)->update($request->all());
+        return Interaksi::find($id)->update($request->all());
     }
 
     /**
@@ -64,6 +49,6 @@ class InteraksiObatController extends Controller
      */
     public function destroy($id)
     {
-        return InteraksiObat::find($id)->delete();
+        return Interaksi::find($id)->delete();
     }
 }

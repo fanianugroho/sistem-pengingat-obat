@@ -35,9 +35,11 @@ Obat
                                     <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
                                     <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} </td>
 
-                                    <td>@{{ item.kontraindikasi_obat.nama_kontraindikasi == 'null' ? '' : item.kontraindikasi_obat.nama_kontraindikasi}}
+                                    <td v-for="int, interaksi in id_interaksi_obat" key="interaksi">
+                                        @{{int.interaksi.nama_interaksi}}
                                     </td>
-                                    <td>@{{ item.interaksi_obat.nama_interaksi == 'null' ? '' : item.interaksi_obat.nama_interaksi}}
+                                    <td v-for="kontra, kontraindikasi in id_kontraindikasi_obat" key="kontraindikasi">
+                                        @{{kontra.kontraindikasi.nama_kontraindikasi}}
                                     </td>
                                     <td>
                                         <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
@@ -212,6 +214,7 @@ Obat
         data: {
             mainData: [],
             editMode: false,
+            
             form: new Form({
                 id: '',
                 nama_obat: '',
@@ -223,8 +226,6 @@ Obat
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                id_interaksi_obat: [],
-                id_kontraindikasi_obat: [],
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -357,11 +358,14 @@ Obat
             refreshData() {
                 axios.get("{{ route('obat.all') }}")
                     .then(response => {
+                        
                         $('#table').DataTable().destroy()
                         this.mainData = response.data
+                        console.log(response.data)
                         this.$nextTick(function () {
                             $('#table').DataTable();
                         })
+                        
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';

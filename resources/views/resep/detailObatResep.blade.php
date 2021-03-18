@@ -205,7 +205,10 @@ Buat Resep
             app.inputSelect()
         }
 
-        let idPasien = localStorage.getItem("id_pasien");
+        
+        let segment_str = window.location.pathname; 
+        let segment_array = segment_str.split( '/' );
+        let id = segment_array.pop();
 
         var app = new Vue({
             el: '#app',
@@ -214,9 +217,8 @@ Buat Resep
                 jumlahObat : 0,
                 editMode: false,
                 form: new Form({
-                    id: '',
+                    id: id,
                     namaObat : '',
-                    id_pasien: idPasien,
                     dosis: '',
                     aturan_pakai: '',
                     takaran_minum: '',
@@ -236,6 +238,10 @@ Buat Resep
                 
             },
             methods: {
+                getUrl(id) {
+                    url = "/detailPasien/detailObatResep/" + id
+                    return url
+                },
                 createModal() {
                     this.editMode = false;
                     this.form.reset();
@@ -254,7 +260,8 @@ Buat Resep
                     this.form.clear();
                 },
                 storeData() {
-                    this.form.post("{{ route('resep.store_obat') }}")
+                    url = "{{ route('resep.store_obat', ':id') }}".replace(':id', this.form.id)
+                    this.form.post(url)
                         .then(response => {
                             $('#modal').modal('hide');
                             Swal.fire(

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKontraindikasiObatTable extends Migration
+class CreateKontraindikasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateKontraindikasiObatTable extends Migration
      */
     public function up()
     {
-        Schema::create('kontraindikasi_obat', function (Blueprint $table) {
+        Schema::create('kontraindikasi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_kontraindikasi');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateKontraindikasiObatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kontraindikasi_obat');
+        Schema::dropIfExists('kontraindikasi');
     }
 }

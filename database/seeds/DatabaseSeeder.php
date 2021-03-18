@@ -12,13 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(BentukObatSeeder::class);
-        $this->call(InteraksiObatSeeder::class);
-        $this->call(KontraindikasiObatSeeder::class);
+        $this->call(InteraksiSeeder::class);
+        $this->call(KontraindikasiSeeder::class);
         $this->call(FungsiSeeder::class);
         $this->call(ObatSeeder::class);
         $this->call(EfekSampingSeeder::class);
         $this->call(FungsiObatSeeder::class);
         $this->call(EfekSampingObatSeeder::class);
+        $this->call(InteraksiObatSeeder::class);
+        $this->call(KontraindikasiObatSeeder::class);
         $this->call(PasienSeeder::class);
         $this->call(UserSeeder::class);
     }

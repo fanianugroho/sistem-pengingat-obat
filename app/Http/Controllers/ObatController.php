@@ -9,6 +9,8 @@ use App\PetunjukPenyimpananObat;
 use App\FungsiObat;
 use App\Obat;
 use App\Fungsi;
+use App\Interaksi;
+use App\Kontraindikasi;
 use App\EfekSamping;
 use Illuminate\Http\Request;
 use Auth;
@@ -23,7 +25,7 @@ class ObatController extends Controller
      */
     public function all()
     {
-        $data =Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat','efek_samping_obat')->get();
+        $data =Obat::with('kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi')->get();
 //          return response()->json($data);
 	    return $data;
     }

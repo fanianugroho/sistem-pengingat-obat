@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\InteraksiObat;
+
 class InteraksiObatSeeder extends Seeder
 {
     /**
@@ -13,24 +14,18 @@ class InteraksiObatSeeder extends Seeder
     {
         $data=[
             [
-                'nama_interaksi' => 'Statin'
+                'id_interaksi' => 1,
+                'id_obat' => 1,
             ],
             [
-                'nama_interaksi' => 'Diltiazem'
+                'id_interaksi' => 2,
+                'id_obat' => 1,
             ],
             [
-                'nama_interaksi' => 'Amiodarone'
+                'id_interaksi' => 3,
+                'id_obat' => 2,
             ],
-            [
-                'nama_interaksi' => 'Nevirapine'
-            ],
-            [
-                'nama_interaksi' => 'Levofloxacin'
-            ],
-            [
-                'nama_interaksi' => '	Trimethoprim/sulfamethoxazole'
-            ],
-        ];
-          InteraksiObat::insert($data);
+            ];
+            InteraksiObat::insert($data);
     }
 }

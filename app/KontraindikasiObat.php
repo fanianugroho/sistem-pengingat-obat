@@ -3,13 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KontraindikasiObat extends Model
 {
-    use SoftDeletes;
-
-    protected $table = 'kontraindikasi_obat';
+    protected $table ='kontraindikasi_obat';
     protected $primaryKey = 'id';
-    protected $fillable=['nama_kontraindikasi'];
+    protected $fillable=[
+        'id_kontraindikasi',
+        'id_obat',
+    ];
+
+    public function kontraindikasi(){
+        return $this->belongsTo('App\Kontraindikasi', 'id_kontraindikasi');
+    }
+    public function obat(){
+        return $this->belongsTo('App\Obat', 'id_obat');
+    }
 }
