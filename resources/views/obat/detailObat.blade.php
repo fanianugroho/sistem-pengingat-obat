@@ -167,20 +167,6 @@ Detail Obat
                             <has-error :form="form" field="id_fungsi_obat"></has-error>
                         </div>
                     </div>
-
-                    <!-- <div class="form-row">
-                        <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
-                        <div class="form-group col-md-8">
-                            <select v-model="form.fungsi_obat" id="id_fungsi_obat" name="states[]"
-                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
-                                class="js-example-basic-multiple">
-                                <option disabled item="">- Pilih Penggunaan Obat -</option>
-                                <option v-for="item in fungsiObat" :value="item.id">
-                                    @{{  item.nama_fungsi }}</option>
-                            </select>
-                            <has-error :form="form" field="id_fungsi_obat"></has-error>
-                        </div>
-                    </div>
                     <div class="form-row" for="id_kontraindikasi_obat">
                         <label class="col-lg-2">Kontraindikasi Obat</label>
                         <div class="form-group col-md-8">
@@ -245,7 +231,7 @@ Detail Obat
                                 :class="{ 'is-invalid': form.errors.has('informasi') }">
                             <has-error :form="form" field="informasi"></has-error>
                         </div>
-                    </div> -->
+                    </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
@@ -340,6 +326,7 @@ Detail Obat
                     })
             },
             editModal(data) {
+                this.editMode = false;
                 let segment_str = window.location.pathname;
                 let segment_array = segment_str.split('/');
                 let id = segment_array.pop();
