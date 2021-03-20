@@ -30,11 +30,20 @@ class ObatController extends Controller
 	    return $data;
     }
     public function detailobat ($id){
-        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat','fungsi_obat.fungsi','efek_samping_obat.efek_samping')->where('id',$id)->first();
-        // dd($detailObat->efek_samping_obat[0]->efek_samping);
-        // dd($detailObat);
-        return view('obat.detailObat',compact('detailObat'));
+        $bentuk_obat = BentukObat::all();
+        $interaksi_obat = Interaksi::all();
+        $kontraindikasi_obat = Kontraindikasi::all();
+        $fungsi_obat = Fungsi::all();
+        $efek_samping_obat = EfekSamping::all();
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi','fungsi_obat.fungsi','efek_samping_obat.efek_samping')->where('id',$id)->first();
+        return view('obat.detailObat',compact('detailObat','bentuk_obat','interaksi_obat','kontraindikasi_obat','fungsi_obat', 'efek_samping_obat'));
     }
+
+    public function detailObatEdit($id){
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi','fungsi_obat.fungsi','efek_samping_obat.efek_samping')->where('id',$id)->first();
+        return $detailObat;
+    }
+
     public function index()
     {
         $bentuk_obat = BentukObat::all();
@@ -66,7 +75,7 @@ class ObatController extends Controller
         // DB::beginTransaction();
         // try {
         //     $obat = New Obat;
-        //     $obat->nama_obat = $request->nama_obat;
+        //     $obat->nama_obat = $request->nama_oba                                                     t;
         //     $obat->id_bentuk_obat = $request->id_bentuk_obat;
         //     $obat->kode_obat = $request->kode_obat;
         //     $obat->stok = $request->stok;

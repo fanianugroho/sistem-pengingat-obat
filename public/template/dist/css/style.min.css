@@ -20,7 +20,13 @@ input {
     overflow: visible
     
 }
-
+.selectall{
+    margin: auto;
+    text-align: right;
+    color: #000;
+    font-weight: 400;
+    font-size: 16px;
+}
 .dropdown-menu,
 .nav,
 .navbar-nav {

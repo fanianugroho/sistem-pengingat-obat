@@ -24,8 +24,6 @@ Obat
                                     <th>No</th>
                                     <th>Kode Obat</th>
                                     <th>Nama Obat</th>
-                                    <th>Kontraindikasi</th>
-                                    <th>Interaksi</th>
                                     <th class="data-fixed-columns">Aksi</th>
                                 </tr>
                             </thead>
@@ -34,23 +32,12 @@ Obat
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
                                     <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} </td>
-
-                                    <td v-for="int, interaksi in id_interaksi_obat" key="interaksi">
-                                        @{{int.interaksi.nama_interaksi}}
-                                    </td>
-                                    <td v-for="kontra, kontraindikasi in id_kontraindikasi_obat" key="kontraindikasi">
-                                        @{{kontra.kontraindikasi.nama_kontraindikasi}}
-                                    </td>
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)" class="text-primary" data-toggle="tooltip"
-                                            data-placement="top" data-original-title="Detail"><i
-                                                class="icon-magnifier-add"></i></a>
-                                        <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
-                                                class="far fa-edit"></i></a>
-                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
+                                       <a v-bind:href="getUrl(item.id)" class="btn btn-blue"data-toggle="tooltip" data-placement="top"
+                                            data-original-title="Detail">Detail</a>
+                                        <a href="javascript:void(0);" @click="deleteData(item.id)" class="btn btn-red"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                                class="far fa-trash-alt"></i></a>
+                                               ></i>Hapus</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -226,6 +213,8 @@ Obat
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
+                id_kontraindikasi_obat:'',
+                id_interaksi_obat:'',
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),

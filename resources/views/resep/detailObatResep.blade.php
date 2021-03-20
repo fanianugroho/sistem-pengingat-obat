@@ -36,8 +36,8 @@ Buat Resep
                     <h3 class="card-title-detailobat"> Daftar Obat Resep Pasien
                     </h3>
                     <h4 class="card-title">
-                        <a href="/cetak-resep"><button type="button" class="btn btn-primary btn-rounded float-right mb-4"> <i
-                                class="icon-printer"></i> Cetak Resep</button></a>
+                        <button type="button" class="btn btn-primary btn-rounded float-right mb-4"
+                            @click="cetakResep()"> <i class="icon-printer"></i> Cetak Resep</button>
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
                     </h4>
@@ -178,16 +178,54 @@ Buat Resep
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
                                 </div>
                             </div>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
-                    <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                            <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                            <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
 
-                            </div>
+                        </div>
                     </form>
 
                 </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- MODAL PRINT-->
+        <div id="modalPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" id="modal">
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body mx">
+                        <div class="selectall">
+                            <input type="checkbox" name="select-all" id="select-all" />
+                                <label for="selectAll"> 
+                                    Pilih Semua
+                                </label><br>
+                        </div>
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                            <label for="vehicle1">
+                             A
+                             </label><br><hr>
+                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                            <label for="vehicle2"> 
+                            B
+                            </label><br><hr>
+                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                            <label for="vehicle3"> 
+                            C
+                            </label><br><hr>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                            <button v-show="!editMode" type="submit" class="btn btn-primary">Cetak</button>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                    
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
@@ -205,20 +243,20 @@ Buat Resep
             app.inputSelect()
         }
 
-        
-        let segment_str = window.location.pathname; 
-        let segment_array = segment_str.split( '/' );
+
+        let segment_str = window.location.pathname;
+        let segment_array = segment_str.split('/');
         let id = segment_array.pop();
 
         var app = new Vue({
             el: '#app',
             data: {
                 mainData: [],
-                jumlahObat : 0,
+                jumlahObat: 0,
                 editMode: false,
                 form: new Form({
                     id: id,
-                    namaObat : '',
+                    namaObat: '',
                     dosis: '',
                     aturan_pakai: '',
                     takaran_minum: '',
@@ -235,7 +273,20 @@ Buat Resep
                 $('#id_obat').select2({
                     placeholder: "Pilih Obat"
                 });
-                
+
+                $('#select-all').click(function(event) {   
+                    if(this.checked) {
+                        
+                        $(':checkbox').each(function() {
+                            this.checked = true;                        
+                        });
+                    } else {
+                        $(':checkbox').each(function() {
+                            this.checked = false;                       
+                        });
+                    }
+                });
+
             },
             methods: {
                 getUrl(id) {
@@ -259,16 +310,20 @@ Buat Resep
                     this.form.fill(data)
                     this.form.clear();
                 },
+                cetakResep() {
+                    this.editMode = false;
+                    $('#modalPrint').modal('show');
+                },
                 storeData() {
                     url = "{{ route('resep.store_obat', ':id') }}".replace(':id', this.form.id)
                     this.form.post(url)
                         .then(response => {
                             $('#modal').modal('hide');
                             Swal.fire(
-                            'Berhasil',
-                            'Resep berhasil ditambahkan',
-                            'success'
-                        )
+                                'Berhasil',
+                                'Resep berhasil ditambahkan',
+                                'success'
+                            )
                             this.refreshData()
                         })
                         .catch(e => {
@@ -281,10 +336,10 @@ Buat Resep
                         .then(response => {
                             $('#modal').modal('hide');
                             Swal.fire(
-                            'Berhasil',
-                            'Data Resep berhasil diubah',
-                            'success'
-                        )
+                                'Berhasil',
+                                'Data Resep berhasil diubah',
+                                'success'
+                            )
                             this.refreshData()
                         })
                         .catch(e => {
@@ -325,8 +380,8 @@ Buat Resep
                 },
 
                 refreshData() {
-                    let segment_str = window.location.pathname; 
-                    let segment_array = segment_str.split( '/' );
+                    let segment_str = window.location.pathname;
+                    let segment_array = segment_str.split('/');
                     let id = segment_array.pop();
                     axios.get("{{ route('detailobatresep', ':id') }}".replace(':id', id))
                         .then(response => {
@@ -343,5 +398,6 @@ Buat Resep
                 }
             },
         })
-</script>
-@endpush
+
+    </script>
+    @endpush
