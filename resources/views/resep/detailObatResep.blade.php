@@ -216,11 +216,9 @@ Buat Resep
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Cetak</button>
-
+                            <a href="/cetak-resep"><button v-show="!editMode" type="submit" class="btn btn-primary">Cetak</button></a>
                         </div>
                     </div><!-- /.modal-content -->
-                    
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>

@@ -240,8 +240,8 @@ class ResepController extends Controller
     public function cetakPdf()
     {
     	$resep = ObatResep::with('obat','resep')->get();
-        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate($resep->id_obat_resep);
-    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep->id_obat_resep, 'qr' => $qr])->setPaper('b7', 'landscape');
+        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('1');
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
     }
 }
