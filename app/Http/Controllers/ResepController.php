@@ -43,7 +43,9 @@ class ResepController extends Controller
 
     public function viewdetailobatresep ($id){
         $nama_obat = Obat::all();
-        return view('resep.detailObatResep',compact('nama_obat'));
+        $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
+        // dd($dataResep[1]->obat->nama_obat);
+        return view('resep.detailObatResep',compact('nama_obat','dataResep'));
     } 
 
     public function detailobatresep ($id){
@@ -51,6 +53,7 @@ class ResepController extends Controller
         $data = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
         return $data;
     }
+
 
     public function detailpasien ($id){
         $nama_obat = Obat::all();
@@ -228,7 +231,12 @@ class ResepController extends Controller
     {
         return Resep::find($id)->delete();
     }
-
+    public function cetakResep ($id){
+        
+        // $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
+        // return view('resep.detailObatResep',compact('dataResep'));
+    }
+    
     public function cetakPdf()
     {
     	$resep = ObatResep::with('obat','resep')->get();

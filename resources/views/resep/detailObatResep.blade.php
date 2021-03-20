@@ -206,18 +206,13 @@ Buat Resep
                                     Pilih Semua
                                 </label><br>
                         </div>
-                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                            <label for="vehicle1">
-                             A
-                             </label><br><hr>
-                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                            <label for="vehicle2"> 
-                            B
-                            </label><br><hr>
-                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                            <label for="vehicle3"> 
-                            C
-                            </label><br><hr>
+                                @foreach ($dataResep as $item)
+                            <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
+                                <label for="data_resep">
+                                        {{$item->obat->nama_obat}}
+                                </label>
+                                <br><hr>
+                                @endforeach
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
@@ -289,6 +284,26 @@ Buat Resep
 
             },
             methods: {
+                getIdResep(id) {
+                url = "{{ route('cetakResep', ':id') }}".replace(':id', id)
+                axios.get(url)
+                    .then(response => {
+                        console.log('test',response.data)
+                       
+                    })
+                    .catch(e => {
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
+                },
+                cetakResep(data) {
+                    this.editMode = false;
+                    let segment_str = window.location.pathname;
+                    let segment_array = segment_str.split('/');
+                    let id = segment_array.pop();
+                    this.getIdResep(id);
+                    $('#modalPrint').modal('show');
+                },
+                
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
                     return url
@@ -309,10 +324,6 @@ Buat Resep
                     this.editMode = true;
                     this.form.fill(data)
                     this.form.clear();
-                },
-                cetakResep() {
-                    this.editMode = false;
-                    $('#modalPrint').modal('show');
                 },
                 storeData() {
                     url = "{{ route('resep.store_obat', ':id') }}".replace(':id', this.form.id)
