@@ -242,18 +242,15 @@ class ResepController extends Controller
     public function cetakPdf($array)
     {
         $fungsiArray = explode (",", $array); 
-        // $fungsiArray = $request->input('idResep');
         $countFungsi = sizeof($fungsiArray);
-        $itemsFungsi = array();
+        $resep = array();
+        $qr = array();
         for($i = 0; $i < $countFungsi; $i++){
-            $data = 
             $item = ObatResep::with('obat','resep.pasien')->where('id',$fungsiArray[$i])->first();
-            $itemsFungsi[] = $item;
+            $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate($fungsiArray[$i]);
+            $resep[] = $item;
         }
-        // $this->getExtension($itemsFungsi);
-        // return $itemsFungsi;
-        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
-    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$itemsFungsi, 'qr' => $qr])->setPaper('b7', 'landscape');
-    	return $pdf->stream();
+    	$pdf = PDF::loadview('resep.resep_pdf',compact('resep'))->setPaper('b7', 'landscape');
+        return $pdf->stream();
     }
 }

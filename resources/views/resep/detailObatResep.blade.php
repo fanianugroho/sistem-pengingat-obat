@@ -373,9 +373,20 @@ Buat Resep
                 },
                 storeCetakResep(id_obat_resep){
                     url = "{{ route('cetak-resep', ':array') }}".replace(':array', this.formStore.idResep)
-                    axios.get(url)
+                    axios.get(url,{responseType: 'blob'})
                     .then(response => {
-                        console.log('res',response)
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'resep.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        Swal.fire(
+                            'Berhasil',
+                            'Resep berhasil diunduh',
+                            'success'
+                        )
+                        $('#modalPrint').modal('hide');
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
