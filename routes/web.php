@@ -26,7 +26,6 @@ Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.u
 Route::get('/obat.all', 'ObatController@all')->name('obat.all');
 Route::resource('obat', 'ObatController');
 Route::get('/detailObatEdit/{id}', 'ObatController@detailObatEdit')->name('detailObatEdit');
-Route::get('/cetakResep/{id}', 'ResepController@cetakResep')->name('cetakResep');
 Route::get('/detailObat/{id}', 'ObatController@detailobat')->name('detailobat');
 Route::get('/bentukobat.all', 'BentukObatController@all')->name('bentukobat.all');
 Route::resource('bentukobat', 'BentukObatController');
@@ -52,10 +51,9 @@ Route::get('/detailPasien/detailObatResep/{id}', 'ResepController@viewdetailobat
 Route::get('/detailObatResep/{id}', 'ResepController@detailobatresep')->name('detailobatresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
-Route::get('/cetak-resep','ResepController@cetakPdf');
+Route::get('/cetak-resep','ResepController@cetakPdf')->name('cetak-resep');
 Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
-Route::get('/cetak-resep','ResepController@cetakPdf');
-Route::get('/cek-resep','ResepController@cekPdf');
+
 
 
 /* }); */

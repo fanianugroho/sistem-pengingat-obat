@@ -30,9 +30,10 @@ class DashboardController extends Controller
                     ->join('obat', 'obat.id', '=', 'obat_resep.id_obat')
                     ->groupBy('obat_resep.id_obat','obat.nama_obat')
                     ->orderBy('total_obat', 'desc')
+                    // ->limit(1)
                     ->get();
 
-        /* dd($obatResep); */
+        // dd($obatResep);
 
         return view('app.dashboard',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien','obatResep'));
     }

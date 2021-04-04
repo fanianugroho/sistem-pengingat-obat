@@ -15,7 +15,9 @@
                             Apoteker</span></a>
                 </li>
                 @endif
+                
                 <li class="list-divider"></li>
+                @if(Auth::user()->tipe_user=='apoteker')
                 <li class="nav-small-cap"><span class="hide-menu">Informasi Resep</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('resep.index')}}"
                         aria-expanded="false"><i class="fas fa-pen-square"></i><span class="hide-menu">Buat
@@ -63,6 +65,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
 
         </nav>

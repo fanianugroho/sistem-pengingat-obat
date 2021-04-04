@@ -44,7 +44,7 @@ class ResepController extends Controller
     public function viewdetailobatresep ($id){
         $nama_obat = Obat::all();
         $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
-        // dd($dataResep[1]->obat->nama_obat);
+        // dd($dataResep[0]->id);
         return view('resep.detailObatResep',compact('nama_obat','dataResep'));
     } 
 
@@ -231,17 +231,14 @@ class ResepController extends Controller
     {
         return Resep::find($id)->delete();
     }
-    public function cetakResep ($id){
-        
-        // $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
-        // return view('resep.detailObatResep',compact('dataResep'));
-    }
     
     public function cetakPdf()
     {
-    	$resep = ObatResep::with('obat','resep')->get();
-        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('1');
+       
+    	$resep = ObatResep::with('obat','resep.pasien')->get();
+        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
     	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
+        // dd($resep[0]);
     }
 }

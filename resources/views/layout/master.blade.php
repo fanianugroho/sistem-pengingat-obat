@@ -149,7 +149,7 @@
         <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
         <script>
             tinymce.init({
-                selector: "textarea",theme: "silver",width: 500,height: 300,
+                selector: "textarea",theme: "silver",
                 plugins: [
                     "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",

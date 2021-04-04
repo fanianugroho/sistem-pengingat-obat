@@ -250,6 +250,11 @@ Detail Obat
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+
+    var getEfekSamping = @json($efek_samping_obat);
+    
+    var getKontraindikasi = @json($kontraindikasi_obat);
+
     function selectTrigger() {
         app.inputSelect()
     }
@@ -265,7 +270,7 @@ Detail Obat
                 kode_obat: '',
                 satuan: '',
                 efek_samping_obat: [],
-                petunjuk_penyimpanan: '',
+                petunjuk_penyimpanan: getEfekSamping.petunjuk_penyimpanan,
                 fungsi_obat: [],
                 pola_makan: '',
                 informasi: '',

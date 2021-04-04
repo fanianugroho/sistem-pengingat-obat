@@ -143,7 +143,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
+                                    <input v-model="form.takaran_minum" disabled="disabled" id="takaran_minum" type="text" min=0
                                         placeholder="Takaran Minum" class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
                                     <has-error :form="form" field="takaran_minum"></has-error>
@@ -189,7 +189,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.jml_kali_minum" id="jml_kali_minum" type="text" min=0
+                                    <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum" type="text" min=0
                                         class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
