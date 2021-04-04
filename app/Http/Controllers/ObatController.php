@@ -40,7 +40,7 @@ class ObatController extends Controller
     }
 
     public function detailObatEdit($id){
-        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi','fungsi_obat.fungsi','efek_samping_obat.efek_samping')->where('id',$id)->first();
+        $detailObat = Obat::with('bentuk_obat','kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi','fungsi_obat.fungsi','efek_samping_obat')->where('id',$id)->first();
         return $detailObat;
     }
 
@@ -119,25 +119,109 @@ class ObatController extends Controller
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        $request->validate([
+        $obat = Obat::where('id',$id)->first();
 
-            'nama_obat' => 'required',
-            'id_bentuk_obat' => 'required',
-            'stok' => 'required',
-            'satuan' => 'required',
-            'id_kontraindikasi_obat' => 'required',
-            'id_interaksi_obat' => 'required',
-            'id_efek_samping_obat' => 'required',
-            'petunjuk_penyimpanan' => 'required',
-            'id_fungsi_obat' => 'required',
-            'pola_makan' => 'required',
-            'informasi' => 'required',
-        ]);
-       
-       
-        return Obat::find($id)->update($request->all());
+        DB::beginTransaction();
+        try {
+            $obat->nama_obat = $request->nama_obat;
+            $obat->kode_obat = $request->kode_obat;
+            $obat->satuan = $request->satuan;
+            $obat->petunjuk_penyimpanan = 'test';
+            $obat->pola_makan = $request->pola_makan;
+            $obat->informasi = $request->informasi;
+            $obat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
+        try {
+            FungsiObat::where('id_obat',$id)->each(function ($fungsiObat, $key) {
+                $fungsiObat->delete();
+            });
+    
+            $fungsiArray = $request->input('id_fungsi_obat');
+            $countFungsi = sizeof($fungsiArray);
+            $itemsFungsi = array();
+            for($i = 0; $i < $countFungsi; $i++){
+                $item = array(
+                    'id_fungsi' => $fungsiArray[$i],
+                    'id_obat' =>$id,
+            );
+                $itemsFungsi[] = $item;
+            }
+            FungsiObat::insert($itemsFungsi);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
+        try {
+            InteraksiObat::where('id_obat',$id)->each(function ($interaksiObat, $key) {
+                $interaksiObat->delete();
+            });
+            
+            $interaskiObatArray = $request->input('id_interaksi_obat');
+            $countInteraksiObat = sizeof($interaskiObatArray);
+            $itemsInteraksiObat = array();
+            for($i = 0; $i < $countInteraksiObat; $i++){
+                $item = array(
+                    'id_interaksi' => $interaskiObatArray[$i],
+                    'id_obat' =>$id,
+            );
+                $itemsInteraksiObat[] = $item;
+            }
+            InteraksiObat::insert($itemsInteraksiObat);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
+        try {
+            KontraindikasiObat::where('id_obat',$id)->each(function ($kontraindikasiObat, $key) {
+                $kontraindikasiObat->delete();
+            });
+            
+            $kontraindikasiObatArray = $request->input('id_kontraindikasi_obat');
+            $countKontraindikasiObat = sizeof($kontraindikasiObatArray);
+            $itemsKontraindikasiObat = array();
+            for($i = 0; $i < $countKontraindikasiObat; $i++){
+                $item = array(
+                    'id_kontraindikasi' => $kontraindikasiObatArray[$i],
+                    'id_obat' =>$id,
+            );
+                $itemsKontraindikasiObat[] = $item;
+            }
+            KontraindikasiObat::insert($itemsKontraindikasiObat);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
+        try {
+            EfekSampingObat::where('id_obat',$id)->each(function ($efekSampingObat, $key) {
+                $efekSampingObat->delete();
+            });
+            
+            $efekSampingObatArray = $request->input('id_efek_samping_obat');
+            $countEfekSampingObat = sizeof($efekSampingObatArray);
+            $itemsEfekSampingObat = array();
+            for($i = 0; $i < $countEfekSampingObat; $i++){
+                $item = array(
+                    'id_efek_samping' => $efekSampingObatArray[$i],
+                    'id_obat' =>$id,
+                );
+                $itemsEfekSampingObat[] = $item;
+            }
+            EfekSampingObat::insert($itemsEfekSampingObat);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
+        DB::commit();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'update obat success'
+        ],200);
     }
 
     /**

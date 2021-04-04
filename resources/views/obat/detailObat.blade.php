@@ -157,21 +157,7 @@ Detail Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.fungsi_obat" id="id_fungsi_obat" name="states[]"
-                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
-                                class="js-example-basic-multiple">
-                                <option disabled item="">- Pilih Penggunaan Obat -</option>
-                                <option v-for="item in fungsiObat" :value="item.id">
-                                    @{{  item.nama_fungsi }}</option>
-                            </select>
-                            <has-error :form="form" field="id_fungsi_obat"></has-error>
-                        </div>
-                    </div>
-
-                    <!-- <div class="form-row">
-                        <label class="col-lg-2" for="id_fungsi_obat">Fungsi</label>
-                        <div class="form-group col-md-8">
-                            <select v-model="form.fungsi_obat" id="id_fungsi_obat" name="states[]"
+                            <select  id="id_fungsi_obat" name="states[]"
                                 multiple="multiple" onchange="selectTrigger()" style="width: 100%"
                                 class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Penggunaan Obat -</option>
@@ -184,8 +170,8 @@ Detail Obat
                     <div class="form-row" for="id_kontraindikasi_obat">
                         <label class="col-lg-2">Kontraindikasi Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.kontraindikasi_obat" id="id_kontraindikasi_obat" name="states[]"
-                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
+                            <select id="id_kontraindikasi_obat" name="states[]"
+                                multiple="multiple" style="width: 100%"
                                 class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Kontraindikasi Obat -</option>
                                 <option v-for="item in kontraindikasiObat" :value="item.id">
@@ -197,7 +183,7 @@ Detail Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_interaksi_obat">Interaksi Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.interaksi_obat" id="id_interaksi_obat" onchange="selectTrigger()"
+                            <select id="id_interaksi_obat"
                                 name="states[]" multiple="multiple" class="js-example-basic-multiple"
                                 style="width: 100%" class="form-control custom-select">
                                 <option disabled item="">- Pilih Interaksi Obat -</option>
@@ -210,8 +196,8 @@ Detail Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_efek_samping_obat"> Efek Samping </label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.efek_samping_obat" id="id_efek_samping_obat" name="states[]"
-                                multiple="multiple" class="js-example-basic-multiple" onchange="selectTrigger()"
+                            <select  id="id_efek_samping_obat" name="states[]" 
+                                multiple="multiple" class="js-example-basic-multiple" 
                                 style="width: 100%" class="form-control custom-select">
                                 <option disabled item="">- Pilih Efek Samping Obat -</option>
                                 <option v-for="item in efeksampingObat" :value="item.id">
@@ -245,7 +231,7 @@ Detail Obat
                                 :class="{ 'is-invalid': form.errors.has('informasi') }">
                             <has-error :form="form" field="informasi"></has-error>
                         </div>
-                    </div> -->
+                    </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
@@ -263,6 +249,8 @@ Detail Obat
     integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA=="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 <script>
     function selectTrigger() {
         app.inputSelect()
@@ -273,19 +261,29 @@ Detail Obat
         data: {
             mainData: [],
             editMode: false,
+            selectedObat: null,
+            selectedFungsi: [],
+            selectedEfekSamping: [],
+            selectedInteraksi: [],
+            selectedKontraindikasi: [],
+
+            selectedInteraksiEdit: [],
+            selectedFungsiEdit : [],
+            selectedEfekSampingEdit : [],
+            selectedKontraindikasiEdit: [],
             form: new Form({
                 id: '',
                 nama_obat: '',
                 kode_obat: '',
                 satuan: '',
-                efek_samping_obat: [],
                 petunjuk_penyimpanan: '',
-                fungsi_obat: [],
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                kontraindikasi_obat:[],
-                interaksi_obat:[],
+                id_interaksi_obat : $('#id_interaksi_obat').val(),
+                id_fungsi_obat : $('#id_fungsi_obat').val(),
+                id_efek_samping_obat : $('#id_efek_samping_obat').val(),
+                id_kontraindikasi_obat : $('#id_kontraindikasi_obat').val(),
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -294,15 +292,11 @@ Detail Obat
             efeksampingObat: @json($efek_samping_obat),
         },
         mounted() {
-            
             $('[data-fancybox]').fancybox({
                 iframe: {
                     preload: false
                 }
             })
-            $('#id_bentuk_obat').select2({
-                placeholder: "Pilih Sediaan Obat"
-            });
             $('#id_interaksi_obat').ready(function () {
                 $('#id_interaksi_obat').select2({
                     placeholder: "Pilih Interaksi"
@@ -315,7 +309,7 @@ Detail Obat
             });
             $('#id_fungsi_obat').ready(function () {
                 $('#id_fungsi_obat').select2({
-                    placeholder: "Pilih Penggunaan"
+                    placeholder: "Pilih Fungsi"
                 });
             });
             $('#id_efek_samping_obat').ready(function () {
@@ -323,19 +317,69 @@ Detail Obat
                     placeholder: "Pilih Efek Samping"
                 });
             });
+
+            $('#id_efek_samping_obat').change(function() {
+                this.selectedEfekSampingEdit = $("[id='id_efek_samping_obat']").toArray().map(x => $(x).val());
+            });
+
+            $('#id_fungsi_obat').change(function() {
+                this.selectedFungsiEdit = $("[id='id_fungsi_obat']").toArray().map(x => $(x).val());
+            });
+
+            $('#id_kontraindikasi_obat').change(function() {
+                this.selectedKontraindikasiEdit = $("[id='id_kontraindikasi_obat']").toArray().map(x => $(x).val());
+            });
+
+            $('#id_interaksi_obat').change(function() {
+                this.selectedInteraksiEdit = $("[id='id_interaksi_obat']").toArray().map(x => $(x).val());
+            });
         },
         methods: {
             getDetailObat(id) {
                 url = "{{ route('detailObatEdit', ':id') }}".replace(':id', id)
                 axios.get(url)
                     .then(response => {
-                        console.log('test',response.data, this.form)
                         this.form.fill(response.data)
+
+                        this.selectedObat = response.data.bentuk_obat.id;
+                        this.selectedFungsi = response.data.fungsi_obat
+                        this.selectedEfekSamping = response.data.efek_samping_obat
+                        this.selectedKontraindikasi = response.data.kontraindikasi_obat
+                        this.selectedInteraksi = response.data.interaksi_obat
+
+
+                        let dataEditEfekSamping = [];
+                        let dataEditFungsi = [];
+                        let dataEditKontraindikasi = [];
+                        let dataEditInteraksi = []; 
+
+                        for(let i=0; i<this.selectedEfekSamping.length; i++){
+                            dataEditEfekSamping.push(this.selectedEfekSamping[i].id_efek_samping)
+                        }
+                        for(let i=0; i<this.selectedFungsi.length; i++){
+                            dataEditFungsi.push(this.selectedFungsi[i].id_fungsi)
+                        }
+                        for(let i=0; i<this.selectedInteraksi.length; i++){
+                            dataEditInteraksi.push(this.selectedFungsi[i].id_fungsi)
+                        }
+                        for(let i=0; i<this.selectedKontraindikasi.length; i++){
+                            dataEditKontraindikasi.push(this.selectedFungsi[i].id_fungsi)
+                        }
+
+                        $('#id_bentuk_obat').find('option[value='+response.data.bentuk_obat.id+']').prop('selected', true);
+                        $('#satuan').find('option[value='+response.data.satuan+']').prop('selected', true);
+
+                        $('#id_efek_samping_obat').val(dataEditEfekSamping).trigger('change');
+                        $('#id_fungsi_obat').val(dataEditFungsi).trigger('change');
+                        $('#id_interaksi_obat').val(dataEditInteraksi).trigger('change');
+                        $('#id_kontraindikasi_obat').val(dataEditKontraindikasi).trigger('change');
+
                         this.form.clear();
                         this.editMode = true;
                         $('#modal').modal('show');  
                     })
                     .catch(e => {
+                        console.log('e',e)
                         e.response.status != 422 ? console.log(e) : '';
                     })
             },
@@ -343,23 +387,31 @@ Detail Obat
                 let segment_str = window.location.pathname;
                 let segment_array = segment_str.split('/');
                 let id = segment_array.pop();
-                this.form.petunjuk_penyimpanan = tinymce.get("petunjuk_penyimpanan").getContent({
-                    format: 'text'
-                })
                 this.getDetailObat(id);
-               
             },
             updateData() {
                 url = "{{ route('obat.update', ':id') }}".replace(':id', this.form.id)
+                
+                let interaksi = $('#id_interaksi_obat').val();
+                let fungsiObat = $('#id_fungsi_obat').val();
+                let efekSamping = $('#id_efek_samping_obat').val();
+                let kontraindikasi =  $('#id_kontraindikasi_obat').val();
+
+                this.form.id_interaksi_obat = interaksi;
+                this.form.id_fungsi_obat = fungsiObat;
+                this.form.id_efek_samping_obat = efekSamping;
+                this.form.id_kontraindikasi_obat = kontraindikasi;
+
                 this.form.put(url)
                     .then(response => {
+                        console.log('res',response)
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
                             'Obat berhasil diubah',
                             'success'
                         )
-                        this.refreshData()
+                        window.location.reload();
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
@@ -367,11 +419,7 @@ Detail Obat
             },
             inputSelect() {
                 this.form.id_bentuk_obat = $("#id_bentuk_obat").val()
-                this.form.id_interaksi_obat = $("#id_interaksi_obat").val()
-                this.form.id_kontraindikasi_obat = $("#id_kontraindikasi_obat").val()
-                this.form.satuan = $("#satuan").val()
-                this.form.id_fungsi_obat = $("#id_fungsi_obat").val()
-                this.form.id_efek_samping_obat = $("#id_efek_samping_obat").val()
+                this.form.satuan = $("#satuan").val();
             },
         },
     })
