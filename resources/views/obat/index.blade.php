@@ -31,13 +31,16 @@ Obat
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
-                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} </td>
+                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} 
+                                        @{{ item.kekuatan_sediaan == 'null' ? '' : item.kekuatan_sediaan}} 
+                                        @{{ item.satuan == 'null' ? '' : item.satuan}} 
+                                    </td>
                                     <td>
-                                       <a v-bind:href="getUrl(item.id)" class="btn btn-blue"data-toggle="tooltip" data-placement="top"
-                                            data-original-title="Detail">Detail</a>
+                                        <a v-bind:href="getUrl(item.id)" class="btn btn-blue" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Detail">Detail</a>
                                         <a href="javascript:void(0);" @click="deleteData(item.id)" class="btn btn-red"
-                                            data-toggle="tooltip" data-placement="top" data-original-title="Hapus"><i
-                                               ></i>Hapus</a>
+                                            data-toggle="tooltip" data-placement="top"
+                                            data-original-title="Hapus"><i></i>Hapus</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -83,15 +86,28 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="satuan">Satuan</label>
+                        <label class="col-lg-2" for="satuan">Kekuatan Sediaan</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.satuan" id="satuan" onchange="selectTrigger()" style="width: 100%"
-                                class="form-control custom-select" :class="{ 'is-invalid': form.errors.has('satuan') }">
-                                <option disabled item="">- Pilih Satuan -</option>
-                                <option value="ml">ml</option>
-                                <option value="mg">mg</option>
-                            </select>
-                            <has-error :form="form" field="satuan"></has-error>
+                            <form>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input v-model="form.kekuatan_sediaan" id="kekuatan_sediaan" type="text" min=0
+                                            placeholder="Kekuatan Sediaan" class="form-control"
+                                            :class="{ 'is-invalid': form.errors.has('kekuatan_sediaan') }">
+                                        <has-error :form="form" field="kekuatan_sediaan"></has-error>
+                                    </div>
+                                    <div class="col">
+                                        <select v-model="form.satuan" id="satuan" onchange="selectTrigger()"
+                                            class="form-control custom-select"
+                                            :class="{ 'is-invalid': form.errors.has('satuan') }">
+                                            <option value="">- Pilih Satuan -</option>
+                                            <option value="ml">ml</option>
+                                            <option value="mg">mg</option>
+                                        </select>
+                                        <has-error :form="form" field="satuan"></has-error>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="form-row">
@@ -201,11 +217,12 @@ Obat
         data: {
             mainData: [],
             editMode: false,
-            
+
             form: new Form({
                 id: '',
                 nama_obat: '',
                 kode_obat: '',
+                kekuatan_sediaan:'',
                 satuan: '',
                 id_efek_samping_obat: [],
                 petunjuk_penyimpanan: '',
@@ -213,8 +230,8 @@ Obat
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                id_kontraindikasi_obat:'',
-                id_interaksi_obat:'',
+                id_kontraindikasi_obat: '',
+                id_interaksi_obat: '',
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -273,9 +290,6 @@ Obat
                 $('#modal').modal('show');
             },
             storeData() {
-                this.form.petunjuk_penyimpanan = tinymce.get("petunjuk_penyimpanan").getContent({
-                    format: 'text'
-                })
                 this.form.post("{{ route('obat.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');
@@ -347,14 +361,14 @@ Obat
             refreshData() {
                 axios.get("{{ route('obat.all') }}")
                     .then(response => {
-                        
+
                         $('#table').DataTable().destroy()
                         this.mainData = response.data
                         console.log(response.data)
                         this.$nextTick(function () {
                             $('#table').DataTable();
                         })
-                        
+
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';

@@ -100,6 +100,7 @@
     </style>
 </head>
 
+@foreach ($resep as $item)
 <body>
     <div id="main">
         <div class="head">
@@ -116,10 +117,10 @@
         <div class="body">
             <div class="body__top">
                 <div class="right">
-                    <p>No : 120</p>
+                    <p>No : {{$item->id_resep}}</p>
                 </div>
                 <div class="left">
-                    <p>Tanggal : 18/02/2021</p>
+                    <p>Tanggal : {{$item->created_at}}</p>
                 </div>
                 <div style="clear:both"></div>
             </div>
@@ -128,10 +129,15 @@
                     <img src="data:image/png;base64, {!! base64_encode($qr) !!} ">
                 </div>
                 <div class="left">
-                    <span class="span-text">Nama : Murdi</span> <br />
-                    <span class="span-text">Amlodine Tablet 10 mg</span> <br />
-                    <span class="span-text">2kali sehari</span> <br />
-                    <span class="span-text">Sesudah Makan</span>
+                    <span class="span-text">
+                    Nama : {{$item->resep->pasien->nama_pasien}}
+                    </span> <br />
+                    <span class="span-text">
+                    {{$item->obat->nama_obat}}</span> <br />
+                    <span class="span-text">
+                    {{$item->aturan_pakai}} kali sehari</span> <br/>
+                    <span class="span-text">
+                    {{$item->waktu_minum}}</span>
                 </div>
                 <div style="clear:both"></div>
                 
@@ -140,4 +146,5 @@
         
     </div>
 </body>
+@endforeach
 </html>

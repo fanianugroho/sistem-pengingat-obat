@@ -252,6 +252,11 @@ Detail Obat
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 <script>
+
+    var getEfekSamping = @json($efek_samping_obat);
+    
+    var getKontraindikasi = @json($kontraindikasi_obat);
+
     function selectTrigger() {
         app.inputSelect()
     }
@@ -384,6 +389,7 @@ Detail Obat
                     })
             },
             editModal(data) {
+                this.editMode = false;
                 let segment_str = window.location.pathname;
                 let segment_array = segment_str.split('/');
                 let id = segment_array.pop();

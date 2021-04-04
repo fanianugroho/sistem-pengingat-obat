@@ -51,10 +51,9 @@ Route::get('/detailPasien/detailObatResep/{id}', 'ResepController@viewdetailobat
 Route::get('/detailObatResep/{id}', 'ResepController@detailobatresep')->name('detailobatresep');
 Route::get('/detailPasien/{id}', 'ResepController@detailpasien')->name('detailpasien');
 Route::resource('resep', 'ResepController');
-Route::get('/cetak-resep','ResepController@cetakPdf');
+Route::get('/cetak-resep','ResepController@cetakPdf')->name('cetak-resep');
 Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
-Route::get('/cetak-resep','ResepController@cetakPdf');
-Route::get('/cek-resep','ResepController@cekPdf');
+
 
 
 /* }); */

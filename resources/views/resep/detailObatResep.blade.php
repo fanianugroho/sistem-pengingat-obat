@@ -57,7 +57,10 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.obat.nama_obat}}</td>
-                                    <td>@{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " x sehari"}}</td>
+                                    <td>
+                                        @{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " x sehari"}}
+                                        @{{ item.takaran_minum == 'null' ? '' : item.takaran_minum +"tablet"}}
+                                    </td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
                                         <a class="text-primary" data-toggle="tooltip" data-placement="top"
@@ -126,8 +129,8 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
-                                        placeholder="Takaran Minum" class="form-control"
+                                    <input v-model="form.takaran_minum" disabled="disabled" id="takaran_minum" type="text" min=0
+                                        placeholder="Takaran Minum" class="form-control" value="jeje"
                                         :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
                                     <has-error :form="form" field="takaran_minum"></has-error>
                                 </div>
@@ -172,7 +175,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.jml_kali_minum" id="jml_kali_minum" type="text" min=0
+                                    <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum" type="text" min=0
                                         class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
@@ -192,43 +195,40 @@ Buat Resep
         </div><!-- /.modal -->
 
         <!-- MODAL PRINT-->
+      
         <div id="modalPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" id="modal">
-                <div class="modal-content">
-                    <div class="modal-header ">
-                        <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body mx">
-                        <div class="selectall">
-                            <input type="checkbox" name="select-all" id="select-all" />
-                                <label for="selectAll"> 
-                                    Pilih Semua
-                                </label><br>
+                <div class="modal-dialog modal-lg" id="modal">
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                            <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                            <label for="vehicle1">
-                             A
-                             </label><br><hr>
-                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                            <label for="vehicle2"> 
-                            B
-                            </label><br><hr>
-                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                            <label for="vehicle3"> 
-                            C
-                            </label><br><hr>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Cetak</button>
-
-                        </div>
-                    </div><!-- /.modal-content -->
-                    
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </div>
+                        <form @submit.prevent="storeCetakResep()" @keydown="form.onKeydown($event)" id="cetak_resep">
+                            <div class="modal-body mx">
+                                <div class="selectall">
+                                    <input type="checkbox" name="select-all" id="select-all" />
+                                        <label for="selectAll"> 
+                                            Pilih Semua
+                                        </label><br>
+                                </div>
+                                        @foreach ($dataResep as $item)
+                                    <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
+                                        <label for="data_resep">
+                                                {{$item->obat->nama_obat}}
+                                        </label>
+                                        <br><hr>
+                                        @endforeach
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-primary">Cetak</button></a>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </form>
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        
+        </div>
     @endsection
 
 
@@ -264,6 +264,7 @@ Buat Resep
                     keterangan: '',
                     jml_obat: '',
                     jml_kali_minum: '',
+                    data_resep: '',
                 }),
                 namaObat: @json($nama_obat),
             },
@@ -273,22 +274,60 @@ Buat Resep
                 $('#id_obat').select2({
                     placeholder: "Pilih Obat"
                 });
-
+               
                 $('#select-all').click(function(event) {   
                     if(this.checked) {
-                        
                         $(':checkbox').each(function() {
-                            this.checked = true;                        
-                        });
-                    } else {
-                        $(':checkbox').each(function() {
-                            this.checked = false;                       
+                            this.checked = true;   
+                            var id_obat_resep = [];
+                                $.each($("input[name='data_resep']:checked"), function(){
+                                    id_obat_resep.push($(this).val());
+                                    // this.storeCetakResep(id_obat_resep);
+                                    console.log(id_obat_resep);
+                                });    
                         });
                     }
+                    else {
+                        $(':checkbox').each(function() {
+                            this.checked = false;    
+
+                        });
+                    }
+                });
+                 $(document).ready(function() {
+                    $("input").click(function(){
+                        var id_obat_resep = [];
+                        $.each($("input[name='data_resep']:checked"), function(){
+                            id_obat_resep.push($(this).val());
+                            console.log(id_obat_resep);
+                        });
+                        this.storeCetakResep(id_obat_resep);
+                    });
                 });
 
             },
             methods: {
+                getIdResep(id) {
+                url = "{{ route('viewdetailobatresep', ':id') }}".replace(':id', id)
+                axios.get(url)
+                    .then(response => {
+                        console.log('test',response.data)
+                       
+                    })
+                    .catch(e => {
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
+                },
+                cetakResep(data) {
+                    this.editMode = false;
+                    let segment_str = window.location.pathname;
+                    let segment_array = segment_str.split('/');
+                    let id = segment_array.pop();
+                    this.getIdResep(id);
+                    $('#modalPrint').modal('show');
+                    
+                },
+                
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
                     return url
@@ -310,10 +349,6 @@ Buat Resep
                     this.form.fill(data)
                     this.form.clear();
                 },
-                cetakResep() {
-                    this.editMode = false;
-                    $('#modalPrint').modal('show');
-                },
                 storeData() {
                     url = "{{ route('resep.store_obat', ':id') }}".replace(':id', this.form.id)
                     this.form.post(url)
@@ -329,6 +364,17 @@ Buat Resep
                         .catch(e => {
                             e.response.status != 422 ? console.log(e) : '';
                         })
+                },
+                storeCetakResep(id_obat_resep){
+                    url = "{{ route('cetak-resep', ':id') }}".replace(':id', id_obat_resep)
+                    axios.get(url)
+                    .then(response => {
+                        console.log('test',response.data)
+                       
+                    })
+                    .catch(e => {
+                        e.response.status != 422 ? console.log(e) : '';
+                    })
                 },
                 updateData() {
                     url = "{{ route('resep.update', ':id') }}".replace(':id', this.form.id)

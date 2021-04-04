@@ -62,7 +62,7 @@ Efek Samping Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_efek_samping"> Efek Samping Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_efek_samping" id="nama_efek_samping" type="text" min=0 placeholder="Masukkan Interaksi Obat"
+                            <input v-model="form.nama_efek_samping" id="nama_efek_samping" type="text" min=0 placeholder="Masukkan Efek Samping Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_efek_samping') }">
                             <has-error :form="form" field="nama_efek_samping"></has-error>
                         </div>
