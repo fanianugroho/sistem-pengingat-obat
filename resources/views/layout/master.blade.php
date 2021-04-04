@@ -147,24 +147,8 @@
         <script src="{{asset('template/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('template/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
         <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
-        <script>
-            tinymce.init({
-                selector: "textarea",theme: "silver",
-                plugins: [
-                    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-                    "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
-                    "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
-            ],
-
-            external_filemanager_path: "/filemanager/",
-            filemanager_title: "Responsive Filemanager",
-            external_plugins: {
-                "filemanager": "/filemanager/plugin.min.js"
-            }
-        });
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 
 
