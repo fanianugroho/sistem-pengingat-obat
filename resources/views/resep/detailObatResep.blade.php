@@ -311,7 +311,7 @@ Buat Resep
                 url = "{{ route('viewdetailobatresep', ':id') }}".replace(':id', id)
                 axios.get(url)
                     .then(response => {
-                        console.log('test',response.data)
+                        // console.log('test',response.data)
                        
                     })
                     .catch(e => {

@@ -60,11 +60,13 @@ class ResepController extends Controller
         $detailPasien = Pasien::where('id', $id)->first();   
         return view('resep.detailPasien',compact('detailPasien','nama_obat'));
     }
-
     public function index()
-    {
-        
+    {  
         return view('resep.index');
+    }
+    public function getObat($id){
+        $obat = Obat::where('id',$id)->first();
+        return $obat;
     }
 
     

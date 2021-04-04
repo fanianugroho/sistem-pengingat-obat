@@ -116,7 +116,7 @@ Buat Resep
                                         style="width: 100%" class="form-control custom-select">
                                         <option disabled item="">- Pilih Nama Obat -</option>
                                         <option v-for="item in namaObat" :value="item.id">
-                                            @{{  item.nama_obat }}</option>
+                                            @{{  item.nama_obat + ' ' + item.kekuatan_sediaan +' '+item.satuan }}</option>
                                     </select>
                                     <has-error :form="form" field="id_obat"></has-error>
                                 </div>
@@ -126,7 +126,7 @@ Buat Resep
                                 <div class="form-group col-md-8">
                                     <input v-model="form.dosis" id="dosis" type="text" min=0
                                         placeholder="Masukkan Dosis" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('dosis') }">
+                                        :class="{ 'is-invalid': form.errors.has('dosis') }" onchange="handleChangeDosis()">
                                     <has-error :form="form" field="dosis"></has-error>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ Buat Resep
                                 <div class="form-group col-md-8">
                                     <input v-model="form.jml_obat" id="jml_obat" type="text" min=0
                                         placeholder="Jumlah Obat" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_obat') }">
+                                        :class="{ 'is-invalid': form.errors.has('jml_obat') }" onchange="handleChangeJumlahMinum()">
                                     <has-error :form="form" field="jml_obat"></has-error>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@ Buat Resep
                                 <div class="form-group col-md-8">
                                     <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum" type="text" min=0
                                         class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
+                                        :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }" >
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
                                 </div>
                             </div>
@@ -221,6 +221,14 @@ Buat Resep
         function selectTrigger() {
             app.inputSelect()
         }
+
+        function handleChangeDosis(){
+            app.changeDosis()
+        }
+
+        function handleChangeJumlahMinum(){
+            app.changeJumlahKaliMinum()
+        }
     
         let segment_str = window.location.pathname; 
         let segment_array = segment_str.split( '/' );
@@ -235,7 +243,7 @@ Buat Resep
                     id: '',
                     namaObat: '',
                     id_pasien: id,
-                    dosis: '',
+                    dosis: null,
                     aturan_pakai: '',
                     takaran_minum: '',
                     waktu_minum: '',
@@ -244,6 +252,7 @@ Buat Resep
                     jml_kali_minum: '',
                 }),
                 namaObat: @json($nama_obat),
+                ketersediaan : null,
 
             },
             mounted() {
@@ -308,6 +317,38 @@ Buat Resep
                 },
                 inputSelect() {
                     this.form.id_obat = $("#id_obat").val()
+                    let id = $("#id_obat").val();
+                    let dosis = $("#dosis").val();
+                    let jumlahObat = $("#jml_obat").val();
+
+                    url = "{{ route('obat.detail', ':id') }}".replace(':id', id)
+                    axios.get(url)
+                    .then(response => {
+                        this.ketersediaan = response.data.kekuatan_sediaan
+                        if(dosis != ''){
+                            this.form.takaran_minum = dosis/this.ketersediaan;
+                            if(jumlahObat != ''){
+                                this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
+                            }
+                        }
+                    })
+                    .catch(e => {
+                        console.log('error',e)
+                    })
+                },
+                changeDosis(){
+                    let dosis = $("#dosis").val();
+                    let jumlahObat = $("#jml_obat").val()
+                    
+                    this.form.takaran_minum = dosis/this.ketersediaan;
+                    if(jumlahObat != ''){
+                        this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
+                    }
+                },
+                changeJumlahKaliMinum(){
+                    let dosis = $("#dosis").val();
+                    let jumlahObat = $("#jml_obat").val()
+                    this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
                 },
                 deleteData(id) {
                     Swal.fire({
@@ -343,8 +384,6 @@ Buat Resep
                     let id = segment_array.pop();
                     axios.get("{{ route('resep.all', ':id') }}".replace(':id', id))
                         .then(response => {
-                            // console.log(response.data);
-                            // this.jumlahObat = response.data.length;
                             $('#tablePasien').DataTable().destroy();
                             let dataPasien = response.data;
                             console.log('data',response.data);
