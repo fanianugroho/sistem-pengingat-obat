@@ -5,6 +5,7 @@ use App\Resep;
 use App\Pasien;
 use App\Obat;
 use App\ObatResep;
+use App\BentukObat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -42,15 +43,16 @@ class ResepController extends Controller
     }
 
     public function viewdetailobatresep ($id){
+        $bentuk_obat = BentukObat::all();
         $nama_obat = Obat::all();
-        $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
-        // dd($dataResep[0]->id);
-        return view('resep.detailObatResep',compact('nama_obat','dataResep'));
+        $dataResep = ObatResep::with('obat.bentuk_obat','resep')->where('id_resep',$id)->get();
+        // dd($bentuk_obat);
+        return view('resep.detailObatResep',compact('nama_obat','dataResep','bentuk_obat'));
     } 
 
     public function detailobatresep ($id){
         
-        $data = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
+        $data = ObatResep::with('obat.bentuk_obat','resep')->where('id_resep',$id)->get();
         return $data;
     }
 
@@ -239,6 +241,6 @@ class ResepController extends Controller
         $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
     	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
-        // dd($resep[0]);
+        dd($resep[0]);
     }
 }

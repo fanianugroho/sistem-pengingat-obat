@@ -81,10 +81,10 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.created_at == 'null' ? '' : item.created_at }}</td>
-                                   
+
                                     <td>
-                                        <a v-bind:href="getUrl(item.id)" class="btn btn-blue"data-toggle="tooltip" data-placement="top"
-                                            data-original-title="Detail">Detail</a>
+                                        <a v-bind:href="getUrl(item.id)" class="btn btn-blue" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Detail">Detail</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -143,10 +143,19 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.takaran_minum" disabled="disabled" id="takaran_minum" type="text" min=0
-                                        placeholder="Takaran Minum" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
-                                    <has-error :form="form" field="takaran_minum"></has-error>
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
+                                                    placeholder="Takaran Minum" class="form-control"
+                                                    :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
+                                                <has-error :form="form" field="takaran_minum"></has-error>
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" disabled ="disabled">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -189,7 +198,7 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum" type="text" min=0
+                                    <input v-model="form.jml_kali_minum" id="jml_kali_minum" type="text" min=0
                                         class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
@@ -221,9 +230,9 @@ Buat Resep
         function selectTrigger() {
             app.inputSelect()
         }
-    
-        let segment_str = window.location.pathname; 
-        let segment_array = segment_str.split( '/' );
+
+        let segment_str = window.location.pathname;
+        let segment_array = segment_str.split('/');
         let id = segment_array.pop();
 
         var app = new Vue({
@@ -338,8 +347,8 @@ Buat Resep
                     })
                 },
                 refreshData() {
-                    let segment_str = window.location.pathname; 
-                    let segment_array = segment_str.split( '/' );
+                    let segment_str = window.location.pathname;
+                    let segment_array = segment_str.split('/');
                     let id = segment_array.pop();
                     axios.get("{{ route('resep.all', ':id') }}".replace(':id', id))
                         .then(response => {
@@ -347,12 +356,12 @@ Buat Resep
                             // this.jumlahObat = response.data.length;
                             $('#tablePasien').DataTable().destroy();
                             let dataPasien = response.data;
-                            console.log('data',response.data);
+                            console.log('data', response.data);
                             const datas = dataPasien.map(data => ({
-                                id : data.id_resep,
+                                id: data.id_resep,
                                 created_at: moment(data.resep.created_at).locale('id').format(
                                     'DD MMMM YYYY'),
-                                    created_at_edit: data.resep.created_at,
+                                created_at_edit: data.resep.created_at,
                             }));
                             this.mainData = datas
                             this.$nextTick(function () {

@@ -56,10 +56,12 @@ Buat Resep
                             <tbody>
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
-                                    <td>@{{ item.obat.nama_obat}}</td>
+                                    <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat }}
+                                    @{{ item.obat.bentuk_obat.nama_bentuk == 'null' ? '' : item.obat.bentuk_obat.nama_bentuk}}</td>
                                     <td>
                                         @{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " x sehari"}}
-                                        @{{ item.takaran_minum == 'null' ? '' : item.takaran_minum +"tablet"}}
+                                        @{{ item.takaran_minum == 'null' ? '' : item.takaran_minum }}
+                                        @{{ item.obat.bentuk_obat.nama_bentuk == 'null' ? '' : item.obat.bentuk_obat.nama_bentuk}}
                                     </td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
@@ -129,10 +131,19 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.takaran_minum" disabled="disabled" id="takaran_minum" type="text" min=0
-                                        placeholder="Takaran Minum" class="form-control" value="jeje"
-                                        :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
-                                    <has-error :form="form" field="takaran_minum"></has-error>
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
+                                                    placeholder="Takaran Minum" class="form-control"
+                                                    :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
+                                                <has-error :form="form" field="takaran_minum"></has-error>
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" disabled ="disabled">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -369,7 +380,7 @@ Buat Resep
                     url = "{{ route('cetak-resep', ':id') }}".replace(':id', id_obat_resep)
                     axios.get(url)
                     .then(response => {
-                        console.log('test',response.data)
+                        console.log('test')
                        
                     })
                     .catch(e => {

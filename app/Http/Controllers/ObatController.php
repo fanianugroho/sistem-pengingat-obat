@@ -25,7 +25,7 @@ class ObatController extends Controller
      */
     public function all()
     {
-        $data =Obat::with('kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi')->get();
+        $data =Obat::with('bentuk_obat','kontraindikasi_obat.kontraindikasi','interaksi_obat.interaksi')->get();
 //          return response()->json($data);
 	    return $data;
     }
@@ -47,8 +47,9 @@ class ObatController extends Controller
     public function index()
     {
         $bentuk_obat = BentukObat::all();
-        $interaksi_obat = InteraksiObat::all();
-        $kontraindikasi_obat = KontraindikasiObat::all();
+        // dd($bentuk_obat);
+        $interaksi_obat = Interaksi::all();
+        $kontraindikasi_obat = Kontraindikasi::all();
         $fungsi_obat = Fungsi::all();
         $efek_samping_obat = EfekSamping::all();
         return view('obat.index',compact('bentuk_obat','interaksi_obat','kontraindikasi_obat','fungsi_obat', 'efek_samping_obat'));
@@ -64,57 +65,99 @@ class ObatController extends Controller
     {
 
         $user = Auth::user();
+        // dd($user->id);
         
-        $kontraindikasi_obat = sizeof($request->id_kontraindikasi_obat);
-        $items = array();
-        for($i=0; i<$kontraindikasi_obat; $i++){
-
+        DB::beginTransaction();
+        try {
+            $obat = New Obat;
+            $obat->nama_obat = $request->nama_obat;
+            $obat->kode_obat = $request->kode_obat;
+            $obat->id_bentuk_obat = $request->id_bentuk_obat;
+            $obat->kekuatan_sediaan = $request->kekuatan_sediaan;
+            $obat->satuan = $request->satuan;
+            $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
+            $obat->pola_makan = $request->pola_makan;
+            $obat->informasi = $request->informasi;
+            $obat->id_users = $user->id;
+            $obat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+            $efekSampingObatArray = $request->input('id_efek_samping_obat');
+            $countEfekSampingObat = sizeof($efekSampingObatArray);
+            $itemsEfekSampingObat = array();
+            for($i = 0; $i < $countEfekSampingObat; $i++){
+                $item = array(
+                    'id_efek_samping' => $efekSampingObatArray[$i],
+                    'id_obat' =>$obat->id,
+                );
+                $itemsEfekSampingObat[] = $item;
             }
+            EfekSampingObat::insert($itemsEfekSampingObat);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+            $fungsiArray = $request->input('id_fungsi_obat');
+            $countFungsi = sizeof($fungsiArray);
+            $itemsFungsi = array();
+            for($i = 0; $i < $countFungsi; $i++){
+                $item = array(
+                    'id_fungsi' => $fungsiArray[$i],
+                    'id_obat' =>$obat->id,
+            );
+                $itemsFungsi[] = $item;
+            }
+            FungsiObat::insert($itemsFungsi);
+            
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+        
+            $interaskiObatArray = $request->input('id_interaksi_obat');
+            $countInteraksiObat = sizeof($interaskiObatArray);
+            $itemsInteraksiObat = array();
+            for($i = 0; $i < $countInteraksiObat; $i++){
+                $item = array(
+                    'id_interaksi' => $interaskiObatArray[$i],
+                    'id_obat' =>$obat->id,
+            );
+                $itemsInteraksiObat[] = $item;
+            }
+            InteraksiObat::insert($itemsInteraksiObat);
+            
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        try {
+            $kontraindikasiObatArray = $request->input('id_kontraindikasi_obat');
+            $countKontraindikasiObat = sizeof($kontraindikasiObatArray);
+            $itemsKontraindikasiObat = array();
+            for($i = 0; $i < $countKontraindikasiObat; $i++){
+                $item = array(
+                    'id_kontraindikasi' => $kontraindikasiObatArray[$i],
+                    'id_obat' =>$obat->id,
+            );
+                $itemsKontraindikasiObat[] = $item;
+            }
+            KontraindikasiObat::insert($itemsKontraindikasiObat);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Update Failed', 'message' => $e->getMessage()]);
+        }
 
-        return $count;
-        // DB::beginTransaction();
-        // try {
-        //     $obat = New Obat;
-        //     $obat->nama_obat = $request->nama_oba                                                     t;
-        //     $obat->id_bentuk_obat = $request->id_bentuk_obat;
-        //     $obat->kode_obat = $request->kode_obat;
-        //     $obat->stok = $request->stok;
-        //     $obat->id_kontraindikasi_obat = $request->id_kontraindikasi_obat;
-        //     $obat->id_interaksi_obat = $request->id_interaksi_obat;
-        //     $obat->satuan = $request->satuan;
-        //     $obat->pola_makan = $request->pola_makan;
-        //     $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
-        //     $obat->informasi = $request->informasi;  
-        //     $obat->id_user = $user->id;
-        //     $obat->save();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        // }
-        // try {
-        //     $efekSampingObat = New EfekSampingObat;
-        //     $efekSampingObat->id_obat = $obat->id;
-        //     $efekSampingObat->id_efek_samping = $request->id_efek_samping_obat;
-        //     $efekSampingObat->save();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        // }
-        // try {
-        //     $fungsiObat = New FungsiObat;
-        //     $fungsiObat->id_obat = $obat->id;
-        //     $fungsiObat->id_fungsi = $request->id_fungsi_obat;
-        //     $fungsiObat->save();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
-        // }
-        // DB::commit();
+        DB::commit();
       
-        // return response()->json([
-        //     'status' => 'Success',
-        //     'message' => 'Berhasil menambah obat'
-        // ]); 
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Berhasil menambah obat'
+        ]); 
 
     }
 
@@ -127,8 +170,10 @@ class ObatController extends Controller
         try {
             $obat->nama_obat = $request->nama_obat;
             $obat->kode_obat = $request->kode_obat;
+            $obat->id_bentuk_obat = $request->id_bentuk_obat;
+            $obat->kekuatan_sediaan = $request->kekuatan_sediaan;
             $obat->satuan = $request->satuan;
-            $obat->petunjuk_penyimpanan = 'test';
+            $obat->petunjuk_penyimpanan = $request->petunjuk_penyimpanan;
             $obat->pola_makan = $request->pola_makan;
             $obat->informasi = $request->informasi;
             $obat->save();

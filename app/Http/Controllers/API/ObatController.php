@@ -12,9 +12,9 @@ use Validator;
 
 class ObatController extends Controller
 {
-    public function index()
+    public function getObatPasien($id)
     {
-        $data = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->get();
+        $data = Obat::with('bentuk_obat','kontraindikasi_obat','interaksi_obat')->where('id',$id)->get();
         if($data){
             return response()->json([
             "status" => "success",

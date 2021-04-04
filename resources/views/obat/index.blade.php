@@ -31,9 +31,10 @@ Obat
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
-                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}} 
-                                        @{{ item.kekuatan_sediaan == 'null' ? '' : item.kekuatan_sediaan}} 
-                                        @{{ item.satuan == 'null' ? '' : item.satuan}} 
+                                    <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}
+                                        @{{item.bentuk_obat.nama_bentuk == 'null' ? '' : item.bentuk_obat.nama_bentuk}}   
+                                        @{{ item.kekuatan_sediaan == 'null' ? '' : item.kekuatan_sediaan}}
+                                        @{{ item.satuan == 'null' ? '' : item.satuan}}
                                     </td>
                                     <td>
                                         <a v-bind:href="getUrl(item.id)" class="btn btn-blue" data-toggle="tooltip"
@@ -126,8 +127,7 @@ Obat
                     <div class="form-row" for="id_kontraindikasi_obat">
                         <label class="col-lg-2">Kontraindikasi Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_kontraindikasi_obat" id="id_kontraindikasi_obat" name="states[]"
-                                multiple="multiple" onchange="selectTrigger()" style="width: 100%"
+                            <select id="id_kontraindikasi_obat" name="states[]" multiple="multiple" style="width: 100%"
                                 class="js-example-basic-multiple">
                                 <option disabled item="">- Pilih Kontraindikasi Obat -</option>
                                 <option v-for="item in kontraindikasiObat" :value="item.id">
@@ -139,9 +139,9 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="id_interaksi_obat">Interaksi Obat</label>
                         <div class="form-group col-md-8">
-                            <select v-model="form.id_interaksi_obat" id="id_interaksi_obat" onchange="selectTrigger()"
-                                name="states[]" multiple="multiple" class="js-example-basic-multiple"
-                                style="width: 100%" class="form-control custom-select">
+                            <select id="id_interaksi_obat" name="states[]" multiple="multiple"
+                                class="js-example-basic-multiple" style="width: 100%"
+                                class="form-control custom-select">
                                 <option disabled item="">- Pilih Interaksi Obat -</option>
                                 <option v-for="item in interaksiObat" :value="item.id">
                                     @{{  item.nama_interaksi }}</option>
@@ -165,7 +165,7 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
+                            <textarea class="form-control"v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
                                 placeholder="Masukkan petunjuk penyimpanan" type="text">
                             </textarea>
                         </div>
@@ -222,7 +222,7 @@ Obat
                 id: '',
                 nama_obat: '',
                 kode_obat: '',
-                kekuatan_sediaan:'',
+                kekuatan_sediaan: '',
                 satuan: '',
                 id_efek_samping_obat: [],
                 petunjuk_penyimpanan: '',
@@ -230,8 +230,9 @@ Obat
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                id_kontraindikasi_obat: '',
-                id_interaksi_obat: '',
+                id_kontraindikasi_obat: [],
+                id_interaksi_obat: [],
+                
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),

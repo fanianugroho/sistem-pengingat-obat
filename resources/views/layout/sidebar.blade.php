@@ -6,9 +6,8 @@
             <ul id="sidebarnav">
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/beranda" aria-expanded="false"><i
                             data-feather="home" class="feather-icon"></i><span class="hide-menu">Beranda</span></a></li>
-
-                <li class="list-divider"></li>
                 @if(Auth::user()->tipe_user=='admin')
+                <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Informasi User</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('user.index')}}"
                         aria-expanded="false"><i class="fas fa-user"></i><span class="hide-menu">Tambah
