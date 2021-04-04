@@ -285,10 +285,10 @@ Detail Obat
                 pola_makan: '',
                 informasi: '',
                 id_bentuk_obat: '',
-                id_interaksi_obat : $('#id_interaksi_obat').val(),
-                id_fungsi_obat : $('#id_fungsi_obat').val(),
-                id_efek_samping_obat : $('#id_efek_samping_obat').val(),
-                id_kontraindikasi_obat : $('#id_kontraindikasi_obat').val(),
+                id_interaksi_obat : '',
+                id_fungsi_obat : '',
+                id_efek_samping_obat : '',
+                id_kontraindikasi_obat : '',
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -365,10 +365,10 @@ Detail Obat
                             dataEditFungsi.push(this.selectedFungsi[i].id_fungsi)
                         }
                         for(let i=0; i<this.selectedInteraksi.length; i++){
-                            dataEditInteraksi.push(this.selectedFungsi[i].id_fungsi)
+                            dataEditInteraksi.push(this.selectedInteraksi[i].id_interaksi)
                         }
                         for(let i=0; i<this.selectedKontraindikasi.length; i++){
-                            dataEditKontraindikasi.push(this.selectedFungsi[i].id_fungsi)
+                            dataEditKontraindikasi.push(this.selectedKontraindikasi[i].id_kontraindikasi)
                         }
 
                         $('#id_bentuk_obat').find('option[value='+response.data.bentuk_obat.id+']').prop('selected', true);
