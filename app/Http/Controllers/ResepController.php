@@ -45,9 +45,8 @@ class ResepController extends Controller
     public function viewdetailobatresep ($id){
         $bentuk_obat = BentukObat::all();
         $nama_obat = Obat::all();
-        $dataResep = ObatResep::with('obat.bentuk_obat','resep')->where('id_resep',$id)->get();
-        // dd($bentuk_obat);
-        return view('resep.detailObatResep',compact('nama_obat','dataResep','bentuk_obat'));
+        $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
+        return view('resep.detailObatResep',compact('nama_obat','dataResep'));
     } 
 
     public function detailobatresep ($id){
@@ -62,11 +61,13 @@ class ResepController extends Controller
         $detailPasien = Pasien::where('id', $id)->first();   
         return view('resep.detailPasien',compact('detailPasien','nama_obat'));
     }
-
     public function index()
-    {
-        
+    {  
         return view('resep.index');
+    }
+    public function getObat($id){
+        $obat = Obat::where('id',$id)->first();
+        return $obat;
     }
 
     
@@ -233,14 +234,28 @@ class ResepController extends Controller
     {
         return Resep::find($id)->delete();
     }
-    
-    public function cetakPdf()
-    {
-       
-    	$resep = ObatResep::with('obat','resep.pasien')->get();
+
+    public function getExtension($array){
         $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
-    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$resep, 'qr' => $qr])->setPaper('b7', 'landscape');
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$array, 'qr' => $qr])->setPaper('b7', 'landscape');
     	return $pdf->stream();
-        dd($resep[0]);
+    }
+    
+    public function cetakPdf($array)
+    {
+        $fungsiArray = explode (",", $array); 
+        // $fungsiArray = $request->input('idResep');
+        $countFungsi = sizeof($fungsiArray);
+        $itemsFungsi = array();
+        for($i = 0; $i < $countFungsi; $i++){
+            $data = 
+            $item = ObatResep::with('obat','resep.pasien')->where('id',$fungsiArray[$i])->first();
+            $itemsFungsi[] = $item;
+        }
+        // $this->getExtension($itemsFungsi);
+        // return $itemsFungsi;
+        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
+    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$itemsFungsi, 'qr' => $qr])->setPaper('b7', 'landscape');
+    	return $pdf->stream();
     }
 }
