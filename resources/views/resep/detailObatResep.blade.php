@@ -203,7 +203,7 @@ Buat Resep
                             <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <form @submit.prevent="storeCetakResep()" @keydown="form.onKeydown($event)" id="cetak_resep">
+                        <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
                             <div class="modal-body mx">
                                 <div class="selectall">
                                     <input type="checkbox" name="select-all" id="select-all" />
@@ -330,7 +330,6 @@ Buat Resep
                     $('#modalPrint').modal('show');
                     
                 },
-                
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
                     return url
@@ -387,6 +386,7 @@ Buat Resep
                             'success'
                         )
                         $('#modalPrint').modal('hide');
+                        $("#cetak_resep")[0].reset();
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
