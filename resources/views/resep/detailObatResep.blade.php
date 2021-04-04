@@ -211,13 +211,13 @@ Buat Resep
                                             Pilih Semua
                                         </label><br>
                                 </div>
-                                        @foreach ($dataResep as $item)
-                                    <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
-                                        <label for="data_resep">
-                                                {{$item->obat->nama_obat}}
-                                        </label>
-                                        <br><hr>
-                                        @endforeach
+                                @foreach ($dataResep as $item)
+                                <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
+                                    <label for="data_resep">
+                                        {{$item->obat->nama_obat}}
+                                    </label>
+                                <br><hr>
+                                @endforeach
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
@@ -242,12 +242,12 @@ Buat Resep
         function selectTrigger() {
             app.inputSelect()
         }
-
-
+        function test(value){
+            app.simpanSementara(value)
+        }
         let segment_str = window.location.pathname;
         let segment_array = segment_str.split('/');
         let id = segment_array.pop();
-
         var app = new Vue({
             el: '#app',
             data: {
@@ -266,7 +266,11 @@ Buat Resep
                     jml_kali_minum: '',
                     data_resep: '',
                 }),
+                formStore : new Form({
+                    idResep : []
+                }),
                 namaObat: @json($nama_obat),
+                id_obat_resep : [],
             },
             mounted() {
                 $('#table').DataTable()
@@ -279,39 +283,38 @@ Buat Resep
                     if(this.checked) {
                         $(':checkbox').each(function() {
                             this.checked = true;   
-                            var id_obat_resep = [];
-                                $.each($("input[name='data_resep']:checked"), function(){
-                                    id_obat_resep.push($(this).val());
-                                    // this.storeCetakResep(id_obat_resep);
-                                    console.log(id_obat_resep);
-                                });    
+                            var id_obat = [];
+                            $.each($("input[name='data_resep']:checked"), function(){
+                                id_obat.push($(this).val());
+                            }); 
+                            test(id_obat);
                         });
                     }
                     else {
                         $(':checkbox').each(function() {
                             this.checked = false;    
-
                         });
                     }
                 });
-                 $(document).ready(function() {
+                $(document).ready(function() {
                     $("input").click(function(){
-                        var id_obat_resep = [];
+                        var id_obat = [];
                         $.each($("input[name='data_resep']:checked"), function(){
-                            id_obat_resep.push($(this).val());
-                            console.log(id_obat_resep);
+                            id_obat.push($(this).val());
                         });
-                        this.storeCetakResep(id_obat_resep);
+                        test(id_obat);
+                        if (!$(this).prop("checked")){
+                            $("#select-all").prop("checked",false);
+                        }
                     });
                 });
-
             },
             methods: {
                 getIdResep(id) {
                 url = "{{ route('viewdetailobatresep', ':id') }}".replace(':id', id)
                 axios.get(url)
                     .then(response => {
-                        // console.log('test',response.data)
+                        console.log('test',response.data)
                        
                     })
                     .catch(e => {
@@ -365,12 +368,14 @@ Buat Resep
                             e.response.status != 422 ? console.log(e) : '';
                         })
                 },
+                simpanSementara(value){
+                    this.formStore.idResep = value
+                },
                 storeCetakResep(id_obat_resep){
-                    url = "{{ route('cetak-resep', ':id') }}".replace(':id', id_obat_resep)
+                    url = "{{ route('cetak-resep', ':array') }}".replace(':array', this.formStore.idResep)
                     axios.get(url)
                     .then(response => {
-                        console.log('test',response.data)
-                       
+                        console.log('res',response)
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
@@ -395,7 +400,6 @@ Buat Resep
                 inputSelect() {
                     this.form.id_obat = $("#id_obat").val()
                 },
-
                 deleteData(id) {
                     Swal.fire({
                         title: 'Apakah anda yakin?',
@@ -424,7 +428,6 @@ Buat Resep
                         }
                     })
                 },
-
                 refreshData() {
                     let segment_str = window.location.pathname;
                     let segment_array = segment_str.split('/');
@@ -444,6 +447,5 @@ Buat Resep
                 }
             },
         })
-
     </script>
     @endpush
