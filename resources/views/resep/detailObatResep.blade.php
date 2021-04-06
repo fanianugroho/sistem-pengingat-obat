@@ -214,7 +214,7 @@ Buat Resep
                             <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <form @submit.prevent="storeCetakResep()" @keydown="form.onKeydown($event)" id="cetak_resep">
+                        <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
                             <div class="modal-body mx">
                                 <div class="selectall">
                                     <input type="checkbox" name="select-all" id="select-all" />
@@ -341,7 +341,6 @@ Buat Resep
                     $('#modalPrint').modal('show');
                     
                 },
-                
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
                     return url
@@ -384,9 +383,21 @@ Buat Resep
                 },
                 storeCetakResep(id_obat_resep){
                     url = "{{ route('cetak-resep', ':array') }}".replace(':array', this.formStore.idResep)
-                    axios.get(url)
+                    axios.get(url,{responseType: 'blob'})
                     .then(response => {
-                        console.log('res',response)
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'resep.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        Swal.fire(
+                            'Berhasil',
+                            'Resep berhasil diunduh',
+                            'success'
+                        )
+                        $('#modalPrint').modal('hide');
+                        $("#cetak_resep")[0].reset();
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
