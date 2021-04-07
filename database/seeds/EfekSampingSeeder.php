@@ -17,10 +17,10 @@ class EfekSampingSeeder extends Seeder
                 'nama_efek_samping' => 'Mual'
             ],
             [
-                'nama_efek_samping' => 'Sakit Kepala'
+                'nama_efek_samping' => 'Diare'
             ],
             [
-                'nama_efek_samping' => 'Meringankan demam'
+                'nama_efek_samping' => 'Menyebabkan kantuk'
             ],
             ];
             EfekSamping::insert($data);

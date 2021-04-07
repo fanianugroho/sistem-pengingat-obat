@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EfekSampingObatSeeder::class);
         $this->call(InteraksiObatSeeder::class);
         $this->call(KontraindikasiObatSeeder::class);
-        $this->call(PasienSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PasienSeeder::class);
+        $this->call(ResepSeeder::class);
+        $this->call(ObatResepSeeder::class);
     }
 }

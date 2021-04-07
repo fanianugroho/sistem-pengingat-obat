@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-Bentuk Obat
+Sediaan Obat
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -12,16 +12,16 @@ Bentuk Obat
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"> Bentuk Obat
+                    <h4 class="card-title"> Sediaan Obat
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
-                            @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Bentuk</button>
+                            @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Sediaan</button>
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Bentuk Obat</th>
+                                    <th>Sediaan Obat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

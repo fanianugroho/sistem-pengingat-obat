@@ -15,10 +15,10 @@ class FungsiSeeder extends Seeder
         
         $data=[
             [
-                'nama_fungsi' => 'Mual'
+                'nama_fungsi' => 'Meringankan sakit kepala'
             ],
             [
-                'nama_fungsi' => 'Sakit Kepala'
+                'nama_fungsi' => 'Meredakan asam urat'
             ],
             [
                 'nama_fungsi' => 'Meringankan demam'
