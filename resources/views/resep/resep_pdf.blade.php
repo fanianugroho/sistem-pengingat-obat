@@ -126,7 +126,7 @@
             </div>
             <div class="body__content">
                 <div class="right">
-                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($item->id_resep)) !!} ">
+                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($item->id)) !!} ">
                 </div>
                 <div class="left">
                     <span class="span-text">
