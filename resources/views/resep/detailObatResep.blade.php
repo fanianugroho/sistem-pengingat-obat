@@ -295,8 +295,7 @@ Buat Resep
                 $('#table').DataTable()
                 this.refreshData()
                 $('#id_obat').select2({
-                    placeholder: "Pilih Obat",
-                    allowClear: true,
+                    placeholder: "Pilih Obat"
                     
                 });
                
@@ -363,10 +362,8 @@ Buat Resep
                 },
                 editModal(data) {
                     this.editMode = true;
-                    this.form.clear();
-                    this.form.id_obat = data.obat.nama_obat
                     this.form.fill(data)
-                    
+                    this.form.clear();
                     $('#modal').modal('show');
                     
                     console.log(data);
@@ -436,6 +433,7 @@ Buat Resep
                         })
                 },
                 inputSelect() {
+                    this.form.id_obat = $("#id_obat").val()
                     let id = $("#id_obat").val();
                     let dosis = $("#dosis").val();
                     let jumlahObat = $("#jml_obat").val();
