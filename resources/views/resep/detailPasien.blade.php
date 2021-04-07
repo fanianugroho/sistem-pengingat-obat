@@ -116,7 +116,8 @@ Buat Resep
                                         style="width: 100%" class="form-control custom-select">
                                         <option disabled item="">- Pilih Nama Obat -</option>
                                         <option v-for="item in namaObat" :value="item.id">
-                                            @{{  item.nama_obat + ' ' + item.kekuatan_sediaan +' '+item.satuan }}</option>
+                                            @{{  item.nama_obat + ' ' + item.kekuatan_sediaan +' '+item.satuan }}
+                                        </option>
                                     </select>
                                     <has-error :form="form" field="id_obat"></has-error>
                                 </div>
@@ -126,7 +127,8 @@ Buat Resep
                                 <div class="form-group col-md-8">
                                     <input v-model="form.dosis" id="dosis" type="text" min=0
                                         placeholder="Masukkan Dosis" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('dosis') }" onchange="handleChangeDosis()">
+                                        :class="{ 'is-invalid': form.errors.has('dosis') }"
+                                        onchange="handleChangeDosis()">
                                     <has-error :form="form" field="dosis"></has-error>
                                 </div>
                             </div>
@@ -143,19 +145,17 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                    <form>
                                         <div class="form-row">
                                             <div class="col">
                                                 <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
-                                                    placeholder="Takaran Minum" class="form-control"
+                                                    placeholder="Takaran Minum" class="form-control" disabled ="disabled"
                                                     :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
                                                 <has-error :form="form" field="takaran_minum"></has-error>
                                             </div>
                                             <div class="col">
-                                                <input class="form-control" disabled ="disabled">
+                                                <input v-model="form.satuan" class="form-control" placeholder="Satuan" disabled ="disabled">
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -191,16 +191,17 @@ Buat Resep
                                 <div class="form-group col-md-8">
                                     <input v-model="form.jml_obat" id="jml_obat" type="text" min=0
                                         placeholder="Jumlah Obat" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_obat') }" onchange="handleChangeJumlahMinum()">
+                                        :class="{ 'is-invalid': form.errors.has('jml_obat') }"
+                                        onchange="handleChangeJumlahMinum()">
                                     <has-error :form="form" field="jml_obat"></has-error>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
                                 <div class="form-group col-md-8">
-                                    <input v-model="form.jml_kali_minum" id="jml_kali_minum" type="text" min=0
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }" >
+                                    <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum"
+                                    placeholder="Jumlah Kali Minum" type="text" min=0 class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
                                 </div>
                             </div>
@@ -231,23 +232,17 @@ Buat Resep
             app.inputSelect()
         }
 
-<<<<<<< HEAD
-        let segment_str = window.location.pathname;
-        let segment_array = segment_str.split('/');
-=======
-        function handleChangeDosis(){
+        function handleChangeDosis() {
             app.changeDosis()
         }
 
-        function handleChangeJumlahMinum(){
+        function handleChangeJumlahMinum() {
             app.changeJumlahKaliMinum()
         }
-    
-        let segment_str = window.location.pathname; 
-        let segment_array = segment_str.split( '/' );
->>>>>>> f68a110d80831bb86f9493604d8caaed0be50c94
-        let id = segment_array.pop();
 
+        let segment_str = window.location.pathname;
+        let segment_array = segment_str.split('/');
+        let id = segment_array.pop();
         var app = new Vue({
             el: '#app',
             data: {
@@ -266,8 +261,7 @@ Buat Resep
                     jml_kali_minum: '',
                 }),
                 namaObat: @json($nama_obat),
-                ketersediaan : null,
-
+                ketersediaan: null,
             },
             mounted() {
                 $('#tablePasien').DataTable()
@@ -334,35 +328,35 @@ Buat Resep
                     let id = $("#id_obat").val();
                     let dosis = $("#dosis").val();
                     let jumlahObat = $("#jml_obat").val();
-
                     url = "{{ route('obat.detail', ':id') }}".replace(':id', id)
                     axios.get(url)
-                    .then(response => {
-                        this.ketersediaan = response.data.kekuatan_sediaan
-                        if(dosis != ''){
-                            this.form.takaran_minum = dosis/this.ketersediaan;
-                            if(jumlahObat != ''){
-                                this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
+                        .then(response => {
+                            this.ketersediaan = response.data.kekuatan_sediaan
+                            this.form.satuan = response.data.satuan
+                            if (dosis != '') {
+                                this.form.takaran_minum = dosis / this.ketersediaan;
+                                if (jumlahObat != '') {
+                                    this.form.jml_kali_minum = (this.ketersediaan * jumlahObat) / dosis
+                                }
                             }
-                        }
-                    })
-                    .catch(e => {
-                        console.log('error',e)
-                    })
+                        })
+                        .catch(e => {
+                            console.log('error', e)
+                        })
                 },
-                changeDosis(){
+                changeDosis() {
                     let dosis = $("#dosis").val();
                     let jumlahObat = $("#jml_obat").val()
-                    
-                    this.form.takaran_minum = dosis/this.ketersediaan;
-                    if(jumlahObat != ''){
-                        this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
+
+                    this.form.takaran_minum = dosis / this.ketersediaan;
+                    if (jumlahObat != '') {
+                        this.form.jml_kali_minum = (this.ketersediaan * jumlahObat) / dosis
                     }
                 },
-                changeJumlahKaliMinum(){
+                changeJumlahKaliMinum() {
                     let dosis = $("#dosis").val();
                     let jumlahObat = $("#jml_obat").val()
-                    this.form.jml_kali_minum  = (this.ketersediaan*jumlahObat) / dosis
+                    this.form.jml_kali_minum = (this.ketersediaan * jumlahObat) / dosis
                 },
                 deleteData(id) {
                     Swal.fire({

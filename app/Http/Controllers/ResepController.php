@@ -186,42 +186,42 @@ class ResepController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'id_pasien' => 'required',
-            'id_obat' => 'required',
-            'dosis' => 'required',
-            'aturan_pakai' => 'required',
-            'takaran_minum' => 'required',
-            'waktu_minum' => 'required',
-            'keterangan' => 'required',
-            'jml_obat' => 'required',
-            'jml_kali_minum' => 'required',
-        ]);
+        // $request->validate([
+        //     'id_obat' => 'required',
+        //     'dosis' => 'required',
+        //     'aturan_pakai' => 'required',
+        //     'takaran_minum' => 'required',
+        //     'waktu_minum' => 'required',
+        //     'keterangan' => 'required',
+        //     'jml_obat' => 'required',
+        //     'jml_kali_minum' => 'required',
+        // ]);
 
-        $resep = Resep::findOrFail($id);
+        $obatResep = ObatResep::where('id',$id)->first();
         
         DB::beginTransaction();
+        
         try {
-            $resep->id_pasien = $request->id_pasien;
-            $resep->id_users = $user->id;
-            $resep->dosis = $request->dosis;
-            $resep->aturan_pakai = $request->aturan_pakai;
-            $resep->takaran_minum = $request->takaran_minum;
-            $resep->waktu_minum = $request->waktu_minum;
-            $resep->keterangan = $request->keterangan;
-            $resep->jml_obat = $request->jml_obat;
-            $resep->jml_kali_minum = $request->jml_kali_minum;
-            $resep->save();
+            $obatResep->id_obat = $request->id_obat;
+            $obatResep->dosis = $request->dosis;
+            $obatResep->aturan_pakai = $request->aturan_pakai;
+            $obatResep->takaran_minum = $request->takaran_minum;
+            $obatResep->waktu_minum = $request->waktu_minum;
+            $obatResep->keterangan = $request->keterangan;
+            $obatResep->jml_obat = $request->jml_obat;
+            $obatResep->jml_kali_minum = $request->jml_kali_minum;
+            $obatResep->save();
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
+        DB::commit();
         return response()->json([
             'status' => 'Success',
             'message' => 'Berhasil merubah obat'
         ]); 
        
-        // return Resep::find($id)->update($request->all());
+        // return ObatResep::find($id)->update($request->all());
     }
 
     /**
@@ -232,7 +232,7 @@ class ResepController extends Controller
      */
     public function destroy($id)
     {
-        return Resep::find($id)->delete();
+        return ObatResep::find($id)->delete();
     }
 
     public function getExtension($array){
