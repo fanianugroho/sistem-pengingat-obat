@@ -31,27 +31,27 @@ class ResepController extends Controller
     
     public function getIdResep($id)
     {
-        $data = ObatResep::with('obat.fungsi_obat.fungsi',
+        $data['obat_resep'] = ObatResep::with('obat.fungsi_obat.fungsi',
                                 'obat.efek_samping_obat.efek_samping',
                                 'obat.interaksi_obat.interaksi',
                                 'obat.kontraindikasi_obat.kontraindikasi',
                                 'obat.bentuk_obat',
                                 'resep.pasien')->where('id',$id)->get();
-        if($data){
-            return response()->json([
-            "status" => "success",
-            "message" => "data berhasil di tampilkan",
-            "data" => $data,
-            
-        ]);
-    
-        } else {
-            return response()->json([
-                "status" => 'failed' ,
-                "message" => 'data gagal di tampilkan',
-                "data" => null,
+                                
+            if(count($data)==1){
+                return response()->json([
+                "status" => "success",
+                "message" => "data berhasil di tampilkan",
+                "data" => $data,
+                
             ]);
-        }
+        
+            } else {
+                return response()->json([
+                    "status" => 'failed' ,
+                    "message" => 'data gagal di tampilkan'
+                ]);
+            }
     }
 
 }
