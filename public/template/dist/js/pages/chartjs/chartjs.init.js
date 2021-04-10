@@ -4,12 +4,12 @@ $(function () {
 	new Chart(document.getElementById("bar-chart"), {
 		type: 'bar',
 		data: {
-		  labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+		  labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
 		  datasets: [
 			{
 			  label: "Population (millions)",
-			  backgroundColor: ["#6174d5", "#5f76e8", "#768bf4", "#7385df", "#b1bdfa"],
-			  data: [8478,6267,5734,4784,1833]
+			  backgroundColor: ["#6174d5","#b1bdfa", "#768bf4", "#6174d5", "#b1bdfa","#b1bdfa","#768bf4"],
+			  data: [35,20,45,33,23,13,38]
 			}
 		  ]
 		},
@@ -17,7 +17,7 @@ $(function () {
 		  legend: { display: false },
 		  title: {
 			display: true, 
-			text: 'Predicted world population (millions) in 2050'
+			text: 'Kunjungan Pasien di Puskesmas'
 		  }
 		}
 	});
@@ -58,7 +58,7 @@ $(function () {
 		  legend: { display: false },
 		  title: {
 			display: true,
-			text: 'Predicted world population (millions) in 2050'
+			text: 'Kunjungan Pasien di Puskesmas'
 		  }
 		}
 	});

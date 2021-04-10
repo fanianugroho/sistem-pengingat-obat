@@ -98,73 +98,25 @@ Beranda
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($obatResep as $value)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Paracetamol Tablet 10 mg</td>
-                            <td>5</td>
-                        
+                            <th scope="row">{{ $value->id_obat}}</th>
+                            <th scope="row">{{ $value->nama_obat}}</th>
+                            <th scope="row">{{ $value->total_obat}}</th>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Komik Sirup 10 ml</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Antimo Tablet 10 ml</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Paramex Tablet 20 mg</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Panadol Tablet 10 ml</td>
-                            <td>1</td>
-                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Top 5 obat yang paling banyak terjual</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Obat</th>
-                            <th scope="col">Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                            <th scope="row">1</th>
-                            <td>Paracetamol Tablet 10 mg</td>
-                            <td>101</td>
-                        
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Komik Sirup 10 ml</td>
-                            <td>67</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Panadol Tablet 10 ml</td>
-                            <td>23</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Antimo Tablet 10 ml</td>
-                            <td>2</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4 class="card-title">Grafik jumlah kedatangan pasien</h4>
+                <div>
+                    <canvas id="bar-chart" height="150"></canvas>
+                </div>
             </div>
         </div>
     </div>

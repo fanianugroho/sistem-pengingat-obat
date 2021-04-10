@@ -220,6 +220,7 @@
     <script src="{{asset('template_welcome/js/smoothscroll.js')}}"></script>
     <script src="{{asset('template_welcome/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('template_welcome/js/custom.js')}}"></script>
+     });
 
 </body>
 

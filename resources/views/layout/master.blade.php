@@ -143,10 +143,13 @@
         <!--Custom JavaScript -->
         <script src="{{asset('template/dist/js/custom.min.js')}}"></script>
         <script src="{{asset('template/dist/js/moment.js')}}"></script>
+        
+        <script src="{{asset('template/dist/js/pages/chartjs/chartjs.init.js')}}"></script>
+        <script src="{{asset('template/assets/libs/chart.js/dist/Chart.min.js')}}"></script>
        
         <script src="{{asset('template/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('template/dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
-        <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
+        
         
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 

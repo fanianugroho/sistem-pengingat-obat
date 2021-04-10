@@ -277,6 +277,7 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
+        
         return Obat::find($id)->delete();
     }
 }
