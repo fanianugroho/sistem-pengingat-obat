@@ -88,7 +88,7 @@ Beranda
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Top 5 obat yang paling banyak digunakan</h4>
+                <h4 class="card-title">Top Obat yang paling banyak digunakan</h4>
                 <table class="table">
                     <thead>
                         <tr>

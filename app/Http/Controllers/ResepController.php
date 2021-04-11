@@ -235,12 +235,6 @@ class ResepController extends Controller
         return ObatResep::find($id)->delete();
     }
 
-    public function getExtension($array){
-        $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate('l');
-    	$pdf = PDF::loadview('resep.resep_pdf',['resep'=>$array, 'qr' => $qr])->setPaper('b7', 'landscape');
-    	return $pdf->stream();
-    }
-    
     public function cetakPdf($array)
     {
         $fungsiArray = explode (",", $array); 
@@ -249,7 +243,6 @@ class ResepController extends Controller
         $qr = array();
         for($i = 0; $i < $countFungsi; $i++){
             $item = ObatResep::with('obat','resep.pasien')->where('id',$fungsiArray[$i])->first();
-            $qr = QrCode::format('png')->size(100)->errorCorrection('H')->generate($fungsiArray[$i]);
             $resep[] = $item;
         }
     	$pdf = PDF::loadview('resep.resep_pdf',compact('resep'))->setPaper('b7', 'landscape');

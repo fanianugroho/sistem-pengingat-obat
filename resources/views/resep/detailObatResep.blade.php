@@ -57,7 +57,8 @@ Buat Resep
                                 <tr v-for="item, index in mainData" :key="index">
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.obat.nama_obat == 'null' ? '' : item.obat.nama_obat }}
-                                    @{{ item.obat.bentuk_obat.nama_bentuk == 'null' ? '' : item.obat.bentuk_obat.nama_bentuk}}</td>
+                                        @{{ item.obat.bentuk_obat.nama_bentuk == 'null' ? '' : item.obat.bentuk_obat.nama_bentuk}}
+                                    </td>
                                     <td>
                                         @{{ item.aturan_pakai == 'null' ? '' : item.aturan_pakai + " x sehari"}}
                                         @{{ item.takaran_minum == 'null' ? '' : item.takaran_minum }}
@@ -133,17 +134,18 @@ Buat Resep
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
                                 <div class="form-group col-md-8">
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
-                                                    placeholder="Takaran Minum" class="form-control" disabled ="disabled"
-                                                    :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
-                                                <has-error :form="form" field="takaran_minum"></has-error>
-                                            </div>
-                                            <div class="col">
-                                                <input v-model="form.satuan" class="form-control" placeholder="Satuan" disabled ="disabled">
-                                            </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
+                                                placeholder="Takaran Minum" class="form-control" disabled="disabled"
+                                                :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
+                                            <has-error :form="form" field="takaran_minum"></has-error>
                                         </div>
+                                        <div class="col">
+                                            <input v-model="form.satuan" class="form-control" placeholder="Satuan"
+                                                disabled="disabled">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -188,7 +190,7 @@ Buat Resep
                                 <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
                                 <div class="form-group col-md-8">
                                     <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum"
-                                    placeholder="Jumlah Kali Minum" type="text" min=0 class="form-control"
+                                        placeholder="Jumlah Kali Minum" type="text" min=0 class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
                                     <has-error :form="form" field="jml_kali_minum"></has-error>
                                 </div>
@@ -207,40 +209,42 @@ Buat Resep
         </div><!-- /.modal -->
 
         <!-- MODAL PRINT-->
-      
+
         <div id="modalPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg" id="modal">
-                    <div class="modal-content">
-                        <div class="modal-header ">
-                            <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-dialog modal-lg" id="modal">
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
+                        <div class="modal-body mx">
+                            <div class="selectall">
+                                <input type="checkbox" name="select-all" id="select-all" />
+                                <label for="selectAll">
+                                    Pilih Semua
+                                </label><br>
+                            </div>
+                            @foreach ($dataResep as $item)
+                            <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
+                            <label for="data_resep">
+                                {{$item->obat->nama_obat}}
+                            </label>
+                            <br>
+                            <hr>
+                            @endforeach
                         </div>
-                        <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
-                            <div class="modal-body mx">
-                                <div class="selectall">
-                                    <input type="checkbox" name="select-all" id="select-all" />
-                                        <label for="selectAll"> 
-                                            Pilih Semua
-                                        </label><br>
-                                </div>
-                                @foreach ($dataResep as $item)
-                                <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
-                                    <label for="data_resep">
-                                        {{$item->obat->nama_obat}}
-                                    </label>
-                                <br><hr>
-                                @endforeach
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Cetak</button></a>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </form>
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        
-        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Cetak</button></a>
+                        </div>
+                </div><!-- /.modal-content -->
+                </form>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    </div>
     @endsection
 
 
@@ -254,6 +258,7 @@ Buat Resep
         function selectTrigger() {
             app.inputSelect()
         }
+
         function handleChangeDosis() {
             app.changeDosis()
         }
@@ -261,7 +266,8 @@ Buat Resep
         function handleChangeJumlahMinum() {
             app.changeJumlahKaliMinum()
         }
-        function test(value){
+
+        function test(value) {
             app.simpanSementara(value)
         }
         let segment_str = window.location.pathname;
@@ -278,6 +284,7 @@ Buat Resep
                     namaObat: '',
                     dosis: '',
                     aturan_pakai: '',
+                    satuan: '',
                     takaran_minum: '',
                     waktu_minum: '',
                     keterangan: '',
@@ -285,61 +292,59 @@ Buat Resep
                     jml_kali_minum: '',
                     data_resep: '',
                 }),
-                formStore : new Form({
-                    idResep : []
+                formStore: new Form({
+                    idResep: []
                 }),
                 namaObat: @json($nama_obat),
-                id_obat_resep : [],
+                id_obat_resep: [],
             },
             mounted() {
                 $('#table').DataTable()
                 this.refreshData()
                 $('#id_obat').select2({
                     placeholder: "Pilih Obat"
-                    
                 });
-               
-                $('#select-all').click(function(event) {   
-                    if(this.checked) {
-                        $(':checkbox').each(function() {
-                            this.checked = true;   
+
+                $('#select-all').click(function (event) {
+                    if (this.checked) {
+                        $(':checkbox').each(function () {
+                            this.checked = true;
                             var id_obat = [];
-                            $.each($("input[name='data_resep']:checked"), function(){
+                            $.each($("input[name='data_resep']:checked"), function () {
                                 id_obat.push($(this).val());
-                            }); 
+                            });
                             test(id_obat);
                         });
-                    }
-                    else {
-                        $(':checkbox').each(function() {
-                            this.checked = false;    
+                    } else {
+                        $(':checkbox').each(function () {
+                            this.checked = false;
                         });
                     }
                 });
-                $(document).ready(function() {
-                    $("input").click(function(){
+                $(document).ready(function () {
+                    $("input").click(function () {
                         var id_obat = [];
-                        $.each($("input[name='data_resep']:checked"), function(){
+                        $.each($("input[name='data_resep']:checked"), function () {
                             id_obat.push($(this).val());
                         });
                         test(id_obat);
-                        if (!$(this).prop("checked")){
-                            $("#select-all").prop("checked",false);
+                        if (!$(this).prop("checked")) {
+                            $("#select-all").prop("checked", false);
                         }
                     });
                 });
             },
             methods: {
                 getIdResep(id) {
-                url = "{{ route('viewdetailobatresep', ':id') }}".replace(':id', id)
-                axios.get(url)
-                    .then(response => {
-                        console.log('test',response.data)
-                       
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
+                    url = "{{ route('viewdetailobatresep', ':id') }}".replace(':id', id)
+                    axios.get(url)
+                        .then(response => {
+                            console.log('test', response.data)
+
+                        })
+                        .catch(e => {
+                            e.response.status != 422 ? console.log(e) : '';
+                        })
                 },
                 cetakResep(data) {
                     this.editMode = false;
@@ -348,7 +353,7 @@ Buat Resep
                     let id = segment_array.pop();
                     this.getIdResep(id);
                     $('#modalPrint').modal('show');
-                    
+
                 },
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
@@ -365,8 +370,22 @@ Buat Resep
                     this.form.fill(data)
                     this.form.clear();
                     $('#modal').modal('show');
-                    
+
                     console.log(data);
+
+                    // this.selectedNamaObat = data.id_obat;
+                    /* $('#id_obat').find('option[value=' + data.id_obat + ']')
+                            .prop('selected', true); */
+                    $('#id_obat').val(data.id_obat).trigger('change');
+                    $('#satuan').val(data.obat.satuan).trigger('change');
+
+                    // let dataNamaObat = [];
+                    // for (let i = 0; i < this.selectedNamaObat.length; i++) {
+                    //         dataEditEfekSamping.push(this.selectedNamaObat[i].id_obat)
+                    //     }
+                    //     $('#id_obat').val(dataEditEfekSamping).trigger('change');
+
+
                 },
                 detailCard(data) {
                     this.editMode = true;
@@ -380,7 +399,7 @@ Buat Resep
                             $('#modal').modal('hide');
                             Swal.fire(
                                 'Berhasil',
-                                'Resep berhasil ditambahkan',
+                                'Obat pada Resep berhasil ditambahkan',
                                 'success'
                             )
                             this.refreshData()
@@ -389,41 +408,43 @@ Buat Resep
                             e.response.status != 422 ? console.log(e) : '';
                         })
                 },
-                simpanSementara(value){
+                simpanSementara(value) {
                     this.formStore.idResep = value
                 },
-                storeCetakResep(id_obat_resep){
+                storeCetakResep(id_obat_resep) {
                     url = "{{ route('cetak-resep', ':array') }}".replace(':array', this.formStore.idResep)
-                    axios.get(url,{responseType: 'blob'})
-                    .then(response => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'resep.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        Swal.fire(
-                            'Berhasil',
-                            'Resep berhasil diunduh',
-                            'success'
-                        )
-                        $('#modalPrint').modal('hide');
-                        $("#cetak_resep")[0].reset();
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
+                    axios.get(url, {
+                            responseType: 'blob'
+                        })
+                        .then(response => {
+                            const url = window.URL.createObjectURL(new Blob([response.data]));
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.setAttribute('download', 'resep.pdf');
+                            document.body.appendChild(link);
+                            link.click();
+                            Swal.fire(
+                                'Berhasil',
+                                'Resep berhasil diunduh',
+                                'success'
+                            )
+                            $('#modalPrint').modal('hide');
+                            $("#cetak_resep")[0].reset();
+                        })
+                        .catch(e => {
+                            e.response.status != 422 ? console.log(e) : '';
+                        })
                 },
                 updateData() {
                     url = "{{ route('resep.update', ':id') }}".replace(':id', this.form.id)
-                    
+
                     this.form.put(url)
                         .then(response => {
-                            
+
                             $('#modal').modal('hide');
                             Swal.fire(
                                 'Berhasil',
-                                'Data Resep berhasil diubah',
+                                'Data Obat pada Resep berhasil diubah',
                                 'success'
                             )
                             this.refreshData()
@@ -485,7 +506,7 @@ Buat Resep
                                 .then(response => {
                                     Swal.fire(
                                         'Terhapus',
-                                        'Resep telah dihapus',
+                                        'Obat pada Resep telah dihapus',
                                         'success'
                                     )
                                     this.refreshData()
@@ -515,5 +536,6 @@ Buat Resep
                 }
             },
         })
+
     </script>
     @endpush

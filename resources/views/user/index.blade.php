@@ -171,6 +171,7 @@ Tambah Apoteker
                 this.form.fill(data)
                 this.form.clear();
                 $('#modal').modal('show');
+                $('#tipe_user').val(data.tipe_user).trigger('change');
             },
             storeData() {
                 this.form.post("{{ route('user.store') }}")

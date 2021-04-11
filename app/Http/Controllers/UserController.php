@@ -123,9 +123,7 @@ class UserController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'username' => 'required|min:5|unique:users,username,',
             'tipe_user' => 'required',
-            'email' => 'required|email|unique:users,email,',
         ]);
         
         $input = $request->all();

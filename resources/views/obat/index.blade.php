@@ -32,7 +32,7 @@ Obat
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.kode_obat == 'null' ? '' : item.kode_obat }}</td>
                                     <td>@{{ item.nama_obat == 'null' ? '' : item.nama_obat}}
-                                        @{{item.bentuk_obat.nama_bentuk == 'null' ? '' : item.bentuk_obat.nama_bentuk}}   
+                                        @{{item.bentuk_obat.nama_bentuk == 'null' ? '' : item.bentuk_obat.nama_bentuk}}
                                         @{{ item.kekuatan_sediaan == 'null' ? '' : item.kekuatan_sediaan}}
                                         @{{ item.satuan == 'null' ? '' : item.satuan}}
                                     </td>
@@ -165,7 +165,7 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <textarea class="form-control"v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
+                            <textarea class="form-control" v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
                                 placeholder="Masukkan petunjuk penyimpanan" type="text">
                             </textarea>
                         </div>
@@ -232,7 +232,7 @@ Obat
                 id_bentuk_obat: '',
                 id_kontraindikasi_obat: [],
                 id_interaksi_obat: [],
-                
+
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),
@@ -345,12 +345,21 @@ Obat
                         url = "{{ route('obat.destroy', ':id') }}".replace(':id', id)
                         this.form.delete(url)
                             .then(response => {
-                                Swal.fire(
-                                    'Terhapus',
-                                    'Obat telah dihapus',
-                                    'success'
-                                )
-                                this.refreshData()
+                                console.log(response, 'data')
+                                if (response.data.message == 'tidak dihapus') {
+                                    Swal.fire(
+                                        'Gagal',
+                                        'Obat tidak bisa dihapus karena telah diberikan kepada pasien',
+                                        'error'
+                                    )
+                                } else {
+                                    Swal.fire(
+                                        'Berhasil',
+                                        'Obat berhasil dihapus',
+                                        'success'
+                                    )
+                                    this.refreshData()
+                                }
                             })
                             .catch(e => {
                                 e.response.status != 422 ? console.log(e) : '';
@@ -372,7 +381,7 @@ Obat
 
                     })
                     .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
+                        e.response.status != 422 ? console.log(e.error) : '';
                     })
             }
         },

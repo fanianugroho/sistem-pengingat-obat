@@ -8,6 +8,7 @@ use App\EfekSampingObat;
 use App\PetunjukPenyimpananObat;
 use App\FungsiObat;
 use App\Obat;
+use App\ObatResep;
 use App\Fungsi;
 use App\Interaksi;
 use App\Kontraindikasi;
@@ -277,7 +278,16 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
-        
-        return Obat::find($id)->delete();
+        $ObatResep = ObatResep::firstWhere('id',$id);
+        if(!$ObatResep){
+            Obat::find($id)->delete();
+            return response()->json([
+                "message" => "data dihapus",
+            ]);
+        }else {
+            return response()->json([
+                "message" => 'tidak dihapus',
+            ]);
+        };
     }
 }

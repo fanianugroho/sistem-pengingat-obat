@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('obat/{id}', 'API\ObatController@getObatPasien');
-Route::resource('pasien', 'API\PasienController');
+
 Route::get('obatResep/{id}','API\ResepController@getIdResep');
