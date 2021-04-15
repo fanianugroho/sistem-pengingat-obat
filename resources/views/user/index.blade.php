@@ -115,7 +115,7 @@ Tambah Apoteker
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                        <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
 

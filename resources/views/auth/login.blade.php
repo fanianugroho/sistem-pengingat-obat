@@ -28,7 +28,7 @@ Sign in
 
         <div class="wrap-input100 validate-input">
             <input class="input100 @error('password') is-invalid @enderror" name="password" required
-                autocomplete="current-password" id="password" type="password" placeholder="Password">
+                autocomplete="current-password" id="password" type="password" placeholder="Kata Sandi">
             @error('password')
             <span class="focus-input100">
                 <strong>{{ $message }}</strong>
@@ -38,7 +38,7 @@ Sign in
 
         <div class="container-login100-form-btn">
             <button type="submit" class="login100-form-btn">
-                {{ __('Login') }}
+                {{ __('Masuk') }}
             </button>
             <!-- <div class="col-lg-12 text-center mt-5">
                 Belum punya akun ? <a href="{{ route('register') }}" class="text-danger">Register</a>

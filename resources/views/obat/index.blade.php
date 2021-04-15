@@ -165,8 +165,9 @@ Obat
                     <div class="form-row">
                         <label class="col-lg-2" for="petunjuk_penyimpanan"> Petunjuk Penyimpanan </label>
                         <div class="form-group col-md-8">
-                            <textarea class="form-control" v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
-                                placeholder="Masukkan petunjuk penyimpanan" type="text">
+                            <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
+                                placeholder="Masukkan petunjuk penyimpanan" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
+                            <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
                             </textarea>
                         </div>
                     </div>
@@ -190,12 +191,10 @@ Obat
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                        <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
-
             </form>
-
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

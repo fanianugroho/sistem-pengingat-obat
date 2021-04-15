@@ -41,42 +41,6 @@
             <!-- Right side toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-right">
-                <!-- Notification -->
-                <li class="nav-item dropdown dropdown-notifications">
-                    <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)" id="bell"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span><i data-feather="bell" class="svg-icon"></i></span>
-                        <span class="badge badge-primary notify-no rounded-circle" id="notify-no">0</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
-                        <ul class="list-style-none">
-                            <li>
-                                <div class="message-center notifications position-relative item-scrollable">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)"
-                                        class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                        <span class="btn btn-primary rounded-circle btn-circle"><i data-feather="box"
-                                                class="text-white"></i></span>
-                                        <div class="w-75 d-inline-block v-middle pl-2">
-                                            <h6 class="message-title mb-0 mt-1">Information</h6> <span
-                                                class="font-12 text-nowrap d-block text-muted">Your Notification Will
-                                                Display Here</span>
-                                            <span class="font-12 text-nowrap d-block text-muted">0:00 AM</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="nav-link pt-3 text-center text-dark px-3 py-2" href="javascript:void(0);">
-                                    <strong>Check all notifications</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- End Notification -->
-                <!-- ============================================================== -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
@@ -114,13 +78,13 @@
 
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                         <a class="dropdown-item" href="{{ route('user.indexPassword') }}">
-                            <i class="fas fa-key"></i>
-                            Ubah Password
+                            <i class="fas fa-key mr-2 ml-1" ></i>
+                            {{ __('Ubah Kata sandi') }}
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i data-feather="log-out" class="svg-icon mr-2 ml-1"></i>
-                            {{ __('Logout') }}
+                            {{ __('Keluar') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

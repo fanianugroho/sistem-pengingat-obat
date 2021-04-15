@@ -52,7 +52,7 @@ Sediaan Obat
     <div class="modal-dialog modal-lg" id="modal">
         <div class="modal-content">
             <div class="modal-header ">
-                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Bentuk</h4>
+                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Sediaan</h4>
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
@@ -60,16 +60,16 @@ Sediaan Obat
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="nama_bentuk"> Bentuk Obat </label>
+                        <label class="col-lg-2" for="nama_bentuk"> Sediaan Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_bentuk" id="nama_bentuk" type="text" min=0 placeholder="Masukkan Bentuk Obat"
+                            <input v-model="form.nama_bentuk" id="nama_bentuk" type="text" min=0 placeholder="Masukkan Sediaan Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_bentuk') }">
                             <has-error :form="form" field="nama_bentuk"></has-error>
                         </div>
                     </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                    <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                 </div>
 
@@ -126,7 +126,7 @@ Sediaan Obat
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
-                            'Bentuk Obat berhasil ditambahkan',
+                            'Sediaan Obat berhasil ditambahkan',
                             'success'
                         )
                         this.refreshData()
@@ -142,7 +142,7 @@ Sediaan Obat
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
-                            'Bentuk Obat berhasil diubah',
+                            'Sediaan Obat berhasil diubah',
                             'success'
                         )
                         this.refreshData()
@@ -169,7 +169,7 @@ Sediaan Obat
                             .then(response => {
                                 Swal.fire(
                                     'Terhapus',
-                                    'Bentuk Obat telah dihapus',
+                                    'Sediaan Obat telah dihapus',
                                     'success'
                                 )
                                 this.refreshData()

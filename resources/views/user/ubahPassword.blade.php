@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-Ubah Password
+Ubah Kata Sandi
 @endsection
 @section('content')
 <div class="row">
@@ -10,32 +10,34 @@ Ubah Password
             <form @submit.prevent="updateData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                 <div class="form-row">
-                        <label class="col-lg-2" for="old_password"> Password Lama </label>
+                        <label class="col-lg-2" for="old_password"> Kata Sandi Lama </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.old_password" id="old_password" type="password" min=0 placeholder="Masukkan Password Lama"
+                            <input v-model="form.old_password" id="old_password" type="password" min=0 placeholder="Masukkan Kata Sandi Lama"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('old_password') }">
                             <has-error :form="form" field="old_password"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="password"> Password Baru</label>
+                        <label class="col-lg-2" for="password"> Kata Sandi Baru</label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.password" id="password" type="password" min=0 placeholder="Masukkan Password Baru"
+                            <input v-model="form.password" id="password" type="password" min=0 placeholder="Masukkan Kata Sandi Baru"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                             <has-error :form="form" field="password"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2" for="password_confirmation"> Konfirmasi Password</label>
+                        <label class="col-lg-2" for="password_confirmation"> Konfirmasi Kata Sandi</label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.password_confirmation" id="password_confirmation" type="password" min=0 placeholder="Konfirmasi Password"
+                            <input v-model="form.password_confirmation" id="password_confirmation" type="password" min=0 placeholder="Konfirmasi Kata Sandi"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
                             <has-error :form="form" field="password_confirmation"></has-error>
                         </div>
                     </div>
                     <div class="modal-footer">
+                    <a href="{{route('beranda')}}">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </a>
+                        <button type="submit" class="btn btn-primary">Ubah</button>
                     </div>
             </form>
             </div>
@@ -75,7 +77,7 @@ Ubah Password
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
-                            'Password berhasil diubah',
+                            'Kata Sandi berhasil diubah',
                             'success'
                         )
                         .then((value)=>{

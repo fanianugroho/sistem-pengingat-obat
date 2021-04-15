@@ -52,24 +52,24 @@ Penggunaan Obat
     <div class="modal-dialog modal-lg" id="modal">
         <div class="modal-content">
             <div class="modal-header ">
-                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Fungsi</h4>
-                <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Fungsi</h4>
+                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Penggunaan</h4>
+                <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Penggunaan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
 
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
-                        <label class="col-lg-2" for="nama_fungsi"> Fungsi Obat </label>
+                        <label class="col-lg-2" for="nama_fungsi"> Penggunaan Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_fungsi" id="nama_fungsi" type="text" min=0 placeholder="Masukkan Fungsi Obat"
+                            <input v-model="form.nama_fungsi" id="nama_fungsi" type="text" min=0 placeholder="Masukkan Penggunaan Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_fungsi') }">
                             <has-error :form="form" field="nama_fungsi"></has-error>
                         </div>
                     </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
+                    <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                 </div>
 
@@ -126,7 +126,7 @@ Penggunaan Obat
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
-                            'Fungsi Obat berhasil ditambahkan',
+                            'Penggunaan Obat berhasil ditambahkan',
                             'success'
                         )
                         this.refreshData()
@@ -142,7 +142,7 @@ Penggunaan Obat
                         $('#modal').modal('hide');
                         Swal.fire(
                             'Berhasil',
-                            'Fungsi Obat berhasil diubah',
+                            'Penggunaan Obat berhasil diubah',
                             'success'
                         )
                         this.refreshData()
@@ -169,7 +169,7 @@ Penggunaan Obat
                             .then(response => {
                                 Swal.fire(
                                     'Terhapus',
-                                    'Fungsi Obat telah dihapus',
+                                    'Penggunaan Obat telah dihapus',
                                     'success'
                                 )
                                 this.refreshData()
