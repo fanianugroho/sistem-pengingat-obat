@@ -41,7 +41,6 @@ Buat Resep
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat </button>
                     </h4>
-
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
                             <thead>
@@ -66,9 +65,7 @@ Buat Resep
                                     </td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
-                                        <a class="text-primary" data-toggle="tooltip" data-placement="top"
-                                            data-original-title="Detail"><i class="icon-magnifier-add"></i></a>
-                                        <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
+                                       <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
                                                 class="far fa-edit"></i></a>
                                         <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
@@ -129,7 +126,9 @@ Buat Resep
                                         :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
                                     <has-error :form="form" field="aturan_pakai"></has-error>
                                 </div>
-                                <p> <b> kali sehari </b> </p>
+                                <div class="col">
+                                    <p class="kali-sehari"> <b> kali sehari </b> </p>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
@@ -154,7 +153,7 @@ Buat Resep
                                     <select v-model="form.waktu_minum" id="waktu_minum" onchange="selectTrigger()"
                                         style="width: 100%" class="form-control custom-select"
                                         :class="{ 'is-invalid': form.errors.has('waktu_minum') }">
-                                        <option disabled item="">- Pilih Waktu Minum -</option>
+                                        <option value="">- Pilih Waktu Minum -</option>
                                         <option value="Sebelum Makan">Sebelum Makan</option>
                                         <option value="Saat Makan">Saat Makan</option>
                                         <option value="Sesudah Makan">Sesudah Makan</option>
@@ -168,7 +167,7 @@ Buat Resep
                                     <select v-model="form.keterangan" id="keterangan" onchange="selectTrigger()"
                                         style="width: 100%" class="form-control custom-select"
                                         :class="{ 'is-invalid': form.errors.has('keterangan') }">
-                                        <option disabled item="">- Pilih Keterangan -</option>
+                                        <option value="">- Pilih Keterangan -</option>
                                         <option value="Kondisional">Kondisional</option>
                                         <option value="Harus Habis">Harus Habis</option>
                                         <option value="Rutin">Rutin</option>
@@ -198,7 +197,7 @@ Buat Resep
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
+                            <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah </button>
                             <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
 
                         </div>

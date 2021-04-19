@@ -8,47 +8,44 @@ Beranda
     <div class="col-3">
         <div class="card border-right">
             <div class="card-body">
-                <a href="">
-                    <div class="d-flex d-lg-flex d-md-block align-items-center">
-                        <div>
-                            <div class="d-inline-flex align-items-center">
-                                <h1 class="text-dark mb-1 font-weight-medium">{{$resepbaru}}</h1>
-
-                            </div>
-                            <h6 class="mb-0 text-dark">
-                                <Table>Resep Baru</Table>
-                            </h6>
+                <div class="d-flex d-lg-flex d-md-block align-items-center">
+                    <div>
+                        <div class="d-inline-flex align-items-center">
+                            <h1 class="text-dark mb-1 font-weight-medium">{{$resepbaru}}</h1>
                         </div>
-                        <div class="ml-auto mt-md-3 mt-lg-0">
-                            <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
-                        </div>
+                        <h6 class="mb-0 text-dark">
+                            <Table>Resep Baru <b>{{Carbon\Carbon::parse($today)->locale('id_ID')->isoFormat('LL')}} </b>
+                            </Table>
+                        </h6>
                     </div>
-                </a>
+                    <div class="ml-auto mt-md-3 mt-lg-0">
+                        <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-3">
         <div class="card border-right">
             <div class="card-body">
-                <a href="">
-                    <div class="d-flex d-lg-flex d-md-block align-items-center">
-                        <div>
-                            <h1 class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{$pasienbaru}}</h1>
-                            <h6 class="mb-0 text-dark">Pasien Baru
-                            </h6>
-                        </div>
-                        <div class="ml-auto mt-md-3 mt-lg-0">
-                            <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
-                        </div>
+                <div class="d-flex d-lg-flex d-md-block align-items-center">
+                    <div>
+                        <h1 class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{$pasienbaru}}</h1>
+                        <h6 class="mb-0 text-dark">Pasien Baru
+                            <b>{{Carbon\Carbon::parse($today)->locale('id_ID')->isoFormat('LL')}} </b>
+                        </h6>
                     </div>
-                </a>
+                    <div class="ml-auto mt-md-3 mt-lg-0">
+                        <span class="mb-0 text-dark"><i data-feather="check-circle"></i></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-3">
         <div class="card border-right">
             <div class="card-body">
-                <a href="">
+                <a href="{{route('pasien.index')}}">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
@@ -68,7 +65,7 @@ Beranda
     <div class="col-3">
         <div class="card border-right">
             <div class="card-body">
-                <a href="">
+                <a href="{{route('obat.index')}}">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
@@ -88,7 +85,7 @@ Beranda
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Top Obat yang paling banyak digunakan</h4>
+                <h4 class="card-title">Top 5 Obat yang paling banyak digunakan</h4>
                 <table class="table">
                     <thead>
                         <tr>
@@ -98,13 +95,13 @@ Beranda
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($obatResep as $value)
+                        @foreach ($obatResep as $value)
                         <tr>
                             <th scope="row">{{ $value->id_obat}}</th>
                             <th scope="row">{{ $value->nama_obat}}</th>
                             <th scope="row">{{ $value->total_obat}}</th>
                         </tr>
-                    @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -113,7 +110,7 @@ Beranda
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Grafik jumlah kedatangan pasien</h4>
+                <h4 class="card-title">Grafik jumlah Resep baru</h4>
                 <div>
                     <canvas id="bar-chart" height="150"></canvas>
                 </div>

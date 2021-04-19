@@ -17,7 +17,7 @@ $(function () {
 		  legend: { display: false },
 		  title: {
 			display: true, 
-			text: 'Kunjungan Pasien di Puskesmas'
+			text: 'Jumlah Resep baru di Puskesmas'
 		  }
 		}
 	});
