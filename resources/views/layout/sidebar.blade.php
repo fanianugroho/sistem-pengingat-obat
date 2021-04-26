@@ -46,12 +46,11 @@
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                 href="{{route('kontraindikasiobat.index')}}" aria-expanded="false"><i
-                                    class="fas fa-vial"></i><span class="hide-menu">Kontraindikasi Obat</span></a>
+                                    class="fas fa-vial"></i><span class="hide-menu">Kontraindikasi</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                 href="{{route('interaksiobat.index')}}" aria-expanded="false"><i
-                                    class="fas fa-hourglass-half"></i><span class="hide-menu">Interaksi
-                                    Obat</span></a>
+                                    class="fas fa-hourglass-half"></i><span class="hide-menu">Interaksi</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                 href="{{route('fungsiobat.index')}}" aria-expanded="false"><i

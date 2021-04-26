@@ -56,12 +56,12 @@
     <section id="home" class="slider" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row">
-                <div class="owl-carousel owl-theme">
+                <div class="owl-carousel">
                     <div class="item item-first">
                         <div class="caption">
-                            <div class="col-md-offset-1 col-md-10">
-                                <h1>Apotech.id</h1>
-                                <h3>Merupakan sebuah platform yang digunakan <br>untuk memantau dan mengelola obat
+                            <div class="col-md-offset-1 col-md-6">
+                                <h1 class="col-md-offset-1 col-md-6">Apotech.id</h1>
+                                <h3 class="col-md-offset-1 col-md-10">Merupakan sebuah platform yang digunakan <br>untuk memantau dan mengelola obat
                                     pasien</h3>
                             </div>
                         </div>

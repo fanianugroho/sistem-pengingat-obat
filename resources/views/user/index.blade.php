@@ -105,10 +105,10 @@ Tambah Apoteker
                         </div>
                     </div>
                     <div class="form-row" v-show="!editMode">
-                        <label class="col-lg-2" for="password">Password </label>
+                        <label class="col-lg-2" for="password">Kata Sandi </label>
                         <div class="form-group col-md-8">
                             <input v-model="form.password" id="password" type="password" min=0
-                                placeholder="Masukkan Password" class="form-control"
+                                placeholder="Masukkan Kata Sandi" class="form-control"
                                 :class="{ 'is-invalid': form.errors.has('password') }">
                             <has-error :form="form" field="password"></has-error>
                         </div>

@@ -7,39 +7,45 @@ Ubah Kata Sandi
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-            <form @submit.prevent="updateData()" @keydown="form.onKeydown($event)" id="form">
-                <div class="modal-body mx-4">
-                <div class="form-row">
-                        <label class="col-lg-2" for="old_password"> Kata Sandi Lama </label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.old_password" id="old_password" type="password" min=0 placeholder="Masukkan Kata Sandi Lama"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('old_password') }">
-                            <has-error :form="form" field="old_password"></has-error>
+                <h4 class="card-title-detailobat"> Ubah kata sandi
+                </h4>
+                <br/>
+                <form @submit.prevent="updateData()" @keydown="form.onKeydown($event)" id="form">
+                    <div class="modal-body mx-4">
+                        <div class="form-row">
+                            <label class="col-lg-2" for="old_password"> Kata Sandi Lama </label>
+                            <div class="form-group col-md-8">
+                                <input v-model="form.old_password" id="old_password" type="password" min=0
+                                    placeholder="Masukkan Kata Sandi Lama" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('old_password') }">
+                                <has-error :form="form" field="old_password"></has-error>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="password"> Kata Sandi Baru</label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.password" id="password" type="password" min=0 placeholder="Masukkan Kata Sandi Baru"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
-                            <has-error :form="form" field="password"></has-error>
+                        <div class="form-row">
+                            <label class="col-lg-2" for="password"> Kata Sandi Baru</label>
+                            <div class="form-group col-md-8">
+                                <input v-model="form.password" id="password" type="password" min=0
+                                    placeholder="Masukkan Kata Sandi Baru" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('password') }">
+                                <has-error :form="form" field="password"></has-error>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <label class="col-lg-2" for="password_confirmation"> Konfirmasi Kata Sandi</label>
-                        <div class="form-group col-md-8">
-                            <input v-model="form.password_confirmation" id="password_confirmation" type="password" min=0 placeholder="Konfirmasi Kata Sandi"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
-                            <has-error :form="form" field="password_confirmation"></has-error>
+                        <div class="form-row">
+                            <label class="col-lg-2" for="password_confirmation"> Konfirmasi Kata Sandi</label>
+                            <div class="form-group col-md-8">
+                                <input v-model="form.password_confirmation" id="password_confirmation" type="password"
+                                    min=0 placeholder="Konfirmasi Kata Sandi" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
+                                <has-error :form="form" field="password_confirmation"></has-error>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                    <a href="{{route('beranda')}}">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    </a>
-                        <button type="submit" class="btn btn-primary">Ubah</button>
-                    </div>
-            </form>
+                        <div class="modal-footer">
+                            <a href="{{route('beranda')}}">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                            </a>
+                            <button type="submit" class="btn btn-primary">Ubah</button>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
@@ -52,7 +58,6 @@ Ubah Kata Sandi
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-
     var app = new Vue({
         el: '#app',
         data: {
@@ -61,28 +66,27 @@ Ubah Kata Sandi
             form: new Form({
                 id: '',
                 old_password: '',
-                password:'',
-                password_confirmation:'',
+                password: '',
+                password_confirmation: '',
             }),
         },
-        mounted() {
-        },
+        mounted() {},
         methods: {
             updateData() {
                 // console.log('res')
                 url = "{{ route('user.ubahPassword', ':id') }}".replace(':id', this.form.id)
                 this.form.post(url)
                     .then(response => {
-                        console.log('res',response);
+                        console.log('res', response);
                         $('#modal').modal('hide');
                         Swal.fire(
-                            'Berhasil',
-                            'Kata Sandi berhasil diubah',
-                            'success'
-                        )
-                        .then((value)=>{
-                            window.location="{{route('beranda')}}"
-                        })
+                                'Berhasil',
+                                'Kata Sandi berhasil diubah',
+                                'success'
+                            )
+                            .then((value) => {
+                                window.location = "{{route('beranda')}}"
+                            })
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e) : '';
@@ -94,4 +98,3 @@ Ubah Kata Sandi
 
 </script>
 @endpush
-
