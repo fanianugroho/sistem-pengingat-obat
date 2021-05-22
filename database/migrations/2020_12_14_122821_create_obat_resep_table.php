@@ -24,7 +24,6 @@ class CreateObatResepTable extends Migration
             $table->enum('keterangan', ['Kondisional', 'Harus Habis', 'Rutin']);
             $table->string('jml_obat');
             $table->integer('jml_kali_minum');
-            
             $table->timestamps();
 
             $table->foreign('id_obat')->references('id')->on('obat')->onDelete('cascade');

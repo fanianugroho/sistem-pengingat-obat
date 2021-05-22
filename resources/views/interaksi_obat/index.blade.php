@@ -4,10 +4,6 @@ Interaksi Obat
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -56,7 +52,6 @@ Interaksi Obat
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Interaksi</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
@@ -64,7 +59,7 @@ Interaksi Obat
                         <div class="form-group col-md-8">
                             <input v-model="form.nama_interaksi" id="nama_interaksi" type="text" min=0 placeholder="Masukkan Interaksi Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_interaksi') }">
-                            <has-error :form="form" field="nama"></has-error>
+                            <has-error :form="form" field="nama_interaksi"></has-error>
                         </div>
                     </div>
                 <div class="modal-footer">
@@ -72,12 +67,10 @@ Interaksi Obat
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                 </div>
-
             </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -151,7 +144,6 @@ Interaksi Obat
                         e.response.status != 422 ? console.log(e) : '';
                     })
             },
-
             deleteData(id) {
                 Swal.fire({
                     title: 'Apakah anda yakin?',
@@ -180,7 +172,6 @@ Interaksi Obat
                     }
                 })
             },
-
             refreshData() {
                 axios.get("{{ route('interaksiobat.all') }}")
                     .then(response => {

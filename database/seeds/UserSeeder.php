@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
             'username'=>'admin',
             'tipe_user' => 'admin',
             'email' => 'admin@admin.com',
-            'email_verified_at'=>'2020-08-01 01:00:00',
             'password' => bcrypt('admin123'),
         ],
         [
@@ -26,7 +25,6 @@ class UserSeeder extends Seeder
             'username'=>'apoteker',
             'tipe_user' => 'apoteker',
             'email' => 'apoteker@apoteker.com',
-            'email_verified_at'=>'2020-08-01 01:00:00',
             'password' => bcrypt('apoteker123'),
         ]
         ];

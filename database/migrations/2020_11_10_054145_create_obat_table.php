@@ -21,17 +21,13 @@ class CreateObatTable extends Migration
             $table->string('kekuatan_sediaan');
             $table->enum('satuan', ['ml', 'mg']);
             $table->string('petunjuk_penyimpanan');
-            $table->string('pola_makan');
-            $table->string('informasi');
+            $table->string('pola_makan')->nullable();
+            $table->string('informasi')->nullable();
             $table->unsignedBigInteger('id_users')->nullable(); 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_bentuk_obat')->references('id')->on('bentuk_obat')->onDelete('cascade');
-            // $table->foreign('id_kontraindikasi_obat')->references('id')->on('kontraindikasi_obat')->onDelete('cascade');
-            // $table->foreign('id_interaksi_obat')->references('id')->on('interaksi_obat')->onDelete('cascade');
-            // $table->foreign('id_efek_samping_obat')->references('id')->on('efek_samping_obat')->onDelete('cascade');
-            // $table->foreign('id_fungsi_obat')->references('id')->on('fungsi_obat')->onDelete('cascade');
             $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
         });
     }

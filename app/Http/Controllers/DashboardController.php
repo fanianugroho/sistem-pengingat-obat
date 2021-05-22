@@ -34,9 +34,7 @@ class DashboardController extends Controller
                     ->limit(5)
                     ->get();
 
-        // dd($obatResep);
-
-        return view('app.dashboard',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien','obatResep','today'));
+        return view('app.beranda',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien','obatResep','today'));
     }
     
     public function tampilanawal ()

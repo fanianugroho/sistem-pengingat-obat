@@ -4,10 +4,6 @@ Efek Samping Obat
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -56,28 +52,26 @@ Efek Samping Obat
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Efek Samping</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_efek_samping"> Efek Samping Obat </label>
                         <div class="form-group col-md-8">
-                            <input v-model="form.nama_efek_samping" id="nama_efek_samping" type="text" min=0 placeholder="Masukkan Efek Samping Obat"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('nama_efek_samping') }">
+                            <input v-model="form.nama_efek_samping" id="nama_efek_samping" type="text" min=0
+                                placeholder="Masukkan Efek Samping Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('nama_efek_samping') }">
                             <has-error :form="form" field="nama_efek_samping"></has-error>
                         </div>
                     </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                    <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
-                    <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
-                </div>
-
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
+                        <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
+                    </div>
             </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -87,7 +81,6 @@ Efek Samping Obat
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    
     var app = new Vue({
         el: '#app',
         data: {
@@ -181,19 +174,19 @@ Efek Samping Obat
                 })
             },
 
-            refreshData() {
-                axios.get("{{ route('efeksampingobat.all') }}")
-                    .then(response => {
-                        $('#table').DataTable().destroy()
-                        this.mainData = response.data
-                        this.$nextTick(function () {
-                            $('#table').DataTable();
-                        })
+        refreshData() {
+            axios.get("{{ route('efeksampingobat.all') }}")
+                .then(response => {
+                    $('#table').DataTable().destroy()
+                    this.mainData = response.data
+                    this.$nextTick(function () {
+                        $('#table').DataTable();
                     })
-                    .catch(e => {
-                                e.response.status != 422 ? console.log(e) : '';
-                            })
-            }
+                })
+                .catch(e => {
+                    e.response.status != 422 ? console.log(e) : '';
+                })
+        }
         },
     })
 

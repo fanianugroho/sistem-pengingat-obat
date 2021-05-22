@@ -6,31 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\ObatResep;
 
-class ResepController extends Controller
+class ObatResepController extends Controller
 {
-    public function index()
-    {
-        $data = ObatResep::with('obat','resep.pasien')->get();
-        if($data){
-            return response()->json([
-            "status" => "success",
-            "message" => "data berhasil di tampilkan",
-            "data" => $data,
-            
-        ]);
-    
-        } else {
-            return response()->json([
-                "status" => 'failed' ,
-                "message" => 'data gagal di tampilkan',
-                "data" => null,
-            ]);
-        }
-    }
-
-    
-    public function getIdResep($id)
-    {
+    public function getIdObatResep($id){
         $data['obat_resep'] = ObatResep::with('obat.fungsi_obat.fungsi',
                                 'obat.efek_samping_obat.efek_samping',
                                 'obat.interaksi_obat.interaksi',
@@ -43,15 +21,13 @@ class ResepController extends Controller
                 "status" => "success",
                 "message" => "data berhasil di tampilkan",
                 "data" => $data,
-                
-            ]);
-        
-            } else {
+                ]);
+            } 
+            else {
                 return response()->json([
                     "status" => 'failed' ,
                     "message" => 'data gagal di tampilkan'
                 ]);
             }
     }
-
 }

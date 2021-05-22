@@ -24,19 +24,19 @@ class UserController extends Controller
         return view('user.ubahPassword');
     }
     public function ubahPassword(Request $request){
-        // dd($request);
         $request_data = $request->all();
         $current_password = Auth::user()->password;
         $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password' => 'required|confirmed|min:8|different:old_password'
+            'kata_sandi_lama' => 'required',
+            'password' => 'required|confirmed|min:8|different:kata_sandi_lama',
+            'password_confirmation' => 'required',
         ]);
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 422);
         }
-        $old_password = $request->old_password;
+        $kata_sandi_lama = $request->kata_sandi_lama;
         
-        if(Hash::check($old_password, $current_password))
+        if(Hash::check($kata_sandi_lama, $current_password))
         {           
             $user_id = Auth::user()->id;                       
             $obj_user = User::find($user_id);
@@ -90,35 +90,6 @@ class UserController extends Controller
         return User::create($input);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -130,12 +101,6 @@ class UserController extends Controller
         return $user->update($input);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         return User::find($id)->delete();

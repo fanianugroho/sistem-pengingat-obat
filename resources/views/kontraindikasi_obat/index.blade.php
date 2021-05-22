@@ -4,10 +4,6 @@ Kontraindikasi Obat
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -64,7 +60,7 @@ Kontraindikasi Obat
                         <div class="form-group col-md-8">
                             <input v-model="form.nama_kontraindikasi" id="nama_kontraindikasi" type="text" min=0 placeholder="Masukkan Kontraindikasi Obat"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('nama_kontraindikasi') }">
-                            <has-error :form="form" field="nama"></has-error>
+                            <has-error :form="form" field="nama_kontraindikasi"></has-error>
                         </div>
                     </div>
                 <div class="modal-footer">
@@ -72,12 +68,10 @@ Kontraindikasi Obat
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                 </div>
-
             </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 

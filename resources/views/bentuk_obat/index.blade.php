@@ -4,10 +4,6 @@ Sediaan Obat
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -56,7 +52,6 @@ Sediaan Obat
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
@@ -72,12 +67,10 @@ Sediaan Obat
                     <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                     <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                 </div>
-
             </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -151,7 +144,6 @@ Sediaan Obat
                         e.response.status != 422 ? console.log(e) : '';
                     })
             },
-
             deleteData(id) {
                 Swal.fire({
                     title: 'Apakah anda yakin?',
@@ -180,7 +172,6 @@ Sediaan Obat
                     }
                 })
             },
-
             refreshData() {
                 axios.get("{{ route('bentukobat.all') }}")
                     .then(response => {

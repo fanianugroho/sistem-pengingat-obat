@@ -17,7 +17,6 @@ class CreateResepTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_pasien');
             $table->unsignedBigInteger('id_users');
-            
             $table->timestamps();
             $table->softDeletes(); 
 

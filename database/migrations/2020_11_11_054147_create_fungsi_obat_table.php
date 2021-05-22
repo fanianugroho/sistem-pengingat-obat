@@ -17,7 +17,6 @@ class CreateFungsiObatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_fungsi');
             $table->unsignedBigInteger('id_obat');
-            
             $table->timestamps();
 
             $table->foreign('id_fungsi')->references('id')->on('fungsi')->onDelete('cascade');

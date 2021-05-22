@@ -262,6 +262,11 @@ Pasien
                 this.form.post("{{ route('pasien.store') }}")
                     .then(response => {
                         $('#modal').modal('hide');
+                        Swal.fire(
+                            'Berhasil',
+                            'Pasien berhasil ditambahkan',
+                            'success'
+                        )
                         this.refreshData()
                     })
                     .catch(e => {

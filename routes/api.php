@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('obatResep/{id}','API\ResepController@getIdResep');
+Route::get('obatResep/{id}','API\ObatResepController@getIdObatResep');

@@ -64,10 +64,14 @@ class ObatController extends Controller
     
     public function store(Request $request)
     {
-
         $user = Auth::user();
-        // dd($user->id);
-        
+        $request->validate([
+            'nama_obat' => 'required',
+            'id_bentuk_obat' => 'required',
+            'kekuatan_sediaan' => 'required',
+            'satuan' => 'required',
+            'petunjuk_penyimpanan' => 'required',
+        ]);
         DB::beginTransaction();
         try {
             $obat = New Obat;
@@ -119,7 +123,6 @@ class ObatController extends Controller
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
         try {
-        
             $interaskiObatArray = $request->input('id_interaksi_obat');
             $countInteraksiObat = sizeof($interaskiObatArray);
             $itemsInteraksiObat = array();

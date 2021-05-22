@@ -17,7 +17,6 @@ class CreateEfekSampingObatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_efek_samping');
             $table->unsignedBigInteger('id_obat');
-            
             $table->timestamps();
 
             $table->foreign('id_efek_samping')->references('id')->on('efek_samping')->onDelete('cascade');

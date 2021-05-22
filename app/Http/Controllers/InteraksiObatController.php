@@ -6,11 +6,7 @@ use Illuminate\Http\Request;
 
 class InteraksiObatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function all()
     {
         $data = Interaksi::all();
@@ -22,7 +18,6 @@ class InteraksiObatController extends Controller
         return view('interaksi_obat.index');
     }
 
-    
     public function store(Request $request)
     {
         $request->validate([
@@ -40,13 +35,7 @@ class InteraksiObatController extends Controller
 
         return Interaksi::find($id)->update($request->all());
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         return Interaksi::find($id)->delete();

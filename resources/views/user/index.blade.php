@@ -4,10 +4,6 @@ Tambah Apoteker
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -15,7 +11,6 @@ Tambah Apoteker
                     <h4 class="card-title"> Apoteker
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Apoteker</button>
-                        
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
@@ -33,7 +28,6 @@ Tambah Apoteker
                                     <td>@{{ index+1 }}</td>
                                     <td>@{{ item.nama == 'null' ? '' : item.nama }}</td>
                                     <td>@{{ item.username == 'null' ? '' : item.username}} </td>
-
                                     <td>@{{ item.email == 'null' ? '' : item.email}}</td>
                                     <td>
                                         <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
@@ -62,7 +56,6 @@ Tambah Apoteker
                 <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Apoteker</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-
             <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
@@ -80,7 +73,7 @@ Tambah Apoteker
                             <input v-model="form.username" id="username" type="text" min=0
                                 placeholder="Masukkan Username" class="form-control"
                                 :class="{ 'is-invalid': form.errors.has('username') }">
-                            <has-error :form="form" field="username"></has-error>
+                                <has-error :form="form" field="username"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
@@ -88,7 +81,7 @@ Tambah Apoteker
                         <div class="form-group col-md-8">
                             <select v-model="form.tipe_user" id="tipe_user" onchange="selectTrigger()" style="width: 100%"
                                 class="form-control custom-select" :class="{ 'is-invalid': form.errors.has('tipe_user') }">
-                                <option disabled item="">- Pilih Tipe User -</option>
+                                <option value="">- Pilih Tipe User -</option>
                                 <option value="admin">Admin</option>
                                 <option value="apoteker">Apoteker</option>
                             </select>
@@ -118,12 +111,10 @@ Tambah Apoteker
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah</button>
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
-
             </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -136,7 +127,6 @@ Tambah Apoteker
     function selectTrigger() {
         app.inputSelect()
     }
-
 
     var app = new Vue({
         el: '#app',
@@ -155,9 +145,6 @@ Tambah Apoteker
         mounted() {
             $('#table').DataTable()
             this.refreshData()
-            $('#tipe_user').select2({
-                    placeholder: "Pilih Tipe User"
-                });
         },
         methods: {
             createModal() {
@@ -168,8 +155,8 @@ Tambah Apoteker
             },
             editModal(data) {
                 this.editMode = true;
-                this.form.fill(data)
                 this.form.clear();
+                this.form.fill(data)
                 $('#modal').modal('show');
                 $('#tipe_user').val(data.tipe_user).trigger('change');
             },
@@ -216,6 +203,7 @@ Tambah Apoteker
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.value) {
+                        console.log(result);
                         url = "{{ route('user.destroy', ':id') }}".replace(':id', id)
                         this.form.delete(url)
                             .then(response => {

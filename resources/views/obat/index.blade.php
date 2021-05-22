@@ -4,10 +4,6 @@ Obat
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -15,7 +11,6 @@ Obat
                     <h4 class="card-title"> Obat
                         <button type="button" class="btn btn-primary btn-rounded float-right mb-3"
                             @click="createModal()"><i class="fas fa-plus-circle"></i> Tambah Obat</button>
-
                     </h4>
                     <div class="table-responsive">
                         <table id="table" class="table table-striped table-bordered no-wrap">
@@ -63,7 +58,7 @@ Obat
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
 
-            <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
+            <form @submit.prevent="storeData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_obat"> Nama Obat </label>
@@ -75,7 +70,7 @@ Obat
                         </div>
                     </div>
                     <div class="form-row">
-                        <label class="col-lg-2">Sediaan</label>
+                        <label class="col-lg-2" for="id_bentuk_obat">Sediaan</label>
                         <div class="form-group col-md-8">
                             <select v-model="form.id_bentuk_obat" id="id_bentuk_obat" onchange="selectTrigger()"
                                 style="width: 100%" class="form-control custom-select">
@@ -167,8 +162,8 @@ Obat
                         <div class="form-group col-md-8">
                             <textarea v-model="form.petunjuk_penyimpanan" id="petunjuk_penyimpanan"
                                 placeholder="Masukkan petunjuk penyimpanan" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('petunjuk_penyimpanan') }">
-                            <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
                             </textarea>
+                            <has-error :form="form" field="petunjuk_penyimpanan"></has-error>
                         </div>
                     </div>
                     <div class="form-row">
@@ -195,9 +190,9 @@ Obat
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
             </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -216,7 +211,6 @@ Obat
         data: {
             mainData: [],
             editMode: false,
-
             form: new Form({
                 id: '',
                 nama_obat: '',
@@ -283,12 +277,6 @@ Obat
                 this.form.clear();
                 $('#modal').modal('show');
             },
-            editModal(data) {
-                this.editMode = true;
-                this.form.fill(data)
-                this.form.clear();
-                $('#modal').modal('show');
-            },
             storeData() {
                 this.form.post("{{ route('obat.store') }}")
                     .then(response => {
@@ -296,22 +284,6 @@ Obat
                         Swal.fire(
                             'Berhasil',
                             'Obat berhasil ditambahkan',
-                            'success'
-                        )
-                        this.refreshData()
-                    })
-                    .catch(e => {
-                        e.response.status != 422 ? console.log(e) : '';
-                    })
-            },
-            updateData() {
-                url = "{{ route('obat.update', ':id') }}".replace(':id', this.form.id)
-                this.form.put(url)
-                    .then(response => {
-                        $('#modal').modal('hide');
-                        Swal.fire(
-                            'Berhasil',
-                            'Obat berhasil diubah',
                             'success'
                         )
                         this.refreshData()
@@ -328,7 +300,6 @@ Obat
                 this.form.id_fungsi_obat = $("#id_fungsi_obat").val()
                 this.form.id_efek_samping_obat = $("#id_efek_samping_obat").val()
             },
-
             deleteData(id) {
                 Swal.fire({
                     title: 'Apakah anda yakin?',
@@ -366,18 +337,15 @@ Obat
                     }
                 })
             },
-
             refreshData() {
                 axios.get("{{ route('obat.all') }}")
                     .then(response => {
-
                         $('#table').DataTable().destroy()
                         this.mainData = response.data
                         console.log(response.data)
                         this.$nextTick(function () {
                             $('#table').DataTable();
                         })
-
                     })
                     .catch(e => {
                         e.response.status != 422 ? console.log(e.error) : '';

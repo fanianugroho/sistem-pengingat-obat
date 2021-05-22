@@ -17,7 +17,6 @@ class CreateKontraindikasiObatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_kontraindikasi');
             $table->unsignedBigInteger('id_obat');
-            
             $table->timestamps();
 
             $table->foreign('id_kontraindikasi')->references('id')->on('kontraindikasi')->onDelete('cascade');

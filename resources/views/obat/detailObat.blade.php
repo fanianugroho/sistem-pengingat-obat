@@ -13,9 +13,7 @@ Detail Obat
                     <div class="card-body">
                         <h3 class="card-title-detailobat"> Detail Obat
                         </h3>
-
                         <div class="col-12 mt-4">
-                            <!-- Card -->
                             <a href="{{route('obat.index')}}">
                                 <button type="button" class="btn btn-primary btn-rounded float-left mb-4">
                                     <i class="fas fa-arrow-left"></i> Kembali</button>
@@ -23,7 +21,6 @@ Detail Obat
                             <a href="javascript:void(0);" @click="editModal()"
                                 class="btn btn-success btn-rounded float-right mb-3">
                                 <i class="far fa-edit"></i> Edit Obat</button></a>
-
                             <table id="table" class="table table-striped table-bordered no-wrap">
                                 <tr>
                                     <th width="400">Kode Obat</th>
@@ -38,16 +35,6 @@ Detail Obat
                                         {{$detailObat->kekuatan_sediaan}}
                                         {{$detailObat->satuan}}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <th>Sediaan</th>
-                                    <td>:</td>
-                                    <td>{{$detailObat->bentuk_obat->nama_bentuk}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Satuan</th>
-                                    <td>:</td>
-                                    <td>{{$detailObat->satuan}}</td>
-                                </tr> -->
                                 <tr>
                                     <th>Fungsi</th>
                                     <td>:</td>
@@ -99,11 +86,7 @@ Detail Obat
                                     <td>:</td>
                                     <td>{{$detailObat->informasi}}</td>
                                 </tr>
-
                             </table>
-
-
-                            <!-- Card -->
                         </div>
                     </div>
                 </div>
@@ -123,7 +106,7 @@ Detail Obat
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
 
-            <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)" id="form">
+            <form @submit.prevent="updateData()" @keydown="form.onKeydown($event)" id="form">
                 <div class="modal-body mx-4">
                     <div class="form-row">
                         <label class="col-lg-2" for="nama_obat"> Nama Obat </label>
@@ -252,9 +235,7 @@ Detail Obat
                         <button v-show="!editMode" type="submit" class="btn btn-primary">Simpan</button>
                         <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
                     </div>
-
             </form>
-
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -268,7 +249,6 @@ Detail Obat
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 <script>
     var getEfekSamping = @json($efek_samping_obat);
-
     var getKontraindikasi = @json($kontraindikasi_obat);
 
     function selectTrigger() {
@@ -369,7 +349,6 @@ Detail Obat
                         this.selectedEfekSamping = response.data.efek_samping_obat
                         this.selectedKontraindikasi = response.data.kontraindikasi_obat
                         this.selectedInteraksi = response.data.interaksi_obat
-
 
                         let dataEditEfekSamping = [];
                         let dataEditFungsi = [];

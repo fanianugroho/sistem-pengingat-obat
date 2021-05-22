@@ -17,11 +17,8 @@ class CreateMinumObatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_obat_resep');
             $table->datetime('waktu_minum');
-            
             $table->timestamps();
-
             $table->softDeletes(); 
-
 
             $table->foreign('id_obat_resep')->references('id')->on('obat')->onDelete('cascade');
         });

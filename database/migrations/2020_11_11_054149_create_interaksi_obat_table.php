@@ -17,7 +17,6 @@ class CreateInteraksiObatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_interaksi');
             $table->unsignedBigInteger('id_obat');
-            
             $table->timestamps();
 
             $table->foreign('id_interaksi')->references('id')->on('interaksi')->onDelete('cascade');
