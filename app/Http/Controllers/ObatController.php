@@ -72,6 +72,9 @@ class ObatController extends Controller
             'satuan' => 'required',
             'petunjuk_penyimpanan' => 'required',
         ]);
+
+        // DE000001;
+
         DB::beginTransaction();
         try {
             $obat = New Obat;
