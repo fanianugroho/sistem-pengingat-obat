@@ -225,7 +225,6 @@ Obat
                 id_bentuk_obat: '',
                 id_kontraindikasi_obat: [],
                 id_interaksi_obat: [],
-
             }),
             bentukObat: @json($bentuk_obat),
             interaksiObat: @json($interaksi_obat),

@@ -6,6 +6,9 @@ use App\Pasien;
 use App\Obat;
 use App\ObatResep;
 use App\BentukObat;
+use App\MinumObat;
+use App\WaktuMinum;
+use App\WaktuMakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -104,6 +107,14 @@ class ResepController extends Controller
      */
     public function store_obat(Request $request ,$id)
     {
+        $request->validate([
+            'id_obat' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+        ]);
        
         DB::beginTransaction();
         try {
@@ -122,11 +133,220 @@ class ResepController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }try {
+            $minumObat = New MinumObat;
+            $minumObat->id_obat_resep = $obatResep->id;
+            $minumObat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        if($obatResep->aturan_pakai =='3'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'siang';
+                $waktuMinum->waktu = '15:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '23:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'siang';
+                $waktuMakan->waktu = '14:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '22:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        } else if ($obatResep->aturan_pakai =='2'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '19:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '18:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        } else{
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'siang';
+                $waktuMinum->waktu = '13:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '18:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '23:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'siang';
+                $waktuMakan->waktu = '12:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '17:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '22:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
         }
         DB::commit();
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil membuat obat'
+            'message' => 'Berhasil membuat obat resep'
         ]); 
     }
 
@@ -134,22 +354,14 @@ class ResepController extends Controller
     {
         $user = Auth::user();
 
-        // $validator = Validator::make($request->all(), [
-        //     'id_pasien' => 'required',
-        //     'dosis' => 'required',
-        //     'aturan_pakai' => 'required',
-        //     'takaran_minum' => 'required',
-        //     'waktu_minum' => 'required',
-        //     'keterangan' => 'required',
-        //     'jml_obat' => 'required',
-        //     'jml_kali_minum' => 'required',
-        // ]);
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 'Failed',
-        //         'message' => $validator->messages()
-        //     ],422);
-        // }
+        $request->validate([
+            'id_obat' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+        ]);
         DB::beginTransaction();
         try {
             $resep = New Resep;
@@ -177,28 +389,235 @@ class ResepController extends Controller
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
+        try {
+            $minumObat = New MinumObat;
+            $minumObat->id_obat_resep = $obatResep->id;
+            $minumObat->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+        }
+        if($obatResep->aturan_pakai =='3'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'siang';
+                $waktuMinum->waktu = '15:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '23:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'siang';
+                $waktuMakan->waktu = '14:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '22:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        } else if ($obatResep->aturan_pakai =='2'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '19:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '18:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        } else{
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'siang';
+                $waktuMinum->waktu = '13:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '18:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->waktu = '23:00:00';
+                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'siang';
+                $waktuMakan->waktu = '12:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '17:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->waktu = '22:30:00';
+                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        }
         DB::commit();
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil membuat obat'
+            'message' => 'Berhasil membuat resep'
         ]); 
     }
 
     public function update(Request $request, $id)
     {
-        // $request->validate([
-        //     'id_obat' => 'required',
-        //     'dosis' => 'required',
-        //     'aturan_pakai' => 'required',
-        //     'takaran_minum' => 'required',
-        //     'waktu_minum' => 'required',
-        //     'keterangan' => 'required',
-        //     'jml_obat' => 'required',
-        //     'jml_kali_minum' => 'required',
-        // ]);
+        $request->validate([
+            'id_obat' => 'required',
+            'dosis' => 'required',
+            'aturan_pakai' => 'required',
+            'waktu_minum' => 'required',
+            'keterangan' => 'required',
+            'jml_obat' => 'required',
+        ]);
 
         $obatResep = ObatResep::where('id',$id)->first();
-        
         DB::beginTransaction();
         
         try {
@@ -218,7 +637,7 @@ class ResepController extends Controller
         DB::commit();
         return response()->json([
             'status' => 'Success',
-            'message' => 'Berhasil merubah obat'
+            'message' => 'Berhasil mengubah obat resep'
         ]); 
        
         // return ObatResep::find($id)->update($request->all());

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMinumObatTable extends Migration
+class CreateWaktuMinumTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateMinumObatTable extends Migration
      */
     public function up()
     {
-        Schema::create('minum_obat', function (Blueprint $table) {
+        Schema::create('waktu_minum', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_obat_resep');
+            $table->unsignedBigInteger('id_minum_obat');
+            $table->string('jam_minum');
+            $table->time('waktu');
+            $table->string('keterangan')->nullable();
             $table->timestamps(); 
 
-            $table->foreign('id_obat_resep')->references('id')->on('obat_resep')->onDelete('cascade');
+            $table->foreign('id_minum_obat')->references('id')->on('minum_obat')->onDelete('cascade');
         });
     }
 
@@ -29,6 +32,6 @@ class CreateMinumObatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('minum_obat');
+        Schema::dropIfExists('waktu_minum');
     }
 }

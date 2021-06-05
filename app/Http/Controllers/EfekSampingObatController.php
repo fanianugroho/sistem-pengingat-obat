@@ -24,7 +24,7 @@ class EfekSampingObatController extends Controller
             'nama_efek_samping' => 'required',
         ]);
 
-        EfekSampingObat::create($request->all());
+        EfekSamping::create($request->all());
     }
 
     
@@ -34,12 +34,12 @@ class EfekSampingObatController extends Controller
             'nama_efek_samping' => 'required',
         ]);
 
-        return EfekSampingObat::find($id)->update($request->all());
+        return EfekSamping::find($id)->update($request->all());
     }
 
     
     public function destroy($id)
     {
-        return EfekSampingObat::find($id)->delete();
+        return EfekSamping::find($id)->delete();
     }
 }

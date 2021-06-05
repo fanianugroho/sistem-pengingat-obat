@@ -5,6 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\ObatResep;
+use App\MinumObat;
+use App\WaktuMinum;
+use App\WaktuMakan;
+use Validator;
+
 
 class ObatResepController extends Controller
 {
@@ -30,4 +35,63 @@ class ObatResepController extends Controller
                 ]);
             }
     }
+
+    public function getJadwalObatResep($id){
+        $dataResep = MinumObat::where('id_obat_resep',$id)->first();
+       
+        $waktuMakan = WaktuMakan::where('id_minum_obat',$dataResep->id)->get();
+        $waktuMinum = WaktuMinum::where('id_minum_obat',$dataResep->id)->get();
+
+        return response()->json([
+            "status" => "success",
+            "message" => "data berhasil di tampilkan",
+            "waktu_makan" => $waktuMakan,
+            "waktu_minum" => $waktuMinum,
+        ]);
+    }
+
+    public function ubahWaktuMakan(Request $request, $id){
+        
+        $waktuMakan = WaktuMakan::where('id', $id)->first();
+
+        $validator = Validator::make($request->all(), [
+            'waktu' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'waktu' => $request->all(),
+                'message' => $validator->errors()]);
+        }
+        WaktuMakan::find($id)->update($request->all());
+        return response()->json([
+            'status' => 'success',
+            'waktu' => $request->all(),
+            'message' => 'waktu berhasil diupdate'
+        ]);
+
+    }
+
+    public function ubahWaktuMinum(Request $request,$id){
+
+        $waktuMinum = WaktuMinum::where('id',$id)->first();
+
+        $validator = Validator::make($request->all(), [
+            'waktu' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'waktu' => $request->all(),
+                'message' => $validator->errors()]);
+        }
+        WaktuMinum::find($id)->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'waktu' => $request->all(),
+            'message' => 'data berhasil diupdate'
+        ]);
+    }
+
 }

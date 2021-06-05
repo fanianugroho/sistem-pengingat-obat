@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('obatResep/{id}','API\ObatResepController@getIdObatResep');
+Route::get('getJadwal/{id}','API\ObatResepController@getJadwalObatResep');
+Route::post('ubahWaktuMakan/{id}','API\ObatResepController@ubahWaktuMakan');
+Route::post('ubahWaktuMinum/{id}','API\ObatResepController@ubahWaktuMinum');
+
+

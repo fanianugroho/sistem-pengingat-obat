@@ -20,9 +20,9 @@ Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
 Auth::routes();
     Route::group(['middleware' => ['auth','verified','web','CheckRole:admin']],function(){
 
-        Route::get('/user.all', 'UserController@all')->name('user.all');
         Route::get('/user.ubahPassword', 'UserController@indexPassword')->name('user.indexPassword');
         Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.ubahPassword');
+        Route::get('/user.all', 'UserController@all')->name('user.all');
         Route::resource('user', 'UserController');
         
     });
@@ -58,12 +58,9 @@ Auth::routes();
             Route::get('/pasien.all', 'PasienController@all')->name('pasien.all');
             Route::resource('pasien', 'PasienController');
         
-
-        
             Route::get('/riwayatresep.all', 'RiwayatResepController@all')->name('riwayatresep.all');
             Route::resource('riwayatresep', 'RiwayatResepController');
             Route::get('/detailResep/{id}', 'RiwayatResepController@detailresep')->name('detailresep');
-    
         
             Route::get('/resep.all/{id}', 'ResepController@all')->name('resep.all');
             Route::get('/obat-detail/{id}', 'ResepController@getObat')->name('obat.detail');

@@ -165,11 +165,16 @@ class ObatController extends Controller
 
     }
 
-   
     public function update(Request $request,$id)
     {
         $obat = Obat::where('id',$id)->first();
-
+        $request->validate([
+            'nama_obat' => 'required',
+            'id_bentuk_obat' => 'required',
+            'kekuatan_sediaan' => 'required',
+            'satuan' => 'required',
+            'petunjuk_penyimpanan' => 'required',
+        ]);
         DB::beginTransaction();
         try {
             $obat->nama_obat = $request->nama_obat;

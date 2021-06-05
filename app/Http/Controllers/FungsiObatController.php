@@ -23,7 +23,7 @@ class FungsiObatController extends Controller
             'nama_fungsi' => 'required',
         ]);
 
-        FungsiObat::create($request->all());
+        Fungsi::create($request->all());
     }
 
     public function update(Request $request, $id)
@@ -32,11 +32,11 @@ class FungsiObatController extends Controller
             'nama_fungsi' => 'required',
         ]);
 
-        return FungsiObat::find($id)->update($request->all());
+        return Fungsi::find($id)->update($request->all());
     }
 
     public function destroy($id)
     {
-        return FungsiObat::find($id)->delete();
+        return Fungsi::find($id)->delete();
     }
 }

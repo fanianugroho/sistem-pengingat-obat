@@ -4,10 +4,6 @@ Buat Resep
 @endsection
 @section('content')
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
-    <!-- basic table -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -15,7 +11,6 @@ Buat Resep
                     <h4 class="card-title"> Detail Obat Resep Pasien
                     </h4>
                     <div class="col-12 mt-4">
-                        <!-- Card -->
                         <table id="table1" class="table table-striped table-bordered no-wrap">
                             <tr>
                                 <th width="200">Jumlah Obat</th>
@@ -23,7 +18,6 @@ Buat Resep
                                 <td>@{{jumlahObat}}</td>
                             </tr>
                         </table>
-                        <!-- Card -->
                     </div>
                 </div>
             </div>
@@ -65,7 +59,7 @@ Buat Resep
                                     </td>
                                     <td>@{{ item.waktu_minum == 'null' ? '' : item.waktu_minum}}</td>
                                     <td>
-                                       <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
+                                        <a href="javascript:void(0);" @click="editModal(item)" class="text-success"
                                             data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i
                                                 class="far fa-edit"></i></a>
                                         <a href="javascript:void(0);" @click="deleteData(item.id)" class="text-danger"
@@ -77,172 +71,161 @@ Buat Resep
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
+    </div>
 
-
-        <!-- MODAL -->
-        <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" id="modal">
-                <div class="modal-content">
-                    <div class="modal-header ">
-                        <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Resep</h4>
-                        <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Resep</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="modal">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Tambah Resep</h4>
+                <h4 class="modal-title" v-show="editMode" id="myLargeModalLabel">Edit Resep</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)"
+                id="form">
+                <div class="modal-body mx-4">
+                    <div class="form-row">
+                        <label class="col-lg-2">Nama Obat</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()"
+                                style="width: 100%" class="form-control custom-select">
+                                <option disabled item="">- Pilih Nama Obat -</option>
+                                <option v-for="item in namaObat" :value="item.id">
+                                    @{{  item.nama_obat + ' ' + item.kekuatan_sediaan +' '+item.satuan }}
+                                </option>
+                            </select>
+                            <has-error :form="form" field="id_obat"></has-error>
+                        </div>
                     </div>
-
-                    <form @submit.prevent="editMode ? updateData() : storeData()" @keydown="form.onKeydown($event)"
-                        id="form">
-                        <div class="modal-body mx-4">
+                    <div class="form-row">
+                        <label class="col-lg-2" for="dosis"> Dosis </label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.dosis" id="dosis" type="text" min=0 placeholder="Masukkan Dosis"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('dosis') }"
+                                onchange="handleChangeDosis()">
+                            <has-error :form="form" field="dosis"></has-error>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-lg-2" for="aturan_pakai"> Aturan Pakai </label>
+                        <div class="form-group col-md-6">
+                            <input v-model="form.aturan_pakai" id="aturan_pakai" type="text" min=0
+                                placeholder="Aturan Pakai" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
+                            <has-error :form="form" field="aturan_pakai"></has-error>
+                        </div>
+                        <div class="col">
+                            <p class="kali-sehari"> <b> kali sehari </b> </p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
+                        <div class="form-group col-md-8">
                             <div class="form-row">
-                                <label class="col-lg-2">Nama Obat</label>
-                                <div class="form-group col-md-8">
-                                    <select v-model="form.id_obat" id="id_obat" onchange="selectTrigger()"
-                                        style="width: 100%" class="form-control custom-select">
-                                        <option disabled item="">- Pilih Nama Obat -</option>
-                                        <option v-for="item in namaObat" :value="item.id">
-                                            @{{  item.nama_obat + ' ' + item.kekuatan_sediaan +' '+item.satuan }}
-                                        </option>
-                                    </select>
-                                    <has-error :form="form" field="id_obat"></has-error>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="dosis"> Dosis </label>
-                                <div class="form-group col-md-8">
-                                    <input v-model="form.dosis" id="dosis" type="text" min=0
-                                        placeholder="Masukkan Dosis" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('dosis') }"
-                                        onchange="handleChangeDosis()">
-                                    <has-error :form="form" field="dosis"></has-error>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="aturan_pakai"> Aturan Pakai </label>
-                                <div class="form-group col-md-6">
-                                    <input v-model="form.aturan_pakai" id="aturan_pakai" type="text" min=0
-                                        placeholder="Aturan Pakai" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('aturan_pakai') }">
-                                    <has-error :form="form" field="aturan_pakai"></has-error>
+                                <div class="col">
+                                    <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
+                                        placeholder="Takaran Minum" class="form-control" disabled="disabled"
+                                        :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
+                                    <has-error :form="form" field="takaran_minum"></has-error>
                                 </div>
                                 <div class="col">
-                                    <p class="kali-sehari"> <b> kali sehari </b> </p>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="takaran_minum"> Takaran Minum </label>
-                                <div class="form-group col-md-8">
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <input v-model="form.takaran_minum" id="takaran_minum" type="text" min=0
-                                                placeholder="Takaran Minum" class="form-control" disabled="disabled"
-                                                :class="{ 'is-invalid': form.errors.has('takaran_minum') }">
-                                            <has-error :form="form" field="takaran_minum"></has-error>
-                                        </div>
-                                        <div class="col">
-                                            <input v-model="form.satuan" class="form-control" placeholder="Satuan"
-                                                disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="waktu_minum">Waktu Minum</label>
-                                <div class="form-group col-md-8">
-                                    <select v-model="form.waktu_minum" id="waktu_minum" onchange="selectTrigger()"
-                                        style="width: 100%" class="form-control custom-select"
-                                        :class="{ 'is-invalid': form.errors.has('waktu_minum') }">
-                                        <option value="">- Pilih Waktu Minum -</option>
-                                        <option value="Sebelum Makan">Sebelum Makan</option>
-                                        <option value="Saat Makan">Saat Makan</option>
-                                        <option value="Sesudah Makan">Sesudah Makan</option>
-                                    </select>
-                                    <has-error :form="form" field="waktu_minum"></has-error>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="keterangan">Keterangan</label>
-                                <div class="form-group col-md-8">
-                                    <select v-model="form.keterangan" id="keterangan" onchange="selectTrigger()"
-                                        style="width: 100%" class="form-control custom-select"
-                                        :class="{ 'is-invalid': form.errors.has('keterangan') }">
-                                        <option value="">- Pilih Keterangan -</option>
-                                        <option value="Kondisional">Kondisional</option>
-                                        <option value="Harus Habis">Harus Habis</option>
-                                        <option value="Rutin">Rutin</option>
-                                    </select>
-                                    <has-error :form="form" field="keterangan"></has-error>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="jml_obat"> Jumlah Obat </label>
-                                <div class="form-group col-md-8">
-                                    <input v-model="form.jml_obat" id="jml_obat" type="text" min=0
-                                        placeholder="Jumlah Obat" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_obat') }"
-                                        onchange="handleChangeJumlahMinum()">
-                                    <has-error :form="form" field="jml_obat"></has-error>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
-                                <div class="form-group col-md-8">
-                                    <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum"
-                                        placeholder="Jumlah Kali Minum" type="text" min=0 class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
-                                    <has-error :form="form" field="jml_kali_minum"></has-error>
+                                    <input v-model="form.satuan" class="form-control" placeholder="Satuan"
+                                        disabled="disabled">
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah </button>
-                            <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
-
-                        </div>
-                    </form>
-
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <!-- MODAL PRINT-->
-
-        <div id="modalPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" id="modal">
-                <div class="modal-content">
-                    <div class="modal-header ">
-                        <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
-                        <div class="modal-body mx">
-                            <div class="selectall">
-                                <input type="checkbox" name="select-all" id="select-all" />
-                                <label for="selectAll">
-                                    Pilih Semua
-                                </label><br>
-                            </div>
-                            @foreach ($dataResep as $item)
-                            <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
-                            <label for="data_resep">
-                                {{$item->obat->nama_obat}}
-                            </label>
-                            <br>
-                            <hr>
-                            @endforeach
+                    <div class="form-row">
+                        <label class="col-lg-2" for="waktu_minum">Waktu Minum</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.waktu_minum" id="waktu_minum" onchange="selectTrigger()"
+                                style="width: 100%" class="form-control custom-select"
+                                :class="{ 'is-invalid': form.errors.has('waktu_minum') }">
+                                <option value="">- Pilih Waktu Minum -</option>
+                                <option value="Sebelum Makan">Sebelum Makan</option>
+                                <option value="Saat Makan">Saat Makan</option>
+                                <option value="Sesudah Makan">Sesudah Makan</option>
+                            </select>
+                            <has-error :form="form" field="waktu_minum"></has-error>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Cetak</button></a>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-lg-2" for="keterangan">Keterangan</label>
+                        <div class="form-group col-md-8">
+                            <select v-model="form.keterangan" id="keterangan" onchange="selectTrigger()"
+                                style="width: 100%" class="form-control custom-select"
+                                :class="{ 'is-invalid': form.errors.has('keterangan') }">
+                                <option value="">- Pilih Keterangan -</option>
+                                <option value="Kondisional">Kondisional</option>
+                                <option value="Harus Habis">Harus Habis</option>
+                                <option value="Rutin">Rutin</option>
+                            </select>
+                            <has-error :form="form" field="keterangan"></has-error>
                         </div>
-                </div><!-- /.modal-content -->
-                </form>
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                    </div>
+                    <div class="form-row">
+                        <label class="col-lg-2" for="jml_obat"> Jumlah Obat </label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.jml_obat" id="jml_obat" type="text" min=0 placeholder="Jumlah Obat"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('jml_obat') }"
+                                onchange="handleChangeJumlahMinum()">
+                            <has-error :form="form" field="jml_obat"></has-error>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-lg-2" for="jml_kali_minum"> Jumlah Kali Minum </label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.jml_kali_minum" disabled="disabled" id="jml_kali_minum"
+                                placeholder="Jumlah Kali Minum" type="text" min=0 class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('jml_kali_minum') }">
+                            <has-error :form="form" field="jml_kali_minum"></has-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                    <button v-show="!editMode" type="submit" class="btn btn-primary">Tambah </button>
+                    <button v-show="editMode" type="submit" class="btn btn-success">Ubah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+    <div id="modalPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" id="modal">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h4 class="modal-title" v-show="!editMode" id="myLargeModalLabel">Pilih obat yang ingin di cetak
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <form @submit.prevent="storeCetakResep()" @keydown="formStore.onKeydown($event)" id="cetak_resep">
+                    <div class="modal-body mx">
+                        <div class="selectall">
+                            <input type="checkbox" name="select-all" id="select-all" />
+                            <label for="selectAll">
+                                Pilih Semua
+                            </label><br>
+                        </div>
+                        @foreach ($dataResep as $item)
+                        <input type="checkbox" id="data_resep" name="data_resep" value="{{$item->id}}">
+                        <label for="data_resep">
+                            {{$item->obat->nama_obat}}
+                        </label>
+                        <br>
+                        <hr>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Cetak</button></a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     @endsection
 
@@ -352,7 +335,6 @@ Buat Resep
                     let id = segment_array.pop();
                     this.getIdResep(id);
                     $('#modalPrint').modal('show');
-
                 },
                 getUrl(id) {
                     url = "/detailPasien/detailObatResep/" + id
@@ -366,25 +348,11 @@ Buat Resep
                 },
                 editModal(data) {
                     this.editMode = true;
-                    this.form.fill(data)
                     this.form.clear();
+                    this.form.fill(data)
                     $('#modal').modal('show');
-
-                    console.log(data);
-
-                    // this.selectedNamaObat = data.id_obat;
-                    /* $('#id_obat').find('option[value=' + data.id_obat + ']')
-                            .prop('selected', true); */
                     $('#id_obat').val(data.id_obat).trigger('change');
                     $('#satuan').val(data.obat.satuan).trigger('change');
-
-                    // let dataNamaObat = [];
-                    // for (let i = 0; i < this.selectedNamaObat.length; i++) {
-                    //         dataEditEfekSamping.push(this.selectedNamaObat[i].id_obat)
-                    //     }
-                    //     $('#id_obat').val(dataEditEfekSamping).trigger('change');
-
-
                 },
                 detailCard(data) {
                     this.editMode = true;

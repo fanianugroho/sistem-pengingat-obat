@@ -89,7 +89,7 @@ Beranda
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <!-- <th scope="col">No</th> -->
                             <th scope="col">Nama Obat</th>
                             <th scope="col">Jumlah</th>
                         </tr>
@@ -97,7 +97,7 @@ Beranda
                     <tbody>
                         @foreach ($obatResep as $value)
                         <tr>
-                            <th scope="row">{{ $value->id_obat}}</th>
+                            <!-- <th scope="row">{{ $value->id_obat}}</th> -->
                             <th scope="row">{{ $value->nama_obat}}</th>
                             <th scope="row">{{ $value->total_obat}}</th>
                         </tr>

@@ -13,12 +13,12 @@ Ubah Kata Sandi
                 <form @submit.prevent="updateData()" @keydown="form.onKeydown($event)" id="form">
                     <div class="modal-body mx-4">
                         <div class="form-row">
-                            <label class="col-lg-2" for="kata_sandi_lama"> Kata Sandi Lama </label>
+                            <label class="col-lg-2" for="old_password"> Kata Sandi Lama </label>
                             <div class="form-group col-md-8">
-                                <input v-model="form.kata_sandi_lama" id="kata_sandi_lama" type="password" min=0
+                                <input v-model="form.old_password" id="old_password" type="password" min=0
                                     placeholder="Masukkan Kata Sandi Lama" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('kata_sandi_lama') }">
-                                <has-error :form="form" field="kata_sandi_lama"></has-error>
+                                    :class="{ 'is-invalid': form.errors.has('old_password') }">
+                                <has-error :form="form" field="old_password"></has-error>
                             </div>
                         </div>
                         <div class="form-row">

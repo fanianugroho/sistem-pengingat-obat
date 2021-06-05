@@ -27,16 +27,16 @@ class UserController extends Controller
         $request_data = $request->all();
         $current_password = Auth::user()->password;
         $validator = Validator::make($request->all(), [
-            'kata_sandi_lama' => 'required',
-            'password' => 'required|confirmed|min:8|different:kata_sandi_lama',
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:8|different:old_password',
             'password_confirmation' => 'required',
         ]);
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 422);
         }
-        $kata_sandi_lama = $request->kata_sandi_lama;
+        $old_password = $request->old_password;
         
-        if(Hash::check($kata_sandi_lama, $current_password))
+        if(Hash::check($old_password, $current_password))
         {           
             $user_id = Auth::user()->id;                       
             $obj_user = User::find($user_id);
@@ -59,22 +59,6 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -95,6 +79,8 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required',
             'tipe_user' => 'required',
+            'username' => 'required',
+            'email'=> 'required'
         ]);
         
         $input = $request->all();
