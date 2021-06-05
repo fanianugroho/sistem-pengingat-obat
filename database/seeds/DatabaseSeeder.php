@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PasienSeeder::class);
         $this->call(ResepSeeder::class);
         $this->call(ObatResepSeeder::class);
+        $this->call(MinumObatSeeder::class);
+        $this->call(WaktuMakanSeeder::class);
+        $this->call(WaktuMinumSeeder::class);
     }
 }

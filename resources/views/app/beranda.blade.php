@@ -112,12 +112,39 @@ Beranda
             <div class="card-body">
                 <h4 class="card-title">Grafik jumlah Resep baru</h4>
                 <div>
-                    <canvas id="bar-chart" height="150"></canvas>
+                    <canvas id="chart-resep" height="150"></canvas>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 @endsection
+@push('script')
+<script src="{{asset('template/dist/js/pages/chartjs/chartjs.init.js')}}"></script>
+<script>
+$(function () {
+	// Bar chart
+	new Chart(document.getElementById("chart-resep"), {
+		type: 'bar',
+		data: {
+        labels: {!!json_encode($thisRange)!!},
+		datasets: [
+			{
+			  label: "Resep",
+			  backgroundColor: ["#6174d5","#b1bdfa", "#768bf4", "#6174d5", "#b1bdfa","#b1bdfa","#768bf4"],
+			  data: {!!json_encode($total)!!}
+			}
+		  ]
+		},
+		options: {
+		  legend: { display: false },
+		  title: {
+			display: true, 
+			text: 'Jumlah Resep baru di Puskesmas'
+		  }
+		}
+	});
+});
+
+</script>
+@endpush

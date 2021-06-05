@@ -1,26 +1,4 @@
 $(function () {
-    "use strict";
-	// Bar chart
-	new Chart(document.getElementById("bar-chart"), {
-		type: 'bar',
-		data: {
-		  labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
-		  datasets: [
-			{
-			  label: "Population (millions)",
-			  backgroundColor: ["#6174d5","#b1bdfa", "#768bf4", "#6174d5", "#b1bdfa","#b1bdfa","#768bf4"],
-			  data: [35,20,45,33,23,13,38]
-			}
-		  ]
-		},
-		options: {
-		  legend: { display: false },
-		  title: {
-			display: true, 
-			text: 'Jumlah Resep baru di Puskesmas'
-		  }
-		}
-	});
 
 	// New chart
 	new Chart(document.getElementById("pie-chart"), {

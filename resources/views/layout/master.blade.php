@@ -132,7 +132,7 @@
         <script src="{{asset('template/dist/js/custom.min.js')}}"></script>
         <script src="{{asset('template/dist/js/moment.js')}}"></script>
         
-        <script src="{{asset('template/dist/js/pages/chartjs/chartjs.init.js')}}"></script>
+        
         <script src="{{asset('template/assets/libs/chart.js/dist/Chart.min.js')}}"></script>
        
         <script src="{{asset('template/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
