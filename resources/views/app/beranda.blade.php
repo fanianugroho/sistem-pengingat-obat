@@ -112,7 +112,7 @@ Beranda
             <div class="card-body">
                 <h4 class="card-title">Grafik jumlah Resep baru</h4>
                 <div>
-                    <canvas id="chart-resep" height="150"></canvas>
+                    <canvas id="bar-chart" height="150"></canvas>
                 </div>
             </div>
         </div>
@@ -123,8 +123,7 @@ Beranda
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 $(function () {
-	// Bar chart
-	new Chart(document.getElementById("chart-resep"), {
+	new Chart(document.getElementById("bar-chart"), {
 		type: 'bar',
 		data: {
         labels: {!!json_encode($thisRange)!!},
@@ -151,6 +150,5 @@ $(function () {
 		}
 	});
 });
-
 </script>
 @endpush

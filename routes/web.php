@@ -69,6 +69,4 @@ Auth::routes();
             Route::resource('resep', 'ResepController');
             Route::get('/cetak-resep/{array}','ResepController@cetakPdf')->name('cetak-resep');
             
-    
-
     });

@@ -35,14 +35,6 @@ class DashboardController extends Controller
                     ->orderBy('total_obat', 'desc')
                     ->limit(5)
                     ->get();
-        // $todayGrafik = Carbon::now()->toDateString();
-        // $today7past =\Carbon\Carbon::today()->subDays(7)->toDateString();
-        // dd($today7past);
-        // $period = CarbonPeriod::create($todayGrafik, $today7past);
-        // $thisRange[] = [];
-        // foreach ($period as $date) {
-        //     dd( $date->format('Y-m-d')); 
-        // }
 
         $start = Carbon::now()->addDays(-7);
         $end = Carbon::now();
@@ -57,8 +49,6 @@ class DashboardController extends Controller
             $thisRange[] = Carbon::parse($date)->locale('id_ID')->isoFormat('LL');
             $total[] = $resep;
         }
-        // dd($thisRange);
-
         return view('app.beranda',compact('pasienbaru','resepbaru','jumlahobat','jumlahpasien','obatResep','today','thisRange','total'));
     }
     
