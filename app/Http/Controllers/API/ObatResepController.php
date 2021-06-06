@@ -67,7 +67,7 @@ class ObatResepController extends Controller
         return response()->json([
             'status' => 'success',
             'waktu' => $request->all(),
-            'message' => 'waktu berhasil diupdate'
+            'message' => 'waktu makan berhasil diupdate'
         ]);
 
     }
@@ -90,7 +90,7 @@ class ObatResepController extends Controller
         return response()->json([
             'status' => 'success',
             'waktu' => $request->all(),
-            'message' => 'data berhasil diupdate'
+            'message' => 'waktu minum berhasil diupdate'
         ]);
     }
 

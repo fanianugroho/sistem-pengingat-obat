@@ -120,7 +120,7 @@ Beranda
 </div>
 @endsection
 @push('script')
-<script src="{{asset('template/dist/js/pages/chartjs/chartjs.init.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 $(function () {
 	// Bar chart
@@ -130,8 +130,15 @@ $(function () {
         labels: {!!json_encode($thisRange)!!},
 		datasets: [
 			{
-			  label: "Resep",
-			  backgroundColor: ["#6174d5","#b1bdfa", "#768bf4", "#6174d5", "#b1bdfa","#b1bdfa","#768bf4"],
+			label: "Resep baru",
+            backgroundColor: [ 'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',
+            'rgba(97, 116, 213)',],
+            borderWidth: 1,
 			  data: {!!json_encode($total)!!}
 			}
 		  ]
@@ -140,7 +147,6 @@ $(function () {
 		  legend: { display: false },
 		  title: {
 			display: true, 
-			text: 'Jumlah Resep baru di Puskesmas'
 		  }
 		}
 	});

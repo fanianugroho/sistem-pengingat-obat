@@ -17,20 +17,17 @@ Route::get('/', function () {
 });
 Route::get('/beranda', 'DashboardController@index')->name('beranda');
 Route::get('/welcome', 'DashboardController@tampilanawal')->name('welcome');
+Route::get('/user.ubahPassword', 'UserController@indexPassword')->name('user.indexPassword');
+Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.ubahPassword');
 Auth::routes();
     Route::group(['middleware' => ['auth','verified','web','CheckRole:admin']],function(){
 
-        Route::get('/user.ubahPassword', 'UserController@indexPassword')->name('user.indexPassword');
-        Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.ubahPassword');
         Route::get('/user.all', 'UserController@all')->name('user.all');
         Route::resource('user', 'UserController');
         
     });
 
     Route::group(['middleware' => ['auth','verified','web','CheckRole:apoteker']],function(){
-
-            Route::get('/user.ubahPassword', 'UserController@indexPassword')->name('user.indexPassword');
-            Route::post('/user.updatePassword', 'UserController@ubahPassword')->name('user.ubahPassword');
         
             Route::get('/obat.all', 'ObatController@all')->name('obat.all');
             Route::resource('obat', 'ObatController');

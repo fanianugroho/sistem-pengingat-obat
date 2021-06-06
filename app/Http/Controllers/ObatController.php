@@ -67,6 +67,7 @@ class ObatController extends Controller
         $user = Auth::user();
         $request->validate([
             'nama_obat' => 'required',
+            'kode_obat' => 'required',
             'id_bentuk_obat' => 'required',
             'kekuatan_sediaan' => 'required',
             'satuan' => 'required',

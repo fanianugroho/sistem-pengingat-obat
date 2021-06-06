@@ -118,6 +118,15 @@ Detail Obat
                         </div>
                     </div>
                     <div class="form-row">
+                        <label class="col-lg-2" for="kode_obat"> Kode Obat </label>
+                        <div class="form-group col-md-8">
+                            <input v-model="form.kode_obat" id="kode_obat" type="text" min=0
+                                placeholder="Masukkan Kode Obat" class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('kode_obat') }">
+                            <has-error :form="form" field="kode_obat"></has-error>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <label class="col-lg-2">Sediaan</label>
                         <div class="form-group col-md-8">
                             <select v-model="form.id_bentuk_obat" id="id_bentuk_obat" onchange="selectTrigger()"
