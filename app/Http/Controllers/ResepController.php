@@ -46,7 +46,6 @@ class ResepController extends Controller
     }
 
     public function viewdetailobatresep ($id){
-        $bentuk_obat = BentukObat::all();
         $nama_obat = Obat::all();
         $dataResep = ObatResep::with('obat','resep')->where('id_resep',$id)->get();
         return view('resep.detailObatResep',compact('nama_obat','dataResep'));
@@ -606,8 +605,7 @@ class ResepController extends Controller
         ]); 
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $request->validate([
             'id_obat' => 'required',
             'dosis' => 'required',
@@ -639,8 +637,6 @@ class ResepController extends Controller
             'status' => 'Success',
             'message' => 'Berhasil mengubah obat resep'
         ]); 
-       
-        // return ObatResep::find($id)->update($request->all());
     }
 
     /**

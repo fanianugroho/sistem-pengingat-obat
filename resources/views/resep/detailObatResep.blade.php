@@ -256,30 +256,30 @@ Buat Resep
         let segment_array = segment_str.split('/');
         let id = segment_array.pop();
         var app = new Vue({
-            el: '#app',
-            data: {
-                mainData: [],
-                jumlahObat: 0,
-                editMode: false,
-                form: new Form({
-                    id: id,
-                    namaObat: '',
-                    dosis: '',
-                    aturan_pakai: '',
-                    satuan: '',
-                    takaran_minum: '',
-                    waktu_minum: '',
-                    keterangan: '',
-                    jml_obat: '',
-                    jml_kali_minum: '',
-                    data_resep: '',
-                }),
-                formStore: new Form({
-                    idResep: []
-                }),
-                namaObat: @json($nama_obat),
-                id_obat_resep: [],
-            },
+        el: '#app',
+        data: {
+            mainData: [],
+            jumlahObat: 0,
+            editMode: false,
+            form: new Form({
+                id: id,
+                namaObat: '',
+                dosis: '',
+                aturan_pakai: '',
+                satuan: '',
+                takaran_minum: '',
+                waktu_minum: '',
+                keterangan: '',
+                jml_obat: '',
+                jml_kali_minum: '',
+                data_resep: '',
+            }),
+            formStore: new Form({
+                idResep: []
+            }),
+            namaObat: @json($nama_obat),
+            id_obat_resep: [],
+        },
             mounted() {
                 $('#table').DataTable()
                 this.refreshData()
@@ -377,6 +377,7 @@ Buat Resep
                 },
                 simpanSementara(value) {
                     this.formStore.idResep = value
+                    console.log(value);
                 },
                 storeCetakResep(id_obat_resep) {
                     url = "{{ route('cetak-resep', ':array') }}".replace(':array', this.formStore.idResep)
@@ -404,7 +405,6 @@ Buat Resep
                 },
                 updateData() {
                     url = "{{ route('resep.update', ':id') }}".replace(':id', this.form.id)
-
                     this.form.put(url)
                         .then(response => {
 
@@ -467,7 +467,7 @@ Buat Resep
                         confirmButtonText: 'Ya, Hapus',
                         cancelButtonText: 'Batal'
                     }).then((result) => {
-                        if (result.value) {
+                        if (result) {
                             url = "{{ route('resep.destroy', ':id') }}".replace(':id', id)
                             this.form.delete(url)
                                 .then(response => {
