@@ -12,6 +12,7 @@ class WaktuMakan extends Model
         'id_minum_obat',
         'jam_makan',
         'waktu',
+        'keterangan',
     ];
 
     public function minum_obat(){

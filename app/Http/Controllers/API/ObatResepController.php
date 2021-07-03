@@ -55,7 +55,8 @@ class ObatResepController extends Controller
         $waktuMakan = WaktuMakan::where('id', $id)->first();
 
         $validator = Validator::make($request->all(), [
-            'waktu' => 'required'
+            'waktu' => 'required',
+            'keterangan' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -77,7 +78,8 @@ class ObatResepController extends Controller
         $waktuMinum = WaktuMinum::where('id',$id)->first();
 
         $validator = Validator::make($request->all(), [
-            'waktu' => 'required'
+            'waktu' => 'required',
+            'keterangan' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([

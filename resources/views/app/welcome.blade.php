@@ -72,8 +72,8 @@
                             </p>
                         </div>
                         <div class="row row-centered">
-                            <div class=" col-md-6 col-sm-4">
-                                <img src="{{asset('template_welcome/images/info-obat.png')}} >
+                            <div class="col-md-6 col-sm-4">
+                                <img src="{{asset('template_welcome/images/info-obat.png')}}">
                                 <h4 class="info-monitoring">Informasi Obat</h4>
                                 <p class="desc-info-monitoring">Memuat informasi lengkap suatu obat</p>
                             </div>

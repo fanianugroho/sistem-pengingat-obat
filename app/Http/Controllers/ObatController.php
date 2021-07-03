@@ -298,7 +298,7 @@ class ObatController extends Controller
             ]);
         }else {
             return response()->json([
-                "message" => 'tidak dihapus',
+                "message" => "tidak dihapus",
             ]);
         };
     }

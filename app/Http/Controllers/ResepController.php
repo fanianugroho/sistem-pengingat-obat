@@ -146,7 +146,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'pagi';
                 $waktuMinum->waktu = '07:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat pagi';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -157,7 +157,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'siang';
                 $waktuMinum->waktu = '15:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat siang';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -168,7 +168,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'malam';
                 $waktuMinum->waktu = '23:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat malam';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -179,7 +179,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'pagi';
                 $waktuMakan->waktu = '06:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan pagi';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -190,7 +190,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'siang';
                 $waktuMakan->waktu = '14:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan siang';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -201,7 +201,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'malam';
                 $waktuMakan->waktu = '22:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan malam';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -213,7 +213,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'pagi';
                 $waktuMinum->waktu = '07:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat pagi';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -224,7 +224,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'malam';
                 $waktuMinum->waktu = '19:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat malam';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -235,7 +235,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'pagi';
                 $waktuMakan->waktu = '06:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan pagi';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -246,7 +246,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'malam';
                 $waktuMakan->waktu = '18:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan malam';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -258,7 +258,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'pagi';
                 $waktuMinum->waktu = '07:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat pagi';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -269,7 +269,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'siang';
                 $waktuMinum->waktu = '13:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat siang';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -280,7 +280,7 @@ class ResepController extends Controller
                 $waktuMinum->id_minum_obat = $minumObat->id;
                 $waktuMinum->jam_minum = 'malam';
                 $waktuMinum->waktu = '18:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat malam';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -289,9 +289,9 @@ class ResepController extends Controller
             try {
                 $waktuMinum = New WaktuMinum;
                 $waktuMinum->id_minum_obat = $minumObat->id;
-                $waktuMinum->jam_minum = 'malam';
+                $waktuMinum->jam_minum = 'malam2';
                 $waktuMinum->waktu = '23:00:00';
-                $waktuMinum->keterangan = 'harus habis';
+                $waktuMinum->keterangan = 'minum obat malam';
                 $waktuMinum->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -302,7 +302,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'pagi';
                 $waktuMakan->waktu = '06:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan pagi';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -313,7 +313,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'siang';
                 $waktuMakan->waktu = '12:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan siang';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -324,7 +324,7 @@ class ResepController extends Controller
                 $waktuMakan->id_minum_obat = $minumObat->id;
                 $waktuMakan->jam_makan = 'malam';
                 $waktuMakan->waktu = '17:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan malam';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();
@@ -333,9 +333,9 @@ class ResepController extends Controller
             try {
                 $waktuMakan = New WaktuMakan;
                 $waktuMakan->id_minum_obat = $minumObat->id;
-                $waktuMakan->jam_makan = 'malam';
+                $waktuMakan->jam_makan = 'malam2';
                 $waktuMakan->waktu = '22:30:00';
-                $waktuMakan->keterangan = 'makan yg banyak';
+                $waktuMakan->keterangan = 'makan malam';
                 $waktuMakan->save();
             } catch (\Exception $e) {
                 DB::rollback();

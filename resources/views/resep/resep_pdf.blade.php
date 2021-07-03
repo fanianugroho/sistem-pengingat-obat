@@ -121,6 +121,7 @@
                 </div>
                 <div class="left">
                     <p>Tanggal : {{$item->created_at}}</p>
+                    
                 </div>
                 <div style="clear:both"></div>
             </div>

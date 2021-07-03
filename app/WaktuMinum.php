@@ -12,6 +12,7 @@ class WaktuMinum extends Model
         'id_minum_obat',
         'jam_minum',
         'waktu',
+        'keterangan',
     ];
 
     public function minum_obat(){
