@@ -23,13 +23,13 @@ class WaktuMinumSeeder extends Seeder
                 'id_minum_obat' => 1,
                 'jam_minum' => 'siang',
                 'waktu' => '15:00',
-                'keterangan' => 'minum obat pagi'
+                'keterangan' => 'minum obat siang'
             ],
             [
                 'id_minum_obat' => 1,
                 'jam_minum' => 'malam',
                 'waktu' => '23:00',
-                'keterangan' => 'minum obat pagi'
+                'keterangan' => 'minum obat malam'
             ],
             [
                 'id_minum_obat' => 2,
@@ -41,13 +41,13 @@ class WaktuMinumSeeder extends Seeder
                 'id_minum_obat' => 2,
                 'jam_minum' => 'siang',
                 'waktu' => '15:00',
-                'keterangan' => 'minum obat pagi'
+                'keterangan' => 'minum obat siang'
             ],
             [
                 'id_minum_obat' => 2,
                 'jam_minum' => 'malam',
                 'waktu' => '23:00',
-                'keterangan' => 'minum obat pagi'
+                'keterangan' => 'minum obat malam'
             ]
             
         ];
