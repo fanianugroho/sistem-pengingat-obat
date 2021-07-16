@@ -72,6 +72,27 @@ class ObatResepController extends Controller
 
     }
 
+    public function tambahWaktuMakan(Request $request){
+        
+        $validator = Validator::make($request->all(), [
+            'jam_makan' => 'required',
+            'waktu' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'waktu' => $request->all(),
+                'message' => $validator->errors()]);
+        }
+        WaktuMakan::create($request->all());
+        return response()->json([
+            'status' => 'success',
+            'waktu' => $request->all(),
+            'message' => 'waktu makan berhasil ditambah'
+        ]);
+
+    }
+
     public function ubahWaktuMinum(Request $request,$id){
 
         $waktuMinum = WaktuMinum::where('id',$id)->first();
@@ -91,6 +112,47 @@ class ObatResepController extends Controller
             'status' => 'success',
             'waktu' => $request->all(),
             'message' => 'waktu minum berhasil diupdate'
+        ]);
+    }
+
+    public function tambahWaktuMinum(Request $request){
+        
+        $validator = Validator::make($request->all(), [
+            'jam_minum' => 'required',
+            'waktu' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'waktu' => $request->all(),
+                'message' => $validator->errors()]);
+        }
+        WaktuMinum::create($request->all());
+        return response()->json([
+            'status' => 'success',
+            'waktu' => $request->all(),
+            'message' => 'waktu minum berhasil ditambah'
+        ]);
+
+    }
+
+    public function destroyWaktuMakan($id)
+    {
+        WaktuMakan::find($id)->delete();
+
+        return response()->json([
+            "status" => "success",
+            "message" => "data berhasil di hapus"
+        ]);
+    }
+
+    public function destroyWaktuMinum($id)
+    {
+        WaktuMinum::find($id)->delete();
+
+        return response()->json([
+            "status" => "success",
+            "message" => "data berhasil di hapus"
         ]);
     }
 

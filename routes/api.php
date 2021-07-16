@@ -18,5 +18,10 @@ Route::get('obatResep/{id}','API\ObatResepController@getIdObatResep');
 Route::get('getJadwal/{id}','API\ObatResepController@getJadwalObatResep');
 Route::post('ubahWaktuMakan/{id}','API\ObatResepController@ubahWaktuMakan');
 Route::post('ubahWaktuMinum/{id}','API\ObatResepController@ubahWaktuMinum');
+Route::post('tambahWaktuMakan','API\ObatResepController@tambahWaktuMakan');
+Route::post('tambahWaktuMinum','API\ObatResepController@tambahWaktuMinum');
+Route::delete('hapusWaktuMakan/{id}', 'API\ObatResepController@destroyWaktuMakan');
+Route::delete('hapusWaktuMinum/{id}', 'API\ObatResepController@destroyWaktuMinum');
+
 
 
