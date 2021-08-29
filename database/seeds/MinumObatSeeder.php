@@ -18,6 +18,12 @@ class MinumObatSeeder extends Seeder
             ],
             [
                 'id_obat_resep' => 2,
+            ],
+            [
+                'id_obat_resep' => 3,
+            ],
+            [
+                'id_obat_resep' => 4,
             ]
         ];
 

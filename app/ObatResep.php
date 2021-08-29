@@ -27,4 +27,7 @@ class ObatResep extends Model
     public function obat(){
         return $this->belongsTo('App\Obat', 'id_obat');
     }
+    public function minum_obat(){
+        return $this->belongsTo('App\MinumObat', 'id_minum_obat');
+    }
 }

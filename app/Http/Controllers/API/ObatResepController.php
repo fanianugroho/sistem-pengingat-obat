@@ -19,7 +19,8 @@ class ObatResepController extends Controller
                                 'obat.interaksi_obat.interaksi',
                                 'obat.kontraindikasi_obat.kontraindikasi',
                                 'obat.bentuk_obat',
-                                'resep.pasien')->where('id',$id)->get();
+                                'resep.pasien','minum_obat.waktu_makan',
+                                'minum_obat.waktu_minum')->where('id',$id)->get();
                                 
             if(count($data)==1){
                 return response()->json([

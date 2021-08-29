@@ -140,7 +140,30 @@ class ResepController extends Controller
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
-        if($obatResep->aturan_pakai =='3'){
+        if($obatResep->aturan_pakai =='1'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'minum obat pagi';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan pagi';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        }else if($obatResep->aturan_pakai =='3'){
             try {
                 $waktuMinum = New WaktuMinum;
                 $waktuMinum->id_minum_obat = $minumObat->id;
@@ -396,7 +419,31 @@ class ResepController extends Controller
             DB::rollback();
             return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
         }
-        if($obatResep->aturan_pakai =='3'){
+        if($obatResep->aturan_pakai =='1'){
+            try {
+                $waktuMinum = New WaktuMinum;
+                $waktuMinum->id_minum_obat = $minumObat->id;
+                $waktuMinum->jam_minum = 'pagi';
+                $waktuMinum->waktu = '07:00:00';
+                $waktuMinum->keterangan = 'minum obat pagi';
+                $waktuMinum->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+            try {
+                $waktuMakan = New WaktuMakan;
+                $waktuMakan->id_minum_obat = $minumObat->id;
+                $waktuMakan->jam_makan = 'pagi';
+                $waktuMakan->waktu = '06:30:00';
+                $waktuMakan->keterangan = 'makan pagi';
+                $waktuMakan->save();
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['status' => 'Failed', 'message' => $e->getMessage()],404);
+            }
+        }
+        else if($obatResep->aturan_pakai =='3'){
             try {
                 $waktuMinum = New WaktuMinum;
                 $waktuMinum->id_minum_obat = $minumObat->id;
